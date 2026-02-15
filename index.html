@@ -14,6 +14,8 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            max-width: 100vw;
+            overflow-x: hidden;
         }
 
         body {
@@ -23,34 +25,37 @@
             margin: 0;
             padding: 0;
             min-height: 100vh;
-            height: auto !important;
+            height: auto;
             max-width: 100vw;
             overflow-x: hidden !important;
-            overflow-y: visible !important;
+            overflow-y: visible;
         }
 
         html {
             margin: 0;
             padding: 0;
             min-height: 100vh;
-            height: auto !important;
+            height: auto;
             max-width: 100vw;
             overflow-x: hidden !important;
-            overflow-y: visible !important;
+            overflow-y: visible;
         }
 
         /* Header */
         .header {
-            height: 60px;
+            height: auto;
+            min-height: 60px;
             border-bottom: 2px solid #0f0;
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
+            justify-content: center;
+            gap: 10px;
+            padding: 10px 20px;
             background: linear-gradient(90deg, #000 0%, #0a1a0a 50%, #000 100%);
-            width: 100% !important;
-            max-width: 100vw !important;
-            overflow-x: hidden !important;
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden;
         }
 
         .logo {
@@ -63,7 +68,12 @@
         /* Selector de Activos */
         .asset-selector {
             display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 10px;
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
         }
 
         .asset-btn {
@@ -112,38 +122,42 @@
         /* ============================ */
         
         .layout-container {
-            display: block !important;
-            width: 100% !important;
-            max-width: 100vw !important;
-            overflow-x: hidden !important;
+            display: block;
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden;
         }
         
         /* BLOQUE 1: Header */
         .header-block {
-            width: 100% !important;
-            max-width: 100vw !important;
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden;
         }
         
         /* BLOQUE 2: Gráfico */
         .chart-block {
-            width: 100% !important;
-            max-width: 100vw !important;
+            width: 100%;
+            max-width: 100vw;
             height: 650px;
             min-height: 650px;
             margin-top: 0;
+            overflow-x: hidden;
         }
         
         .chart-block #tradingview_chart {
-            width: 100% !important;
-            max-width: 100vw !important;
+            width: 100%;
+            max-width: 100vw;
             height: 100%;
+            overflow-x: hidden;
         }
         
         /* BLOQUE 3: Señales */
         .signals-block {
-            width: 100% !important;
-            max-width: 100vw !important;
-            margin-top: 50px !important;
+            width: 100%;
+            max-width: 100vw;
+            margin-top: 50px;
+            overflow-x: hidden;
         }
         
         /* Main Container */
@@ -165,9 +179,11 @@
         }
 
         #tradingview_chart {
-            width: 100%;
-            height: 600px;
+            width: 100% !important;
+            max-width: 100% !important;
+            height: 100%;
             min-height: 600px;
+            display: block;
         }
 
         /* Trading Signals - Below chart */
