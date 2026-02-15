@@ -342,9 +342,9 @@
         
         .qr-code-wrapper {
             display: inline-block;
-            padding: 15px;
+            padding: 10px;
             border: 3px solid #0f0;
-            border-radius: 10px;
+            border-radius: 15px;
             animation: qrPulse 2s infinite;
             background: #fff;
         }
@@ -361,9 +361,10 @@
         }
         
         .qr-code-wrapper img {
-            width: 180px;
-            height: 180px;
+            width: 150px;
+            height: 150px;
             display: block;
+            border-radius: 8px;
         }
         
         .qr-access-text {
@@ -1083,7 +1084,7 @@
     <div class="qr-access-container">
         <div class="qr-access-title">📱 Acceso Rápido IA</div>
         <div class="qr-code-wrapper">
-            <img id="qrCode" src="" alt="Código QR">
+            <img id="qrCode" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://chat-trading-ia.vercel.app" alt="Código QR">
         </div>
         <div class="qr-access-text">📱 Escanea para llevar la IA en tu celular</div>
         <div class="qr-timer" id="qrTimer">Actualizando en: 7:00:00</div>
@@ -1646,12 +1647,12 @@
             
             // Función para generar el QR code
             function generateQRCode() {
-                // Añadir parámetro de versión para cache busting
-                const timestamp = Math.floor(Date.now() / QR_REFRESH_MS);
-                const qrUrl = `${QR_BASE_URL}?v=${timestamp}`;
+                // Añadir número aleatorio para cache busting cada 7 horas
+                const randomNum = Math.floor(Math.random() * 100000);
+                const qrUrl = `${QR_BASE_URL}?v=${randomNum}`;
                 
-                // Usar API de QR code (qrserver)
-                const qrImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(qrUrl)}&bgcolor=000000&color=00ff00&format=png`;
+                // Usar API de QR server - tamaño 150x150
+                const qrImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrUrl)}`;
                 
                 const qrImg = document.getElementById('qrCode');
                 if (qrImg) {
