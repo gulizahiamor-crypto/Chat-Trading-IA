@@ -112,12 +112,13 @@
             border-right: 2px solid #0f0;
             position: relative;
             min-height: 600px;
-            overflow-y: visible;
+            height: auto;
+            overflow: visible;
         }
 
         #tradingview_chart {
             width: 100%;
-            height: 100%;
+            height: 600px;
             min-height: 600px;
         }
 
@@ -186,7 +187,9 @@
 
         /* Señales Panel */
         .señales-panel {
+            position: relative;
             height: 120px;
+            min-height: 120px;
             border-top: 2px solid #0f0;
             background: #000;
             padding: 15px;
@@ -194,6 +197,7 @@
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            z-index: 1;
         }
 
         .señales-content {
@@ -387,10 +391,12 @@
 
             /* Señales panel */
             .señales-panel {
+                position: relative;
                 height: auto;
                 min-height: 100px;
                 padding: 15px;
                 flex-shrink: 0;
+                z-index: 1;
             }
 
             .señales-title {
