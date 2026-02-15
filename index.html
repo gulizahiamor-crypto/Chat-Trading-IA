@@ -20,7 +20,7 @@
             background-color: #000;
             color: #0f0;
             font-family: 'Courier New', monospace;
-            overflow-x: hidden;
+            overflow-y: auto !important;
             min-height: 100vh;
         }
 
@@ -93,8 +93,8 @@
         /* Main Container */
         .main-container {
             display: flex;
-            min-height: calc(100vh - 160px);
-            overflow-y: auto;
+            min-height: calc(100vh - 180px);
+            overflow-y: auto !important;
         }
 
         /* Chart Area */
@@ -103,7 +103,7 @@
             border-right: 2px solid #0f0;
             position: relative;
             min-height: 600px;
-            overflow: hidden;
+            overflow-y: visible;
         }
 
         #tradingview_chart {
@@ -306,7 +306,7 @@
             .main-container {
                 flex-direction: column;
                 min-height: auto;
-                overflow-y: visible;
+                overflow-y: auto !important;
             }
 
             /* Chart area - full width */
@@ -316,6 +316,7 @@
                 border-right: none;
                 border-bottom: 2px solid #0f0;
                 flex-shrink: 0;
+                overflow-y: visible;
             }
 
             #tradingview_chart {
@@ -326,7 +327,8 @@
             /* Trading signals en móvil */
             .trading-signals {
                 position: relative;
-                margin: 10px;
+                margin: 15px;
+                margin-top: 25px;
                 width: auto;
             }
 
@@ -409,6 +411,7 @@
 
             .chart-area {
                 min-height: 400px;
+                overflow-y: visible;
             }
 
             #tradingview_chart {
@@ -552,7 +555,8 @@
             left: auto;
             right: auto;
             width: auto;
-            margin: 15px;
+            margin: 20px;
+            margin-top: 30px;
             background: rgba(0, 0, 0, 0.95);
             border: 2px solid #0f0;
             border-radius: 5px;
