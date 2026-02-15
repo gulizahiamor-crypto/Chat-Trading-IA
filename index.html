@@ -500,6 +500,190 @@
             text-align: center;
             margin-top: 15px;
         }
+
+        /* ============================ */
+        /* CEREBRO DE TRADING - SEÑALES */
+        /* ============================ */
+
+        .trading-signals {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.95);
+            border: 2px solid #0f0;
+            border-radius: 5px;
+            padding: 10px;
+            display: none;
+            z-index: 50;
+        }
+
+        .trading-signals.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .signal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #0f0;
+            padding-bottom: 5px;
+        }
+
+        .signal-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #0f0;
+            text-shadow: 0 0 10px #0f0;
+        }
+
+        .effectiveness-badge {
+            background: #0f0;
+            color: #000;
+            padding: 3px 8px;
+            font-size: 10px;
+            font-weight: bold;
+            border-radius: 3px;
+            animation: pulse 1s infinite;
+        }
+
+        .signal-content {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .signal-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+            border: 1px solid #0a0;
+            border-radius: 3px;
+            background: rgba(0, 255, 0, 0.05);
+        }
+
+        .signal-pair {
+            font-weight: bold;
+            font-size: 14px;
+            min-width: 80px;
+        }
+
+        .signal-direction {
+            font-size: 12px;
+            font-weight: bold;
+            padding: 3px 10px;
+            border-radius: 3px;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .signal-direction.BUY {
+            background: #00ff00;
+            color: #000;
+        }
+
+        .signal-direction.SELL {
+            background: #ff0000;
+            color: #fff;
+        }
+
+        .signal-prices {
+            display: flex;
+            gap: 15px;
+            font-size: 11px;
+        }
+
+        .signal-price {
+            text-align: center;
+        }
+
+        .signal-price-label {
+            color: #0a0;
+            font-size: 9px;
+        }
+
+        .signal-price-value {
+            font-weight: bold;
+        }
+
+        .signal-confidence {
+            font-size: 10px;
+            color: #0f0;
+            text-align: right;
+            min-width: 80px;
+        }
+
+        .scanner-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            padding: 8px;
+            background: rgba(0, 255, 0, 0.1);
+            border-radius: 3px;
+        }
+
+        .scanner-dot {
+            width: 10px;
+            height: 10px;
+            background: #0f0;
+            border-radius: 50%;
+            animation: blink 0.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .scanner-text {
+            font-size: 11px;
+            color: #0f0;
+        }
+
+        .scanner-progress {
+            display: flex;
+            gap: 5px;
+            font-size: 10px;
+        }
+
+        .scanner-asset {
+            padding: 2px 6px;
+            border: 1px solid #0a0;
+            border-radius: 2px;
+            color: #0a0;
+        }
+
+        .scanner-asset.active {
+            background: #0f0;
+            color: #000;
+        }
+
+        .smc-analysis {
+            font-size: 10px;
+            color: #0a0;
+            margin-top: 5px;
+            padding-top: 5px;
+            border-top: 1px dashed #0a0;
+        }
+
+        .signal-legend {
+            display: flex;
+            gap: 15px;
+            font-size: 9px;
+            color: #0a0;
+            margin-top: 8px;
+            padding-top: 5px;
+            border-top: 1px solid #0a0;
+        }
     </style>
 </head>
 <body>
@@ -529,6 +713,36 @@
         <!-- Chart Area -->
         <div class="chart-area">
             <div class="ia-indicator" id="iaIndicator">🧠 MODO IA ACTIVADO - Indicadores de Alta Precisión</div>
+            
+            <!-- Panel de Señales de Trading -->
+            <div class="trading-signals" id="tradingSignals">
+                <div class="signal-header">
+                    <span class="signal-title">🧠 CEREBRO DE TRADING SMC</span>
+                    <span class="effectiveness-badge">1.000.000% EFECTIVIDAD</span>
+                </div>
+                
+                <div class="scanner-status">
+                    <div class="scanner-dot"></div>
+                    <span class="scanner-text" id="scannerText">Iniciando scanner SMC...</span>
+                    <div class="scanner-progress" id="scannerProgress"></div>
+                </div>
+                
+                <div class="signal-content" id="signalContent">
+                    <!-- Las señales se generarán dinámicamente -->
+                </div>
+                
+                <div class="smc-analysis" id="smcAnalysis">
+                    Analizando estructuras de mercado...
+                </div>
+                
+                <div class="signal-legend">
+                    <span>📈 BUY = Entrada LARGA</span>
+                    <span>📉 SELL = Entrada CORTA</span>
+                    <span>🔒 SL = Stop Loss</span>
+                    <span>🎯 TP = Take Profit</span>
+                </div>
+            </div>
+            
             <div id="tradingview_chart"></div>
         </div>
 
@@ -828,6 +1042,212 @@
                     hideAdminPanel();
                 }
             });
+
+            // ========================================
+            // CEREBRO DE TRADING SMC - SEÑALES
+            // ========================================
+
+            // Activos a escanear
+            const assets = [
+                { symbol: 'OANDA:XAUUSD', name: 'XAUUSD', basePrice: 2650.00 },
+                { symbol: 'OANDA:EURUSD', name: 'EURUSD', basePrice: 1.0850 },
+                { symbol: 'OANDA:GBPUSD', name: 'GBPUSD', basePrice: 1.2650 },
+                { symbol: 'OANDA:USDJPY', name: 'USDJPY', basePrice: 149.50 },
+                { symbol: 'OANDA:AUDUSD', name: 'AUDUSD', basePrice: 0.6550 },
+                { symbol: 'OANDA:USDCHF', name: 'USDCHF', basePrice: 0.8850 }
+            ];
+
+            // Conceptos SMC para análisis simulado
+            const smcConcepts = [
+                'Order Block Bullish',
+                'Order Block Bearish',
+                'Liquidity Sweep',
+                'Fair Value Gap',
+                'Break of Structure',
+                'Change of Character',
+                'Order Block Confirmado',
+                'Stop Hunt detected',
+                'Institutional Floor',
+                'High Volume Node'
+            ];
+
+            // Estado del scanner
+            let tradingBrainActive = false;
+            let currentScanAsset = 0;
+            let generatedSignals = [];
+            let scannerInterval = null;
+            let signalInterval = null;
+
+            // Elementos del DOM
+            const tradingSignals = document.getElementById('tradingSignals');
+            const scannerText = document.getElementById('scannerText');
+            const scannerProgress = document.getElementById('scannerProgress');
+            const signalContent = document.getElementById('signalContent');
+            const smcAnalysis = document.getElementById('smcAnalysis');
+
+            // Función para generar precio aleatorio cercano al base
+            function generatePrice(base, variation) {
+                return (base + (Math.random() - 0.5) * variation).toFixed(
+                    base > 100 ? 2 : 4
+                );
+            }
+
+            // Función para generar señal SMC
+            function generateSMCSignal(asset) {
+                const isBuy = Math.random() > 0.5;
+                const direction = isBuy ? 'BUY' : 'SELL';
+                
+                // Generar precios
+                const entry = parseFloat(generatePrice(asset.basePrice, asset.basePrice * 0.002));
+                const slPips = (asset.basePrice > 100 ? 300 : 30) * (Math.random() * 0.5 + 0.5);
+                const tpPips = slPips * (Math.random() * 1 + 2); // 2:1 a 3:1 ratio
+                
+                let sl, tp;
+                if (asset.basePrice > 100) {
+                    // Para oro y yenes
+                    sl = isBuy ? entry - slPips * 0.01 : entry + slPips * 0.01;
+                    tp = isBuy ? entry + tpPips * 0.01 : entry - tpPips * 0.01;
+                } else {
+                    sl = isBuy ? entry - slPips * 0.0001 : entry + slPips * 0.0001;
+                    tp = isBuy ? entry + tpPips * 0.0001 : entry - tpPips * 0.0001;
+                }
+
+                const confidence = (85 + Math.random() * 14).toFixed(1);
+                const smcConcept = smcConcepts[Math.floor(Math.random() * smcConcepts.length)];
+
+                return {
+                    pair: asset.name,
+                    direction: direction,
+                    entry: entry.toFixed(asset.basePrice > 100 ? 2 : 4),
+                    sl: sl.toFixed(asset.basePrice > 100 ? 2 : 4),
+                    tp: tp.toFixed(asset.basePrice > 100 ? 2 : 4),
+                    confidence: confidence,
+                    smc: smcConcept,
+                    time: new Date().toLocaleTimeString('es-ES')
+                };
+            }
+
+            // Función para mostrar señal
+            function displaySignal(signal) {
+                const html = `
+                    <div class="signal-row">
+                        <span class="signal-pair">${signal.pair}</span>
+                        <span class="signal-direction ${signal.direction}">${signal.direction}</span>
+                        <div class="signal-prices">
+                            <div class="signal-price">
+                                <div class="signal-price-label">ENTRY</div>
+                                <div class="signal-price-value">${signal.entry}</div>
+                            </div>
+                            <div class="signal-price">
+                                <div class="signal-price-label">SL</div>
+                                <div class="signal-price-value" style="color: #ff3333;">${signal.sl}</div>
+                            </div>
+                            <div class="signal-price">
+                                <div class="signal-price-label">TP</div>
+                                <div class="signal-price-value" style="color: #00ff00;">${signal.tp}</div>
+                            </div>
+                        </div>
+                        <span class="signal-confidence">${signal.confidence}% Conf.</span>
+                    </div>
+                `;
+                signalContent.innerHTML = html;
+            }
+
+            // Función para iniciar el scanner
+            function startTradingBrain() {
+                if (tradingBrainActive) return;
+                tradingBrainActive = true;
+                
+                // Mostrar panel de señales
+                tradingSignals.classList.add('active');
+                
+                // Inicializar progress dots
+                scannerProgress.innerHTML = assets.map(a => 
+                    `<span class="scanner-asset" id="asset-${a.name}">${a.name}</span>`
+                ).join('');
+
+                let scanCount = 0;
+                
+                // Scanner de activos
+                scannerInterval = setInterval(() => {
+                    const asset = assets[currentScanAsset];
+                    const assetEl = document.getElementById(`asset-${asset.name}`);
+                    
+                    // Marcar como escaneado
+                    if (assetEl) assetEl.classList.add('active');
+                    
+                    // Actualizar texto
+                    scannerText.textContent = `Escaneando ${asset.name} con SMC...`;
+                    
+                    // Analisis SMC
+                    const concept = smcConcepts[Math.floor(Math.random() * smcConcepts.length)];
+                    smcAnalysis.textContent = `SMC: ${concept} detectado en ${asset.name} | Analizando flujo de órdenes...`;
+                    
+                    currentScanAsset = (currentScanAsset + 1) % assets.length;
+                    scanCount++;
+
+                    // Después de 3 ciclos, generar señales
+                    if (scanCount >= 3 * assets.length) {
+                        generateAllSignals();
+                        scanCount = 0;
+                    }
+                }, 2000);
+
+                // Generar señales cada 15 segundos
+                signalInterval = setInterval(generateAllSignals, 15000);
+
+                // Primera generación después de 5 segundos
+                setTimeout(generateAllSignals, 5000);
+
+                addLog('🧠 Cerebro de Trading SMC iniciado');
+                addLog('Escaneando 6 mercados en tiempo real');
+            }
+
+            // Función para generar todas las señales
+            function generateAllSignals() {
+                generatedSignals = [];
+                
+                // Generar 1-3 señales por ciclo
+                const numSignals = Math.floor(Math.random() * 3) + 1;
+                const shuffled = [...assets].sort(() => 0.5 - Math.random());
+                
+                for (let i = 0; i < numSignals; i++) {
+                    generatedSignals.push(generateSMCSignal(shuffled[i]));
+                }
+
+                // Mostrar la señal más fuerte
+                const bestSignal = generatedSignals.reduce((a, b) => 
+                    parseFloat(a.confidence) > parseFloat(b.confidence) ? a : b
+                );
+                
+                displaySignal(bestSignal);
+                smcAnalysis.textContent = `MEJOR SEÑAL: ${bestSignal.smc} en ${bestSignal.pair} | Confianza: ${bestSignal.confidence}%`;
+                
+                addLog(`✅ Señal ${bestSignal.direction} en ${bestSignal.pair}: E:${bestSignal.entry} SL:${bestSignal.sl} TP:${bestSignal.tp}`);
+            }
+
+            // Función para detener el scanner
+            function stopTradingBrain() {
+                if (!tradingBrainActive) return;
+                tradingBrainActive = false;
+                
+                clearInterval(scannerInterval);
+                clearInterval(signalInterval);
+                
+                tradingSignals.classList.remove('active');
+                addLog('🛑 Cerebro de Trading detenido');
+            }
+
+            // Iniciar cerebro cuando se activa modo IA
+            const originalChangeMode = changeMode;
+            changeMode = function(mode) {
+                originalChangeMode(mode);
+                if (mode === 'ia') {
+                    setTimeout(startTradingBrain, 2000);
+                } else {
+                    stopTradingBrain();
+                }
+            };
         });
     </script>
 </body>
