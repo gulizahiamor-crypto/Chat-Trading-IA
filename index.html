@@ -236,6 +236,266 @@
             display: block;
             animation: pulse 1s infinite;
         }
+
+        /* ============================ */
+        /* DISEÑO RESPONSIVO - MÓVILES */
+        /* ============================ */
+
+        @media (max-width: 768px) {
+            /* Header vertical */
+            .header {
+                height: auto;
+                flex-direction: column;
+                padding: 10px;
+                gap: 10px;
+            }
+
+            .logo {
+                font-size: 14px;
+                text-align: center;
+            }
+
+            /* Selector de activos - wrap */
+            .asset-selector {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 5px;
+            }
+
+            .asset-btn {
+                padding: 6px 10px;
+                font-size: 10px;
+            }
+
+            /* Botones de modo más grandes para touch */
+            .view-mode {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .mode-btn {
+                padding: 12px 20px;
+                font-size: 13px;
+                flex: 1;
+                text-align: center;
+                min-height: 48px;
+            }
+
+            /* Main container vertical */
+            .main-container {
+                flex-direction: column;
+                height: auto;
+            }
+
+            /* Chart area - 100% width, fixed height */
+            .chart-area {
+                width: 100%;
+                height: 400px;
+                border-right: none;
+                border-bottom: 2px solid #0f0;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            #tradingview_chart {
+                height: 100%;
+                min-height: 400px;
+            }
+
+            /* Cerebro IA - panel colapsable */
+            .cerebro-ia {
+                width: 100%;
+                border-left: none;
+                border-top: 2px solid #0f0;
+                max-height: 200px;
+                overflow: hidden;
+            }
+
+            .cerebro-ia.expanded {
+                max-height: 300px;
+            }
+
+            .cerebro-header {
+                cursor: pointer;
+                user-select: none;
+                position: relative;
+            }
+
+            .cerebro-header::after {
+                content: ' ▼';
+                font-size: 12px;
+            }
+
+            .cerebro-ia.expanded .cerebro-header::after {
+                content: ' ▲';
+            }
+
+            .cerebro-logs {
+                max-height: 150px;
+                overflow-y: auto;
+            }
+
+            .cerebro-ia.expanded .cerebro-logs {
+                max-height: 250px;
+            }
+
+            /* Señales panel */
+            .señales-panel {
+                height: auto;
+                min-height: 80px;
+                padding: 10px;
+            }
+
+            .señales-title {
+                font-size: 12px;
+            }
+
+            .calibrating {
+                font-size: 11px;
+            }
+
+            /* Ajustar body para scroll vertical */
+            body {
+                overflow: auto;
+                height: auto;
+                min-height: 100vh;
+            }
+        }
+
+        /* Extra small devices */
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 12px;
+            }
+
+            .mode-btn {
+                padding: 14px 10px;
+                font-size: 11px;
+            }
+
+            .asset-btn {
+                padding: 5px 8px;
+                font-size: 9px;
+            }
+
+            .chart-area {
+                height: 350px;
+            }
+
+            .cerebro-logs {
+                font-size: 10px;
+            }
+
+            .log-entry {
+                padding: 5px;
+            }
+        }
+
+        /* ============================ */
+        /* PANEL DE ADMINISTRADOR SECRETO */
+        /* ============================ */
+
+        .admin-panel {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 500px;
+            background: #1a0000;
+            border: 3px solid #ff0000;
+            border-radius: 10px;
+            padding: 30px;
+            z-index: 9999;
+            display: none;
+            box-shadow: 0 0 50px rgba(255, 0, 0, 0.5), inset 0 0 30px rgba(255, 0, 0, 0.1);
+        }
+
+        .admin-panel.visible {
+            display: block;
+            animation: adminAppear 0.5s ease-out;
+        }
+
+        @keyframes adminAppear {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        .admin-header {
+            background: #ff0000;
+            color: #fff;
+            padding: 15px;
+            margin: -30px -30px 20px -30px;
+            border-radius: 7px 7px 0 0;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .admin-stats {
+            color: #fff;
+            font-size: 16px;
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ff3333;
+            background: rgba(255, 0, 0, 0.1);
+        }
+
+        .admin-stats .count {
+            font-size: 48px;
+            font-weight: bold;
+            color: #ff0000;
+            text-shadow: 0 0 20px #ff0000;
+            display: block;
+            margin: 10px 0;
+        }
+
+        .admin-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-weight: bold;
+        }
+
+        .admin-close:hover {
+            color: #ff6666;
+        }
+
+        .admin-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 9998;
+            display: none;
+        }
+
+        .admin-overlay.visible {
+            display: block;
+        }
+
+        .admin-hint {
+            color: #666;
+            font-size: 10px;
+            text-align: center;
+            margin-top: 15px;
+        }
     </style>
 </head>
 <body>
@@ -289,6 +549,18 @@
                 Calibrando algoritmo cuántico...
             </div>
         </div>
+    </div>
+
+    <!-- Panel de Administrador Secreto (Oculto) -->
+    <div class="admin-overlay" id="adminOverlay"></div>
+    <div class="admin-panel" id="adminPanel">
+        <button class="admin-close" id="adminClose">&times;</button>
+        <div class="admin-header">🔒 PANEL DEL CREADOR</div>
+        <div class="admin-stats">
+            <span id="adminCount">0</span>
+            <span>usuarios han analizado el mercado</span>
+        </div>
+        <div class="admin-hint">Acceso restringido - Solo personal autorizado</div>
     </div>
 
     <script type="text/javascript">
@@ -471,6 +743,87 @@
             initChart(currentSymbol);
             addLog('Sistema de trading inicializado');
             addLog('Listo para recibir órdenes');
+
+            // Panel colapsable del Cerebro IA en móviles
+            const cerebroHeader = document.querySelector('.cerebro-header');
+            const cerebroIa = document.querySelector('.cerebro-ia');
+
+            if (cerebroHeader && cerebroIa) {
+                cerebroHeader.addEventListener('click', function() {
+                    cerebroIa.classList.toggle('expanded');
+                });
+            }
+
+            // ========================================
+            // PANEL DE ADMINISTRADOR SECRETO
+            // ========================================
+
+            // Contador de visitantes usando localStorage
+            function getVisitorCount() {
+                const count = localStorage.getItem('mibot_visitor_count');
+                return count ? parseInt(count) : 0;
+            }
+
+            function incrementVisitorCount() {
+                let count = getVisitorCount();
+                count++;
+                localStorage.setItem('mibot_visitor_count', count.toString());
+                return count;
+            }
+
+            // Inicializar contador
+            const visitorCount = incrementVisitorCount();
+
+            // Elementos del panel de admin
+            const adminPanel = document.getElementById('adminPanel');
+            const adminOverlay = document.getElementById('adminOverlay');
+            const adminClose = document.getElementById('adminClose');
+            const adminCount = document.getElementById('adminCount');
+
+            // Clave secreta
+            const SECRET_KEY = 'admin123';
+            let typedBuffer = '';
+
+            // Escuchar teclado
+            document.addEventListener('keydown', function(e) {
+                // Añadir carácter al buffer
+                typedBuffer += e.key.toLowerCase();
+
+                // Mantener solo los últimos caracteres iguales a la clave
+                if (typedBuffer.length > SECRET_KEY.length * 2) {
+                    typedBuffer = typedBuffer.slice(-SECRET_KEY.length);
+                }
+
+                // Verificar si la clave está en el buffer
+                if (typedBuffer.includes(SECRET_KEY)) {
+                    showAdminPanel();
+                    typedBuffer = '';
+                }
+            });
+
+            // Mostrar panel de admin
+            function showAdminPanel() {
+                adminCount.textContent = visitorCount;
+                adminPanel.classList.add('visible');
+                adminOverlay.classList.add('visible');
+            }
+
+            // Ocultar panel de admin
+            function hideAdminPanel() {
+                adminPanel.classList.remove('visible');
+                adminOverlay.classList.remove('visible');
+            }
+
+            // Event listeners para cerrar
+            adminClose.addEventListener('click', hideAdminPanel);
+            adminOverlay.addEventListener('click', hideAdminPanel);
+
+            // Prevenir cierre con Escape
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && adminPanel.classList.contains('visible')) {
+                    hideAdminPanel();
+                }
+            });
         });
     </script>
 </body>
