@@ -316,6 +316,70 @@
             background: #0f0;
         }
 
+        /* ============================ */
+        /* ACCESO QR INTELIGENTE */
+        /* ============================ */
+        
+        .qr-access-container {
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden;
+            padding: 30px 20px;
+            text-align: center;
+            background: #000;
+            border-top: 2px solid #0f0;
+            margin-top: 20px;
+        }
+        
+        .qr-access-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #0f0;
+            text-shadow: 0 0 15px #0f0;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+        
+        .qr-code-wrapper {
+            display: inline-block;
+            padding: 15px;
+            border: 3px solid #0f0;
+            border-radius: 10px;
+            animation: qrPulse 2s infinite;
+            background: #fff;
+        }
+        
+        @keyframes qrPulse {
+            0%, 100% {
+                box-shadow: 0 0 20px #0f0, inset 0 0 20px rgba(0, 255, 0, 0.1);
+                border-color: #0f0;
+            }
+            50% {
+                box-shadow: 0 0 40px #0f0, inset 0 0 30px rgba(0, 255, 0, 0.2);
+                border-color: #00ff00;
+            }
+        }
+        
+        .qr-code-wrapper img {
+            width: 180px;
+            height: 180px;
+            display: block;
+        }
+        
+        .qr-access-text {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #0f0;
+            text-shadow: 0 0 10px #0f0;
+            animation: blink 1.5s infinite;
+        }
+        
+        .qr-timer {
+            margin-top: 10px;
+            font-size: 10px;
+            color: #0a0;
+        }
+
         /* IA Mode Indicator */
         .ia-indicator {
             position: absolute;
@@ -1015,6 +1079,16 @@
         </div>
     </div>
 
+    <!-- Acceso QR Inteligente -->
+    <div class="qr-access-container">
+        <div class="qr-access-title">📱 Acceso Rápido IA</div>
+        <div class="qr-code-wrapper">
+            <img id="qrCode" src="" alt="Código QR">
+        </div>
+        <div class="qr-access-text">📱 Escanea para llevar la IA en tu celular</div>
+        <div class="qr-timer" id="qrTimer">Actualizando en: 7:00:00</div>
+    </div>
+
     </div>
     <!-- FIN LAYOUT CONTAINER -->
 
@@ -1559,6 +1633,64 @@
                     stopTradingBrain();
                 }
             };
+
+            // ========================================
+            // ACCESO QR INTELIGENTE
+            // ========================================
+            
+            const QR_BASE_URL = 'https://chat-trading-ia.vercel.app';
+            const QR_REFRESH_HOURS = 7;
+            const QR_REFRESH_MS = QR_REFRESH_HOURS * 60 * 60 * 1000; // 7 horas en milisegundos
+            
+            let qrGenerationTime = Date.now();
+            
+            // Función para generar el QR code
+            function generateQRCode() {
+                // Añadir parámetro de versión para cache busting
+                const timestamp = Math.floor(Date.now() / QR_REFRESH_MS);
+                const qrUrl = `${QR_BASE_URL}?v=${timestamp}`;
+                
+                // Usar API de QR code (qrserver)
+                const qrImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(qrUrl)}&bgcolor=000000&color=00ff00&format=png`;
+                
+                const qrImg = document.getElementById('qrCode');
+                if (qrImg) {
+                    qrImg.src = qrImageUrl;
+                }
+                
+                qrGenerationTime = Date.now();
+                addLog('📱 Código QR generado para acceso móvil');
+            }
+            
+            // Temporizador para actualizar el QR
+            function updateQRTimer() {
+                const now = Date.now();
+                const elapsed = now - qrGenerationTime;
+                const remaining = QR_REFRESH_MS - elapsed;
+                
+                if (remaining <= 0) {
+                    // Regenerar QR después de 7 horas
+                    generateQRCode();
+                    return;
+                }
+                
+                // Formatear tiempo restante
+                const hours = Math.floor(remaining / (1000 * 60 * 60));
+                const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
+                
+                const timerEl = document.getElementById('qrTimer');
+                if (timerEl) {
+                    timerEl.textContent = `Actualizando en: ${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                }
+            }
+            
+            // Inicializar QR al cargar
+            window.addEventListener('load', function() {
+                generateQRCode();
+                // Actualizar timer cada segundo
+                setInterval(updateQRTimer, 1000);
+            });
         });
     </script>
 </body>
