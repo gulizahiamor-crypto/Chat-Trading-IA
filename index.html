@@ -20,8 +20,8 @@
             background-color: #000;
             color: #0f0;
             font-family: 'Courier New', monospace;
-            overflow: hidden;
-            height: 100vh;
+            overflow-x: hidden;
+            min-height: 100vh;
         }
 
         /* Header */
@@ -33,6 +33,7 @@
             justify-content: space-between;
             padding: 0 20px;
             background: linear-gradient(90deg, #000 0%, #0a1a0a 50%, #000 100%);
+            flex-shrink: 0;
         }
 
         .logo {
@@ -92,7 +93,8 @@
         /* Main Container */
         .main-container {
             display: flex;
-            height: calc(100vh - 60px - 100px);
+            min-height: calc(100vh - 160px);
+            overflow-y: auto;
         }
 
         /* Chart Area */
@@ -100,11 +102,24 @@
             flex: 1;
             border-right: 2px solid #0f0;
             position: relative;
+            min-height: 600px;
+            overflow: hidden;
         }
 
         #tradingview_chart {
             width: 100%;
             height: 100%;
+            min-height: 600px;
+        }
+
+        /* Trading Signals - Below chart */
+        .trading-signals {
+            position: relative;
+            bottom: auto;
+            left: auto;
+            right: auto;
+            margin: 10px;
+            z-index: 50;
         }
 
         /* Cerebro IA Sidebar */
@@ -162,13 +177,14 @@
 
         /* Señales Panel */
         .señales-panel {
-            height: 100px;
+            height: 120px;
             border-top: 2px solid #0f0;
             background: #000;
             padding: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
         }
 
         .señales-content {
@@ -252,6 +268,7 @@
                 flex-direction: column;
                 padding: 10px;
                 gap: 10px;
+                flex-shrink: 0;
             }
 
             .logo {
@@ -288,22 +305,29 @@
             /* Main container vertical */
             .main-container {
                 flex-direction: column;
-                height: auto;
+                min-height: auto;
+                overflow-y: visible;
             }
 
-            /* Chart area - 100% width, fixed height */
+            /* Chart area - full width */
             .chart-area {
                 width: 100%;
-                height: 400px;
+                min-height: 500px;
                 border-right: none;
                 border-bottom: 2px solid #0f0;
-                overflow-y: auto;
-                -webkit-overflow-scrolling: touch;
+                flex-shrink: 0;
             }
 
             #tradingview_chart {
-                height: 100%;
-                min-height: 400px;
+                height: 500px;
+                min-height: 500px;
+            }
+
+            /* Trading signals en móvil */
+            .trading-signals {
+                position: relative;
+                margin: 10px;
+                width: auto;
             }
 
             /* Cerebro IA - panel colapsable */
@@ -346,8 +370,9 @@
             /* Señales panel */
             .señales-panel {
                 height: auto;
-                min-height: 80px;
-                padding: 10px;
+                min-height: 100px;
+                padding: 15px;
+                flex-shrink: 0;
             }
 
             .señales-title {
@@ -383,7 +408,12 @@
             }
 
             .chart-area {
-                height: 350px;
+                min-height: 400px;
+            }
+
+            #tradingview_chart {
+                height: 400px;
+                min-height: 400px;
             }
 
             .cerebro-logs {
@@ -392,6 +422,17 @@
 
             .log-entry {
                 padding: 5px;
+            }
+
+            /* Trading signals responsive */
+            .signal-row {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .signal-prices {
+                width: 100%;
+                justify-content: space-around;
             }
         }
 
@@ -506,14 +547,16 @@
         /* ============================ */
 
         .trading-signals {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            right: 10px;
+            position: relative;
+            bottom: auto;
+            left: auto;
+            right: auto;
+            width: auto;
+            margin: 15px;
             background: rgba(0, 0, 0, 0.95);
             border: 2px solid #0f0;
             border-radius: 5px;
-            padding: 10px;
+            padding: 15px;
             display: none;
             z-index: 50;
         }
