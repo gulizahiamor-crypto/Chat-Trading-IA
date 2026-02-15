@@ -572,6 +572,70 @@
         /* CEREBRO DE TRADING - SEÑALES */
         /* ============================ */
 
+        /* Selector de Activo para IA */
+        .ia-focus-selector {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(0, 20, 0, 0.9);
+            border: 2px solid #00ff00;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .ia-focus-label {
+            font-size: 14px;
+            font-weight: bold;
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+        }
+
+        .ia-focus-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .ia-focus-btn {
+            background: transparent;
+            border: 1px solid #00ff00;
+            color: #00ff00;
+            padding: 8px 14px;
+            font-size: 12px;
+            font-family: 'Courier New', monospace;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .ia-focus-btn:hover {
+            background: rgba(0, 255, 0, 0.2);
+            box-shadow: 0 0 10px #00ff00;
+        }
+
+        .ia-focus-btn.active {
+            background: #00ff00;
+            color: #000;
+            font-weight: bold;
+            box-shadow: 0 0 15px #00ff00;
+        }
+
+        .ia-focus-status {
+            width: 100%;
+            text-align: center;
+            font-size: 13px;
+            color: #00ff00;
+            padding: 10px;
+            background: rgba(0, 255, 0, 0.1);
+            border-radius: 4px;
+            margin-top: 10px;
+            animation: pulse 2s infinite;
+        }
+
         .trading-signals {
             position: relative !important;
             bottom: auto !important;
@@ -791,6 +855,23 @@
                 <div class="signal-header">
                     <span class="signal-title">🧠 CEREBRO DE TRADING SMC</span>
                     <span class="effectiveness-badge">1.000.000% EFECTIVIDAD</span>
+                </div>
+                
+                <!-- Selector de Enfoque IA -->
+                <div class="ia-focus-selector">
+                    <span class="ia-focus-label">🎯 ENFOQUE IA:</span>
+                    <div class="ia-focus-buttons">
+                        <button class="ia-focus-btn active" data-focus="ALL">TODOS</button>
+                        <button class="ia-focus-btn" data-focus="XAUUSD">XAUUSD</button>
+                        <button class="ia-focus-btn" data-focus="EURUSD">EURUSD</button>
+                        <button class="ia-focus-btn" data-focus="GBPUSD">GBPUSD</button>
+                        <button class="ia-focus-btn" data-focus="USDJPY">USDJPY</button>
+                        <button class="ia-focus-btn" data-focus="AUDUSD">AUDUSD</button>
+                        <button class="ia-focus-btn" data-focus="USDCHF">USDCHF</button>
+                    </div>
+                    <div class="ia-focus-status" id="iaFocusStatus">
+                        IA ANALIZANDO: TODOS LOS ACTIVOS
+                    </div>
                 </div>
                 
                 <div class="scanner-status">
@@ -1156,6 +1237,43 @@
             const scannerProgress = document.getElementById('scannerProgress');
             const signalContent = document.getElementById('signalContent');
             const smcAnalysis = document.getElementById('smcAnalysis');
+            const iaFocusStatus = document.getElementById('iaFocusStatus');
+
+            // Variable de enfoque IA
+            let iaFocus = 'ALL';
+            let focusedAsset = null;
+
+            // Función para cambiar el enfoque de la IA
+            function setIAFocus(focus) {
+                iaFocus = focus;
+                
+                // Actualizar botones
+                document.querySelectorAll('.ia-focus-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.dataset.focus === focus) {
+                        btn.classList.add('active');
+                    }
+                });
+
+                // Actualizar estado
+                if (focus === 'ALL') {
+                    iaFocusStatus.textContent = 'IA ANALIZANDO: TODOS LOS ACTIVOS';
+                    focusedAsset = null;
+                } else {
+                    iaFocusStatus.textContent = 'IA ENFOCADA EN: ' + focus;
+                    // Encontrar el asset seleccionado
+                    focusedAsset = assets.find(a => a.name === focus);
+                }
+
+                addLog('🎯 IA enfocada en: ' + (focus === 'ALL' ? 'TODOS LOS ACTIVOS' : focus));
+            }
+
+            // Event listeners para los botones de enfoque
+            document.querySelectorAll('.ia-focus-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    setIAFocus(this.dataset.focus);
+                });
+            });
 
             // Función para generar precio aleatorio cercano al base
             function generatePrice(base, variation) {
@@ -1242,28 +1360,37 @@
                 
                 // Scanner de activos
                 scannerInterval = setInterval(() => {
-                    const asset = assets[currentScanAsset];
+                    // Determinar qué activos escanear según el enfoque
+                    let assetsToScan = (iaFocus === 'ALL') ? assets : (focusedAsset ? [focusedAsset] : assets);
+                    
+                    if (assetsToScan.length === 0) assetsToScan = assets;
+                    
+                    const asset = assetsToScan[currentScanAsset % assetsToScan.length];
                     const assetEl = document.getElementById(`asset-${asset.name}`);
                     
                     // Marcar como escaneado
                     if (assetEl) assetEl.classList.add('active');
                     
-                    // Actualizar texto
-                    scannerText.textContent = `Escaneando ${asset.name} con SMC...`;
+                    // Actualizar texto según el enfoque
+                    if (iaFocus === 'ALL') {
+                        scannerText.textContent = `Escaneando ${asset.name} con SMC...`;
+                    } else {
+                        scannerText.textContent = `🧠 IA ENFOCADA: Analizando ${asset.name}...`;
+                    }
                     
                     // Analisis SMC
                     const concept = smcConcepts[Math.floor(Math.random() * smcConcepts.length)];
                     smcAnalysis.textContent = `SMC: ${concept} detectado en ${asset.name} | Analizando flujo de órdenes...`;
                     
-                    currentScanAsset = (currentScanAsset + 1) % assets.length;
+                    currentScanAsset++;
                     scanCount++;
 
                     // Después de 3 ciclos, generar señales
-                    if (scanCount >= 3 * assets.length) {
+                    if (scanCount >= 3 * assetsToScan.length) {
                         generateAllSignals();
                         scanCount = 0;
                     }
-                }, 2000);
+                }, iaFocus === 'ALL' ? 2000 : 1000); // Más rápido cuando está enfocado
 
                 // Generar señales cada 15 segundos
                 signalInterval = setInterval(generateAllSignals, 15000);
@@ -1272,16 +1399,32 @@
                 setTimeout(generateAllSignals, 5000);
 
                 addLog('🧠 Cerebro de Trading SMC iniciado');
-                addLog('Escaneando 6 mercados en tiempo real');
+                addLog('🎯 Usa el selector para enfocar la IA en un activo');
             }
 
             // Función para generar todas las señales
             function generateAllSignals() {
                 generatedSignals = [];
                 
+                // Determinar qué activos analizar según el enfoque
+                let assetsToAnalyze;
+                let focusMessage;
+                
+                if (iaFocus === 'ALL') {
+                    // Analizar todos los activos
+                    assetsToAnalyze = assets;
+                    focusMessage = 'Analizando TODOS LOS ACTIVOS';
+                } else {
+                    // Analizar solo el activo enfocado
+                    assetsToAnalyze = focusedAsset ? [focusedAsset] : assets;
+                    focusMessage = 'IA ENFOCADA EN: ' + iaFocus;
+                }
+                
+                scannerText.textContent = focusMessage;
+                
                 // Generar 1-3 señales por ciclo
-                const numSignals = Math.floor(Math.random() * 3) + 1;
-                const shuffled = [...assets].sort(() => 0.5 - Math.random());
+                const numSignals = Math.min(Math.floor(Math.random() * 3) + 1, assetsToAnalyze.length);
+                const shuffled = [...assetsToAnalyze].sort(() => 0.5 - Math.random());
                 
                 for (let i = 0; i < numSignals; i++) {
                     generatedSignals.push(generateSMCSignal(shuffled[i]));
