@@ -1084,11 +1084,18 @@
     <div class="qr-access-container">
         <div class="qr-access-title">📱 Acceso Rápido IA</div>
         <div class="qr-code-wrapper">
-            <img id="qrCode" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://chat-trading-ia.vercel.app" alt="Código QR">
+            <img id="qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://chat-trading-ia.vercel.app" style="width: 180px; height: 180px; display: block; margin: 0 auto; border-radius: 8px;">
         </div>
         <div class="qr-access-text">📱 Escanea para llevar la IA en tu celular</div>
         <div class="qr-timer" id="qrTimer">Actualizando en: 7:00:00</div>
     </div>
+    
+    <!-- Script para actualizar QR cada 7 horas -->
+    <script>
+        setInterval(function() {
+            document.getElementById('qr-image').src = 'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://chat-trading-ia.vercel.app&v=' + Date.now();
+        }, 25200000);
+    </script>
 
     </div>
     <!-- FIN LAYOUT CONTAINER -->
@@ -1639,59 +1646,8 @@
             // ACCESO QR INTELIGENTE
             // ========================================
             
-            const QR_BASE_URL = 'https://chat-trading-ia.vercel.app';
-            const QR_REFRESH_HOURS = 7;
-            const QR_REFRESH_MS = QR_REFRESH_HOURS * 60 * 60 * 1000; // 7 horas en milisegundos
-            
-            let qrGenerationTime = Date.now();
-            
-            // Función para generar el QR code
-            function generateQRCode() {
-                // Añadir número aleatorio para cache busting cada 7 horas
-                const randomNum = Math.floor(Math.random() * 100000);
-                const qrUrl = `${QR_BASE_URL}?v=${randomNum}`;
-                
-                // Usar API de QR server - tamaño 150x150
-                const qrImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrUrl)}`;
-                
-                const qrImg = document.getElementById('qrCode');
-                if (qrImg) {
-                    qrImg.src = qrImageUrl;
-                }
-                
-                qrGenerationTime = Date.now();
-                addLog('📱 Código QR generado para acceso móvil');
-            }
-            
-            // Temporizador para actualizar el QR
-            function updateQRTimer() {
-                const now = Date.now();
-                const elapsed = now - qrGenerationTime;
-                const remaining = QR_REFRESH_MS - elapsed;
-                
-                if (remaining <= 0) {
-                    // Regenerar QR después de 7 horas
-                    generateQRCode();
-                    return;
-                }
-                
-                // Formatear tiempo restante
-                const hours = Math.floor(remaining / (1000 * 60 * 60));
-                const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
-                
-                const timerEl = document.getElementById('qrTimer');
-                if (timerEl) {
-                    timerEl.textContent = `Actualizando en: ${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                }
-            }
-            
-            // Inicializar QR al cargar
-            window.addEventListener('load', function() {
-                generateQRCode();
-                // Actualizar timer cada segundo
-                setInterval(updateQRTimer, 1000);
-            });
+            // El QR se actualiza automáticamente cada 7 horas mediante el script en el HTML
+            addLog('📱 Código QR de acceso móvil cargado');
         });
     </script>
 </body>
