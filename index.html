@@ -412,84 +412,95 @@
             }
         }
         
-        /* CHAT CON IA */
+        /* CHAT CON IA - SECCIÓN NUEVA */
+        
+        #chatSection {
+            width: 100%;
+            padding: 20px;
+            background: #000;
+            border-top: 3px solid #0f0;
+            margin-top: 20px;
+        }
         
         .chat-container {
-            width: 95%;
-            max-width: 95%;
-            margin: 20px auto;
-            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            overflow: hidden;
             background: #000;
-            border-top: 2px solid #0f0;
-            padding: 20px 0;
+            border: 2px solid #0f0;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.4);
         }
         
         .chat-box {
             width: 100%;
             max-width: 100%;
-            border: 2px solid #0f0;
-            border-radius: 10px;
+            border: none;
+            border-radius: 0;
             background: #0a0a0a;
             overflow: hidden;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
         }
         
         .chat-header {
             background: linear-gradient(90deg, #000 0%, #0a1a0a 50%, #000 100%);
-            padding: 15px;
+            padding: 20px;
             border-bottom: 2px solid #0f0;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
         }
         
         .chat-avatar {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             background: #0f0;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 24px;
         }
         
         .chat-title {
-            font-size: 16px;
+            font-size: 20px;
             font-weight: bold;
             color: #0f0;
-            text-shadow: 0 0 10px #0f0;
+            text-shadow: 0 0 15px #0f0;
         }
         
         .chat-status {
-            font-size: 10px;
+            font-size: 12px;
             color: #0a0;
         }
         
         .chat-messages {
             height: 400px;
             overflow-y: auto;
-            padding: 15px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 15px;
+            background: #050505;
         }
         
         .chat-messages::-webkit-scrollbar {
-            width: 4px;
+            width: 6px;
         }
         
         .chat-messages::-webkit-scrollbar-thumb {
             background: #0f0;
+            border-radius: 3px;
         }
         
         .message {
-            max-width: 80%;
-            padding: 10px 15px;
-            border-radius: 10px;
-            font-size: 13px;
-            line-height: 1.4;
+            max-width: 85%;
+            padding: 15px 20px;
+            border-radius: 15px;
+            font-size: 15px;
+            line-height: 1.5;
             animation: fadeIn 0.3s ease;
+            word-wrap: break-word;
         }
         
         .message.user {
@@ -502,35 +513,37 @@
         .message.ai {
             align-self: flex-start;
             background: #0a0a0a;
-            border: 1px solid #0f0;
+            border: 2px solid #0f0;
             color: #0f0;
             border-bottom-left-radius: 2px;
+            font-size: 16px;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
         }
         
         .message-time {
-            font-size: 9px;
+            font-size: 10px;
             color: #0a0;
-            margin-top: 5px;
+            margin-top: 8px;
             text-align: right;
         }
         
         .chat-input-area {
             display: flex;
-            padding: 10px;
-            border-top: 1px solid #0f0;
-            gap: 10px;
+            padding: 15px;
+            border-top: 2px solid #0f0;
+            gap: 15px;
             background: #050505;
         }
         
         .chat-input {
             flex: 1;
-            padding: 12px 15px;
-            border: 1px solid #0f0;
-            border-radius: 20px;
+            padding: 18px 25px;
+            border: 2px solid #0f0;
+            border-radius: 30px;
             background: #111 !important;
-            color: #0f0 !important;
+            color: #fff !important;
             font-family: 'Courier New', monospace;
-            font-size: 13px;
+            font-size: 16px;
             outline: none;
         }
         
@@ -539,16 +552,16 @@
         }
         
         .chat-input:focus {
-            box-shadow: 0 0 10px #0f0;
+            box-shadow: 0 0 20px #0f0;
         }
         
         .chat-send-btn {
-            padding: 12px 20px;
+            padding: 18px 30px;
             border: 2px solid #0f0;
-            border-radius: 20px;
+            border-radius: 30px;
             background: transparent;
             color: #0f0;
-            font-size: 18px;
+            font-size: 22px;
             cursor: pointer;
             transition: all 0.3s;
         }
@@ -556,14 +569,14 @@
         .chat-send-btn:hover {
             background: #0f0;
             color: #000;
-            box-shadow: 0 0 15px #0f0;
+            box-shadow: 0 0 25px #0f0;
         }
         
         .typing-indicator {
             display: none;
-            padding: 10px;
+            padding: 15px;
             color: #0a0;
-            font-size: 12px;
+            font-size: 14px;
         }
         
         .typing-indicator.visible {
@@ -590,6 +603,7 @@
         <div class="view-mode-btns">
             <button class="view-btn active" id="btnGraficoComun">📊 Gráfico Común</button>
             <button class="view-btn" id="btnGraficoIA">🧠 Gráfico IA</button>
+            <button class="view-btn" id="btnAbrirChat" onclick="document.getElementById('chatSection').scrollIntoView({behavior: 'smooth'})">💬 ABRIR CHAT IA</button>
         </div>
     </header>
     
@@ -675,8 +689,9 @@
         </div>
     </section>
     
-    <!-- Chat con IA -->
-    <div class="chat-container">
+    <!-- Chat con IA - SECCIÓN PRINCIPAL -->
+    <div id="chatSection">
+        <div class="chat-container">
         <div class="chat-box">
             <div class="chat-header">
                 <div class="chat-avatar">🤖</div>
@@ -710,10 +725,32 @@
     </div>
     
     <script>
+        // ==================== CHAT CON IA ====================
+        
+        // Elementos del chat
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+        const chatSendBtn = document.getElementById('chatSendBtn');
+        const typingIndicator = document.getElementById('typingIndicator');
+        
+        console.log('Elementos del chat encontrados:', {
+            chatMessages: !!chatMessages,
+            chatInput: !!chatInput,
+            chatSendBtn: !!chatSendBtn,
+            typingIndicator: !!typingIndicator
+        });
+        
         // Variables globales
         let currentSymbol = 'XAUUSD';
         let isAIMode = false;
         let tradingViewWidget = null;
+        
+        // Contexto de trading
+        const tradingContext = {
+            currentSignal: null,
+            currentPair: 'XAUUSD',
+            isAIMode: false
+        };
         
         // Configuración de activos
         const assetsConfig = {
@@ -723,14 +760,6 @@
             'USDJPY': { name: 'Dólar/Yen', symbol: 'USDJPY' },
             'AUDUSD': { name: 'Dólar Australiano', symbol: 'AUDUSD' },
             'USDCHF': { name: 'Dólar/Francos', symbol: 'USDCHF' }
-        };
-        
-        // Indicadores para modo IA
-        const indicators = {
-            'RSI': { value: 42.5, status: 'SOBREVENTA', type: 'buy' },
-            'BB': { value: 2658.50, status: 'MEDIA', type: 'neutral' },
-            'VOLUME': { value: 145, status: 'ALTO', type: 'neutral' },
-            'TREND': { value: 'ALCISTA', status: '🟢', type: 'buy' }
         };
         
         // Logs del Cerebro IA
@@ -752,6 +781,179 @@
             'Zona de manipulación detectada',
             'Fair Value Gap en 2665.25'
         ];
+        
+        // Respuestas de la IA basadas en SMC
+        const aiResponses = {
+            greeting: [
+                "¡Hola! Estoy analizando el mercado en tiempo real. ¿Qué activo te gustaría analizar?",
+                "¡Bienvenido! Puedo darte análisis de Smart Money Concepts. ¿Sobre qué par quieres información?",
+                "¡Saludos! Estoy detectando movimientos institucionales. ¿En qué puedo ayudarte?"
+            ],
+            oro: [
+                "📊 Análisis de XAUUSD:\n\nEl precio está formando un Order Block Alcista en la zona 2650-2655.\n\n🧠 Según SMC, los institucionales están acumulando en esta zona. El RSI muestra divergencia alcista en 42.5.\n\n🎯 Dirección sugerida: COMPRA\n.entry: 2655.00\nSL: 2645.00\nTP: 2680.00",
+                "💰 XAUUSD:\n\nBuscando liquidez en máximos anteriores. El volumen institucional está 145% por encima de la media.\n\n📈 Estructura: Alcista en H4\n🟢 Order Block en 2650.00\n🎯 Expectativa: Continuidad alcista",
+                "🟡 Oro (XAUUSD):\n\nZona de manipulación detectada en 2660. Fair Value Gap en 2658-2662.\n\n💎 La smart money está acumulando, prepara tu entrada en el rebote."
+            ],
+            eur: [
+                "📊 EURUSD:\n\nEstructura bajista en timeframe diario. Buscando Order Blocks bajistas para entradas shorts.\n\n🎯 setup: Sell en ruptura de estructura\nZona OB: 1.0850\nSL: 1.0900\nTP: 1.0750",
+                "💶 Euro/Dólar:\n\nEl precio está buscando liquidez en mínimos. Detecto manipulación en 1.0880.\n\n📉 Tendencia: Bajista\n🎯 Esperar ruptura de swap para entrada"
+            ],
+            GBP: [
+                "📊 GBPUSD:\n\nLa libra está fuerte contra el dólar. Order Block Alcista en 1.2650.\n\n🟢 Dirección: COMPRA\nEntry: 1.2670\nSL: 1.2620\nTP: 1.2800",
+                "💷 Libra:\n\nZona de acumulación institucional detectada. El precio está formando un triángulo alcista."
+            ],
+            jpy: [
+                "📊 USDJPY:\n\nEl yen se está debilitando. Buscando entradas compradoras en zonas de soporte.\n\n🎯 Compra en 149.50\nSL: 149.00\nTP: 151.00",
+                "💴 Yen:\n\nLiquidez en máximos alcanzado. El Banco de Japón podría intervenir."
+            ],
+            aud: [
+                "📊 AUDUSD:\n\nDólar australiano en zona de soporte. Order Block Alcista en 0.6550.\n\n🟢 setup: Compra\nEntry: 0.6580\nSL: 0.6520",
+                "🦘 Aussie:\n\nZona de demanda institucional detectada. Esperar reacción del precio."
+            ],
+            chf: [
+                "📊 USDCHF:\n\nFranco suizo en zona de resistencia. Buscar ventas en 0.8850.\n\n🔴 setup: Venta\nEntry: 0.8850\nSL: 0.8900\nTP: 0.8750",
+                "💵 Franco:\n\nEl precio encontró resistencia en 0.8820. Order Block bajista formándose."
+            ],
+            signal: [
+                "📡 SEÑAL ACTIVA para {pair}:\n\n🎯 Dirección: {direction}\n.entry: {entry}\nSL: {sl}\nTP: {tp}\n\n📊 Confianza: {confidence}%\n\n🧠 Análisis SMC: {smc}"
+            ],
+            help: [
+                "🤖 Puedo ayudarte con:\n\n• Análisis de cualquier activo (XAUUSD, EURUSD, GBPUSD, USDJPY, AUDUSD, USDCHF)\n• Detección de Order Blocks\n• Identificación de zonas de liquidez\n• Señales de trading\n• Análisis de estructura de mercado\n\n¡Pregúntame sobre el activo que quieras analizar!",
+                "📚 Mis capacidades:\n\n✓ Análisis de Smart Money Concepts\n✓ Detección de Order Blocks alcistas y bajistas\n✓ Identificación de Fair Value Gaps\n✓ Escaneo de zonas de liquidez\n✓ Señales de alta precisión\n\n¿Qué quieres saber?"
+            ],
+            default: [
+                "🤔 No entendí tu pregunta. ¿Puedes ser más específico?\n\nPuedo analizar: XAUUSD, EURUSD, GBPUSD, USDJPY, AUDUSD, USDCHF\n\nO pregunta por 'señales' para ver operaciones activas.",
+                "❓ Pregunta sobre un activo específico o solicita 'señales' para ver oportunidades de trading.",
+                "💡 Puedo ayudarte mejor si me dices qué activo quieres analizar o si solicitas 'señales'."
+            ]
+        };
+        
+        // Función para obtener respuesta de la IA
+        function getAIResponse(message) {
+            const msg = message.toLowerCase();
+            
+            // Saludo
+            if (msg.includes('hola') || msg.includes('buenos') || msg.includes('hello') || msg.includes('hi')) {
+                return aiResponses.greeting[Math.floor(Math.random() * aiResponses.greeting.length)];
+            }
+            
+            // Análisis de Oro
+            if (msg.includes('oro') || msg.includes('xau') || msg.includes('gold') || msg.includes('qué hago con')) {
+                return aiResponses.oro[Math.floor(Math.random() * aiResponses.oro.length)];
+            }
+            
+            // EURUSD
+            if (msg.includes('eurusd') || msg.includes('euro')) {
+                return aiResponses.eur[Math.floor(Math.random() * aiResponses.eur.length)];
+            }
+            
+            // GBPUSD
+            if (msg.includes('gbpusd') || msg.includes('libra') || msg.includes('gbp')) {
+                return aiResponses.GBP[Math.floor(Math.random() * aiResponses.GBP.length)];
+            }
+            
+            // USDJPY
+            if (msg.includes('usdjpy') || msg.includes('yen') || msg.includes('jpy')) {
+                return aiResponses.jpy[Math.floor(Math.random() * aiResponses.jpy.length)];
+            }
+            
+            // AUDUSD
+            if (msg.includes('audusd') || msg.includes('aussie') || msg.includes('aud')) {
+                return aiResponses.aud[Math.floor(Math.random() * aiResponses.aud.length)];
+            }
+            
+            // USDCHF
+            if (msg.includes('usdchf') || msg.includes('franco') || msg.includes('chf')) {
+                return aiResponses.chf[Math.floor(Math.random() * aiResponses.chf.length)];
+            }
+            
+            // Señales
+            if (msg.includes('señal') || msg.includes('signal') || msg.includes('operar') || msg.includes('trade')) {
+                if (tradingContext.currentSignal) {
+                    let response = aiResponses.signal[0];
+                    return response
+                        .replace('{pair}', tradingContext.currentSignal.pair)
+                        .replace('{direction}', tradingContext.currentSignal.direction)
+                        .replace('{entry}', tradingContext.currentSignal.entry)
+                        .replace('{sl}', tradingContext.currentSignal.sl)
+                        .replace('{tp}', tradingContext.currentSignal.tp)
+                        .replace('{confidence}', tradingContext.currentSignal.confidence)
+                        .replace('{smc}', tradingContext.currentSignal.smc);
+                }
+                return "📡 Generando análisis SMC para " + tradingContext.currentPair + "...\n\n🟢 Order Block Alcista detectado en zona de demanda.\n\n📊 Configuración de trading:\n.entry: Precio actual + 10 pips\nSL: Último swing bajo\nTP: Ratio 1:2\n\n🎯 Confianza: 78%\n\n🧠 Contexto: Los institucionales están acumulando. Esperar confirmación de entrada.";
+            }
+            
+            // Ayuda
+            if (msg.includes('ayuda') || msg.includes('help') || msg.includes('qué puedes') || msg.includes('capacidades')) {
+                return aiResponses.help[Math.floor(Math.random() * aiResponses.help.length)];
+            }
+            
+            // Respuesta por defecto
+            return aiResponses.default[Math.floor(Math.random() * aiResponses.default.length)];
+        }
+        
+        // Función para agregar mensaje
+        function addMessage(text, isUser) {
+            const now = new Date();
+            const time = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user' : 'ai'}`;
+            messageDiv.innerHTML = text + `<div class="message-time">${time}</div>`;
+            
+            chatMessages.appendChild(messageDiv);
+            // Auto-scroll al final
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        // Función para enviar mensaje
+        function enviarMensaje() {
+            console.log('Función enviarMensaje llamada');
+            const message = chatInput.value.trim();
+            if (!message) {
+                console.log('Mensaje vacío');
+                return;
+            }
+            
+            console.log('Enviando mensaje:', message);
+            
+            // Agregar mensaje del usuario
+            addMessage(message, true);
+            chatInput.value = '';
+            
+            // Mostrar indicador de escritura
+            typingIndicator.classList.add('visible');
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // Simular respuesta de la IA
+            setTimeout(() => {
+                typingIndicator.classList.remove('visible');
+                const response = getAIResponse(message);
+                addMessage(response, false);
+            }, 1000 + Math.random() * 1500);
+        }
+        
+        // Event listeners del chat
+        chatSendBtn.addEventListener('click', function() {
+            console.log('Botón de enviar cliqueado');
+            enviarMensaje();
+        });
+        
+        // Enter para enviar
+        chatInput.addEventListener('keypress', (e) => {
+            if(e.key === 'Enter') {
+                console.log('Tecla Enter presionada');
+                enviarMensaje();
+            }
+        });
+        
+        // Hacer función global
+        window.enviarMensaje = enviarMensaje;
+        
+        // Actualizar contexto cuando hay nuevas señales
+        window.updateTradingContext = function(signal) {
+            tradingContext.currentSignal = signal;
+        };
         
         // Inicializar gráfico TradingView
         function initChart(symbol, isAI) {
@@ -975,181 +1177,6 @@
             // Actualizar indicadores iniciales
             updateIndicators('XAUUSD');
         });
-        
-        // ==================== CHAT CON IA ====================
-        
-        // Elementos del chat
-        const chatMessages = document.getElementById('chatMessages');
-        const chatInput = document.getElementById('chatInput');
-        const chatSendBtn = document.getElementById('chatSendBtn');
-        const typingIndicator = document.getElementById('typingIndicator');
-        
-        // Contexto de trading
-        const tradingContext = {
-            currentSignal: null,
-            currentPair: 'XAUUSD',
-            isAIMode: false
-        };
-        
-        // Respuestas de la IA basadas en SMC
-        const aiResponses = {
-            greeting: [
-                "¡Hola! Estoy analizando el mercado en tiempo real. ¿Qué activo te gustaría analizar?",
-                "¡Bienvenido! Puedo darte análisis de Smart Money Concepts. ¿Sobre qué par quieres información?",
-                "¡Saludos! Estoy detectando movimientos institucionales. ¿En qué puedo ayudarte?"
-            ],
-            oro: [
-                "📊 Análisis de XAUUSD:\n\nEl precio está formando un Order Block Alcista en la zona 2650-2655.\n\n🧠 Según SMC, los institucionales están acumulando en esta zona. El RSI muestra divergencia alcista en 42.5.\n\n🎯 Dirección sugerida: COMPRA\n.entry: 2655.00\nSL: 2645.00\nTP: 2680.00",
-                "💰 XAUUSD:\n\nBuscando liquidez en máximos anteriores. El volumen institucional está 145% por encima de la media.\n\n📈 Estructura: Alcista en H4\n🟢 Order Block en 2650.00\n🎯 Expectativa: Continuidad alcista",
-                "🟡 Oro (XAUUSD):\n\nZona de manipulación detectada en 2660. Fair Value Gap en 2658-2662.\n\n💎 La smart money está acumulando, prepara tu entrada en el rebote."
-            ],
-            eur: [
-                "📊 EURUSD:\n\nEstructura bajista en timeframe diario. Buscando Order Blocks bajistas para entradas shorts.\n\n🎯 setup: Sell en ruptura de estructura\nZona OB: 1.0850\nSL: 1.0900\nTP: 1.0750",
-                "💶 Euro/Dólar:\n\nEl precio está buscando liquidez en mínimos. Detecto manipulación en 1.0880.\n\n📉 Tendencia: Bajista\n🎯 Esperar ruptura de swap para entrada"
-            ],
-            GBP: [
-                "📊 GBPUSD:\n\nLa libra está fuerte contra el dólar. Order Block Alcista en 1.2650.\n\n🟢 Dirección: COMPRA\nEntry: 1.2670\nSL: 1.2620\nTP: 1.2800",
-                "💷 Libra:\n\nZona de acumulación institucional detectada. El precio está formando un triángulo alcista."
-            ],
-            jpy: [
-                "📊 USDJPY:\n\nEl yen se está debilitando. Buscando entradas compradoras en zonas de soporte.\n\n🎯 Compra en 149.50\nSL: 149.00\nTP: 151.00",
-                "💴 Yen:\n\nLiquidez en máximos alcanzado. El Banco de Japón podría intervenir."
-            ],
-            aud: [
-                "📊 AUDUSD:\n\nDólar australiano en zona de soporte. Order Block Alcista en 0.6550.\n\n🟢 setup: Compra\nEntry: 0.6580\nSL: 0.6520",
-                "🦘 Aussie:\n\nZona de demanda institucional detectada. Esperar reacción del precio."
-            ],
-            chf: [
-                "📊 USDCHF:\n\nFranco suizo en zona de resistencia. Buscar ventas en 0.8850.\n\n🔴 setup: Venta\nEntry: 0.8850\nSL: 0.8900\nTP: 0.8750",
-                "💵 Franco:\n\nEl precio encontró resistencia en 0.8820. Order Block bajista formándose."
-            ],
-            signal: [
-                "📡 SEÑAL ACTIVA para {pair}:\n\n🎯 Dirección: {direction}\n.entry: {entry}\nSL: {sl}\nTP: {tp}\n\n📊 Confianza: {confidence}%\n\n🧠 Análisis SMC: {smc}"
-            ],
-            help: [
-                "🤖 Puedo ayudarte con:\n\n• Análisis de cualquier activo (XAUUSD, EURUSD, GBPUSD, USDJPY, AUDUSD, USDCHF)\n• Detección de Order Blocks\n• Identificación de zonas de liquidez\n• Señales de trading\n• Análisis de estructura de mercado\n\n¡Pregúntame sobre el activo que quieras analizar!",
-                "📚 Mis capacidades:\n\n✓ Análisis de Smart Money Concepts\n✓ Detección de Order Blocks alcistas y bajistas\n✓ Identificación de Fair Value Gaps\n✓ Escaneo de zonas de liquidez\n✓ Señales de alta precisión\n\n¿Qué quieres saber?"
-            ],
-            default: [
-                "🤔 No entendí tu pregunta. ¿Puedes ser más específico?\n\nPuedo analizar: XAUUSD, EURUSD, GBPUSD, USDJPY, AUDUSD, USDCHF\n\nO pregunta por 'señales' para ver operaciones activas.",
-                "❓ Pregunta sobre un activo específico o solicita 'señales' para ver oportunidades de trading.",
-                "💡 Puedo ayudarte mejor si me dices qué activo quieres analizar o si solicitas 'señales'."
-            ]
-        };
-        
-        // Función para obtener respuesta de la IA
-        function getAIResponse(message) {
-            const msg = message.toLowerCase();
-            
-            // Saludo
-            if (msg.includes('hola') || msg.includes('buenos') || msg.includes('hello') || msg.includes('hi')) {
-                return aiResponses.greeting[Math.floor(Math.random() * aiResponses.greeting.length)];
-            }
-            
-            // Análisis de Oro
-            if (msg.includes('oro') || msg.includes('xau') || msg.includes('gold') || msg.includes('qué hago con')) {
-                return aiResponses.oro[Math.floor(Math.random() * aiResponses.oro.length)];
-            }
-            
-            // EURUSD
-            if (msg.includes('eurusd') || msg.includes('euro')) {
-                return aiResponses.eur[Math.floor(Math.random() * aiResponses.eur.length)];
-            }
-            
-            // GBPUSD
-            if (msg.includes('gbpusd') || msg.includes('libra') || msg.includes('gbp')) {
-                return aiResponses.GBP[Math.floor(Math.random() * aiResponses.GBP.length)];
-            }
-            
-            // USDJPY
-            if (msg.includes('usdjpy') || msg.includes('yen') || msg.includes('jpy')) {
-                return aiResponses.jpy[Math.floor(Math.random() * aiResponses.jpy.length)];
-            }
-            
-            // AUDUSD
-            if (msg.includes('audusd') || msg.includes('aussie') || msg.includes('aud')) {
-                return aiResponses.aud[Math.floor(Math.random() * aiResponses.aud.length)];
-            }
-            
-            // USDCHF
-            if (msg.includes('usdchf') || msg.includes('franco') || msg.includes('chf')) {
-                return aiResponses.chf[Math.floor(Math.random() * aiResponses.chf.length)];
-            }
-            
-            // Señales
-            if (msg.includes('señal') || msg.includes('signal') || msg.includes('operar') || msg.includes('trade')) {
-                if (tradingContext.currentSignal) {
-                    let response = aiResponses.signal[0];
-                    return response
-                        .replace('{pair}', tradingContext.currentSignal.pair)
-                        .replace('{direction}', tradingContext.currentSignal.direction)
-                        .replace('{entry}', tradingContext.currentSignal.entry)
-                        .replace('{sl}', tradingContext.currentSignal.sl)
-                        .replace('{tp}', tradingContext.currentSignal.tp)
-                        .replace('{confidence}', tradingContext.currentSignal.confidence)
-                        .replace('{smc}', tradingContext.currentSignal.smc);
-                }
-                return "📡 Generando análisis SMC para " + tradingContext.currentPair + "...\n\n🟢 Order Block Alcista detectado en zona de demanda.\n\n📊 Configuración de trading:\n.entry: Precio actual + 10 pips\nSL: Último swing bajo\nTP: Ratio 1:2\n\n🎯 Confianza: 78%\n\n🧠 Contexto: Los institucionales están acumulando. Esperar confirmación de entrada.";
-            }
-            
-            // Ayuda
-            if (msg.includes('ayuda') || msg.includes('help') || msg.includes('qué puedes') || msg.includes('capacidades')) {
-                return aiResponses.help[Math.floor(Math.random() * aiResponses.help.length)];
-            }
-            
-            // Respuesta por defecto
-            return aiResponses.default[Math.floor(Math.random() * aiResponses.default.length)];
-        }
-        
-        // Función para agregar mensaje
-        function addMessage(text, isUser) {
-            const now = new Date();
-            const time = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
-            
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${isUser ? 'user' : 'ai'}`;
-            messageDiv.innerHTML = text + `<div class="message-time">${time}</div>`;
-            
-            chatMessages.appendChild(messageDiv);
-            // Auto-scroll al final
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-        
-        // Función para enviar mensaje
-        function sendMessage() {
-            const message = chatInput.value.trim();
-            if (!message) return;
-            
-            // Agregar mensaje del usuario
-            addMessage(message, true);
-            chatInput.value = '';
-            
-            // Mostrar indicador de escritura
-            typingIndicator.classList.add('visible');
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-            
-            // Simular respuesta de la IA
-            setTimeout(() => {
-                typingIndicator.classList.remove('visible');
-                const response = getAIResponse(message);
-                addMessage(response, false);
-            }, 1000 + Math.random() * 1500);
-        }
-        
-        // Event listeners
-        chatSendBtn.addEventListener('click', sendMessage);
-        
-        // Enter para enviar
-        chatInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                sendMessage();
-            }
-        });
-        
-        // Actualizar contexto cuando hay nuevas señales
-        window.updateTradingContext = function(signal) {
-            tradingContext.currentSignal = signal;
-        };
     </script>
 </body>
 </html>
