@@ -98,6 +98,45 @@
             box-shadow: 0 0 20px #0f0;
         }
 
+        /* ============================ */
+        /* LAYOUT PRINCIPAL - 3 BLOQUES */
+        /* ============================ */
+        
+        .layout-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            height: auto;
+        }
+        
+        /* BLOQUE 1: Header */
+        .header-block {
+            flex-shrink: 0;
+            z-index: 100;
+        }
+        
+        /* BLOQUE 2: Gráfico */
+        .chart-block {
+            flex-shrink: 0;
+            min-height: 650px;
+            height: 650px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #0f0;
+        }
+        
+        .chart-block #tradingview_chart {
+            height: 100%;
+            min-height: 650px;
+        }
+        
+        /* BLOQUE 3: Señales */
+        .signals-block {
+            flex-shrink: 0;
+            margin-top: 20px;
+            padding: 20px;
+            background: #000;
+        }
+        
         /* Main Container */
         .main-container {
             display: flex;
@@ -108,11 +147,11 @@
 
         /* Chart Area */
         .chart-area {
-            flex: 1;
-            border-right: 2px solid #0f0;
+            width: 100%;
+            border: none;
             position: relative;
             min-height: 600px;
-            height: auto;
+            height: 600px;
             overflow: visible;
         }
 
@@ -332,6 +371,18 @@
                 border-bottom: 2px solid #0f0;
                 flex-shrink: 0;
                 overflow-y: visible;
+            }
+
+            /* BLOQUE 2: Gráfico en móvil */
+            .chart-block {
+                min-height: 500px;
+                height: 500px;
+                margin-bottom: 20px;
+            }
+            
+            .chart-block #tradingview_chart {
+                height: 500px;
+                min-height: 500px;
             }
 
             #tradingview_chart {
@@ -823,7 +874,11 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
+    <!-- LAYOUT PRINCIPAL CON 3 BLOQUES -->
+    <div class="layout-container">
+    
+    <!-- BLOQUE 1: Header (Menú y Selectores) -->
+    <div class="header header-block">
     <div class="header">
         <div class="logo">🤖 MiBot Trading Terminal</div>
         
@@ -843,8 +898,17 @@
             <button class="mode-btn" data-mode="ia">🧠 Gráfico IA</button>
         </div>
     </div>
+    <!-- FIN BLOQUE 1: Header -->
 
-    <!-- Main Container -->
+    <!-- BLOQUE 2: Gráfico -->
+    <div class="chart-block">
+        <div id="tradingview_chart"></div>
+    </div>
+    <!-- FIN BLOQUE 2: Gráfico -->
+
+    <!-- BLOQUE 3: Señales -->
+    <div class="signals-block">
+    <!-- Panel de Señales de Trading -->
     <div class="main-container">
         <!-- Chart Area -->
         <div class="chart-area">
@@ -895,21 +959,9 @@
                     <span>🎯 TP = Take Profit</span>
                 </div>
             </div>
-            
-            <div id="tradingview_chart"></div>
-        </div>
-
-        <!-- Cerebro IA Sidebar -->
-        <div class="cerebro-ia">
-            <div class="cerebro-header">🧠 CEREBRO IA</div>
-            <div class="cerebro-logs" id="cerebroLogs">
-                <div class="log-entry">
-                    <div class="log-time">[INICIO]</div>
-                    <div class="log-text">Sistema iniciado. Esperando datos...</div>
-                </div>
-            </div>
-        </div>
+    <!-- FIN BLOQUE 3: Señales de Trading -->
     </div>
+    <!-- FIN signals-block -->
 
     <!-- Señales Panel -->
     <div class="señales-panel">
@@ -921,6 +973,9 @@
             </div>
         </div>
     </div>
+
+    </div>
+    <!-- FIN LAYOUT CONTAINER -->
 
     <!-- Panel de Administrador Secreto (Oculto) -->
     <div class="admin-overlay" id="adminOverlay"></div>
