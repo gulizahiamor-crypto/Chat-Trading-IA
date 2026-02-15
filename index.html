@@ -3,402 +3,430 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Frontend Oficial de Chat Trading IA - Plataforma de análisis de mercados financieros para XAUUSD, EURUSD, GBPUSD, USDJPY, AUDUSD y USDCHF">
-    <meta name="author" content="MiBot Trading IA">
-    <meta name="theme-color" content="#000000">
-    <meta name="robots" content="index, follow">
-    <title>MiBot Trading - Terminal de Trading IA</title>
-    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <title>MiBot Trading IA - Terminal de Trading Profesional</title>
+    <script src="https://s3.tradingview.com/tv.js"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            max-width: 100vw;
-            overflow-x: hidden;
         }
-
+        
         body {
-            background-color: #000;
-            color: #0f0;
             font-family: 'Courier New', monospace;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            height: auto;
-            max-width: 100vw;
-            overflow-x: hidden !important;
-            overflow-y: visible;
-        }
-
-        html {
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            height: auto;
-            max-width: 100vw;
-            overflow-x: hidden !important;
-            overflow-y: visible;
-        }
-
-        /* Header */
-        .header {
-            height: auto;
-            min-height: 60px;
-            border-bottom: 2px solid #0f0;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 10px 20px;
-            background: linear-gradient(90deg, #000 0%, #0a1a0a 50%, #000 100%);
-            width: 100%;
-            max-width: 100vw;
+            background: #000;
+            color: #0f0;
             overflow-x: hidden;
         }
-
-        .logo {
-            font-size: 18px;
-            font-weight: bold;
-            text-shadow: 0 0 10px #0f0;
-            letter-spacing: 2px;
+        
+        /* Header Principal */
+        .main-header {
+            background: linear-gradient(180deg, #0a0a0a 0%, #000 100%);
+            border-bottom: 2px solid #0f0;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
         }
-
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-shadow: 0 0 20px #0f0;
+            animation: glow 2s infinite;
+        }
+        
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 20px #0f0; }
+            50% { text-shadow: 0 0 40px #0f0, 0 0 60px #0f0; }
+        }
+        
         /* Selector de Activos */
         .asset-selector {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
             gap: 10px;
-            width: 100%;
-            max-width: 100%;
-            overflow-x: hidden;
+            flex-wrap: wrap;
         }
-
+        
         .asset-btn {
-            background: transparent;
+            padding: 10px 20px;
+            background: #000;
             border: 1px solid #0f0;
             color: #0f0;
-            padding: 8px 16px;
-            cursor: pointer;
             font-family: 'Courier New', monospace;
-            font-size: 12px;
+            font-size: 14px;
+            cursor: pointer;
             transition: all 0.3s;
+            text-transform: uppercase;
         }
-
-        .asset-btn:hover, .asset-btn.active {
+        
+        .asset-btn:hover {
             background: #0f0;
             color: #000;
             box-shadow: 0 0 15px #0f0;
         }
-
-        /* Modo de Visualización */
-        .view-mode {
-            display: flex;
-            gap: 10px;
-        }
-
-        .mode-btn {
-            background: transparent;
-            border: 2px solid #0f0;
-            color: #0f0;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-
-        .mode-btn:hover, .mode-btn.active {
+        
+        .asset-btn.active {
             background: #0f0;
             color: #000;
             box-shadow: 0 0 20px #0f0;
         }
-
-        /* ============================ */
-        /* LAYOUT PRINCIPAL */
-        /* ============================ */
         
-        .layout-container {
-            display: block;
-            width: 100%;
-            max-width: 100vw;
-            overflow-x: hidden;
+        /* Modo de Visualización */
+        .view-mode-btns {
+            display: flex;
+            gap: 10px;
         }
         
-        /* BLOQUE 1: Header */
-        .header-block {
-            width: 100%;
-            max-width: 100vw;
-            overflow-x: hidden;
+        .view-btn {
+            padding: 12px 25px;
+            background: transparent;
+            border: 2px solid #0f0;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
         }
         
-        /* BLOQUE 2: Gráfico */
-        .chart-block {
-            width: 100%;
-            max-width: 100vw;
-            height: 650px;
-            min-height: 650px;
-            margin-top: 0;
-            overflow-x: hidden;
+        .view-btn:hover {
+            background: rgba(0, 255, 0, 0.2);
+            box-shadow: 0 0 15px #0f0;
         }
         
-        .chart-block #tradingview_chart {
-            width: 100%;
-            max-width: 100vw;
-            height: 100%;
-            overflow-x: hidden;
+        .view-btn.active {
+            background: #0f0;
+            color: #000;
+            box-shadow: 0 0 25px #0f0;
         }
         
-        /* BLOQUE 3: Señales */
-        .signals-block {
-            width: 100%;
-            max-width: 100vw;
-            margin-top: 50px;
-            overflow-x: hidden;
-        }
-        
-        /* Main Container */
+        /* Contenedor Principal */
         .main-container {
             display: flex;
-            height: auto;
-            min-height: auto;
-            overflow-y: visible !important;
+            min-height: calc(100vh - 150px);
         }
-
-        /* Chart Area */
-        .chart-area {
-            width: 100%;
-            border: none;
-            position: relative;
-            min-height: 600px;
-            height: 600px;
-            overflow: visible;
-        }
-
-        #tradingview_chart {
-            width: 100% !important;
-            max-width: 100% !important;
-            height: 100%;
-            min-height: 600px;
-            display: block;
-        }
-
-        /* Trading Signals - Below chart */
-        .trading-signals {
-            position: relative;
-            bottom: auto;
-            left: auto;
-            right: auto;
-            margin: 10px;
-            z-index: 50;
-        }
-
-        /* Cerebro IA Sidebar */
-        .cerebro-ia {
-            width: 300px;
-            background: #000;
-            border-left: 2px solid #0f0;
+        
+        /* Gráfico Principal */
+        .chart-section {
+            flex: 1;
+            padding: 20px;
             display: flex;
             flex-direction: column;
         }
-
-        .cerebro-header {
-            padding: 15px;
-            border-bottom: 1px solid #0f0;
-            text-align: center;
-            font-size: 16px;
-            font-weight: bold;
-            text-shadow: 0 0 10px #0f0;
-            animation: pulse 2s infinite;
+        
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #0f0;
+            background: rgba(0, 255, 0, 0.05);
         }
-
+        
+        .chart-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .chart-mode-indicator {
+            color: #0a0;
+            font-size: 12px;
+        }
+        
+        .tradingview-container {
+            flex: 1;
+            border: 2px solid #0f0;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+            min-height: 500px;
+        }
+        
+        /* Sidebar CEREBRO IA */
+        .cerebro-ia {
+            width: 350px;
+            border-left: 2px solid #0f0;
+            background: #050505;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .cerebro-header {
+            background: linear-gradient(90deg, #000 0%, #0a1a0a 50%, #000 100%);
+            padding: 20px;
+            border-bottom: 2px solid #0f0;
+            text-align: center;
+        }
+        
+        .cerebro-title {
+            font-size: 20px;
+            font-weight: bold;
+            text-shadow: 0 0 15px #0f0;
+            animation: pulse 1s infinite;
+        }
+        
         @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.7; }
         }
-
+        
+        .cerebro-subtitle {
+            font-size: 10px;
+            color: #0a0;
+            margin-top: 5px;
+        }
+        
         .cerebro-logs {
             flex: 1;
+            padding: 15px;
             overflow-y: auto;
-            padding: 10px;
             font-size: 11px;
+            line-height: 1.8;
         }
-
+        
+        .cerebro-logs::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        .cerebro-logs::-webkit-scrollbar-thumb {
+            background: #0f0;
+        }
+        
         .log-entry {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             padding: 8px;
             border-left: 2px solid #0f0;
             background: rgba(0, 255, 0, 0.05);
-            animation: slideIn 0.3s ease-out;
+            animation: fadeIn 0.5s ease;
         }
-
-        @keyframes slideIn {
-            from { transform: translateX(-20px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
         }
-
+        
         .log-time {
             color: #0a0;
-            font-size: 10px;
+            font-size: 9px;
         }
-
+        
         .log-text {
-            margin-top: 4px;
-        }
-
-        /* Señales Panel */
-        .señales-panel {
-            position: relative;
-            height: 120px;
-            min-height: 120px;
-            border-top: 2px solid #0f0;
-            background: #000;
-            padding: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            z-index: 1;
-        }
-
-        .señales-content {
-            text-align: center;
-        }
-
-        .señales-title {
-            font-size: 16px;
-            font-weight: bold;
             color: #0f0;
-            text-shadow: 0 0 15px #0f0;
-            margin-bottom: 10px;
-            animation: blink 1s infinite;
+            margin-top: 3px;
         }
-
+        
+        .log-scanning {
+            color: #ff0;
+            animation: blink 0.5s infinite;
+        }
+        
         @keyframes blink {
             0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+            50% { opacity: 0.3; }
         }
-
-        .calibrating {
-            font-size: 14px;
+        
+        /* Panel de Señales */
+        .signals-section {
+            border-top: 2px solid #0f0;
+            padding: 20px;
+            background: #0a0a0a;
+        }
+        
+        .signals-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .signals-title {
+            font-size: 18px;
+            font-weight: bold;
+            text-shadow: 0 0 10px #0f0;
+        }
+        
+        .signal-status {
+            padding: 5px 15px;
+            border: 1px solid #ff0;
+            color: #ff0;
+            font-size: 12px;
+            animation: blink 1s infinite;
+        }
+        
+        .calibrating-message {
+            text-align: center;
+            padding: 40px;
+            border: 2px dashed #0f0;
+            background: rgba(0, 255, 0, 0.05);
+        }
+        
+        .calibrating-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+        
+        .calibrating-text {
+            font-size: 16px;
+            color: #0f0;
+        }
+        
+        .calibrating-subtext {
+            font-size: 12px;
             color: #0a0;
+            margin-top: 10px;
         }
-
-        .loader {
-            display: inline-block;
+        
+        /* Scanner de Liquidez */
+        .liquidity-scanner {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #0f0;
+            background: rgba(0, 255, 0, 0.05);
+        }
+        
+        .scanner-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .scanner-radar {
             width: 20px;
             height: 20px;
             border: 2px solid #0f0;
             border-radius: 50%;
-            border-top-color: transparent;
-            animation: spin 1s linear infinite;
-            margin-right: 10px;
-            vertical-align: middle;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 5px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #000;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #0f0;
-        }
-
-        /* ============================ */
-        /* ACCESO QR INTELIGENTE */
-        /* ============================ */
-        
-        .qr-access-container {
-            width: 100%;
-            max-width: 100vw;
-            overflow-x: hidden;
-            padding: 30px 20px;
-            text-align: center;
-            background: #000;
-            border-top: 2px solid #0f0;
-            margin-top: 20px;
+            animation: radar 2s infinite;
         }
         
-        .qr-access-title {
-            font-size: 18px;
-            font-weight: bold;
-            color: #0f0;
-            text-shadow: 0 0 15px #0f0;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
+        @keyframes radar {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
-        .qr-code-wrapper {
-            display: inline-block;
-            padding: 10px;
-            border: 3px solid #0f0;
-            border-radius: 15px;
-            animation: qrPulse 2s infinite;
-            background: #fff;
-        }
-        
-        @keyframes qrPulse {
-            0%, 100% {
-                box-shadow: 0 0 20px #0f0, inset 0 0 20px rgba(0, 255, 0, 0.1);
-                border-color: #0f0;
-            }
-            50% {
-                box-shadow: 0 0 40px #0f0, inset 0 0 30px rgba(0, 255, 0, 0.2);
-                border-color: #00ff00;
-            }
-        }
-        
-        .qr-code-wrapper img {
-            width: 150px;
-            height: 150px;
-            display: block;
-            border-radius: 8px;
-        }
-        
-        .qr-access-text {
-            margin-top: 15px;
-            font-size: 14px;
-            color: #0f0;
-            text-shadow: 0 0 10px #0f0;
-            animation: blink 1.5s infinite;
-        }
-        
-        .qr-timer {
-            margin-top: 10px;
-            font-size: 10px;
+        .scanner-results {
+            font-size: 12px;
             color: #0a0;
+            line-height: 1.6;
         }
-
-        /* ============================ */
+        
+        /* Order Block Detector */
+        .orderblock-detector {
+            margin-top: 15px;
+            padding: 15px;
+            border: 1px solid #0f0;
+            background: rgba(0, 255, 0, 0.05);
+        }
+        
+        .ob-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .ob-display {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .ob-zone {
+            padding: 8px 12px;
+            border: 1px solid #0f0;
+            font-size: 11px;
+            background: rgba(0, 255, 0, 0.1);
+        }
+        
+        /* AI Indicators Panel */
+        .indicators-panel {
+            padding: 15px;
+            border-top: 1px solid #0f0;
+        }
+        
+        .indicators-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .indicator-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px;
+            margin-bottom: 5px;
+            border: 1px solid #0a0;
+            font-size: 11px;
+        }
+        
+        .indicator-value {
+            color: #0f0;
+            font-weight: bold;
+        }
+        
+        .indicator-buy { color: #0f0; }
+        .indicator-sell { color: #f00; }
+        .indicator-neutral { color: #ff0; }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .cerebro-ia {
+                width: 280px;
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .main-container {
+                flex-direction: column;
+            }
+            
+            .cerebro-ia {
+                width: 100%;
+                border-left: none;
+                border-top: 2px solid #0f0;
+            }
+            
+            .asset-selector {
+                justify-content: center;
+            }
+            
+            .view-mode-btns {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .asset-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .view-btn {
+                padding: 10px 15px;
+                font-size: 12px;
+            }
+        }
+        
         /* CHAT CON IA */
-        /* ============================ */
         
         .chat-container {
-            width: 100%;
-            max-width: 100vw;
+            width: 95%;
+            max-width: 95%;
+            margin: 20px auto;
             overflow-x: hidden;
-            padding: 20px;
             background: #000;
             border-top: 2px solid #0f0;
-            margin-top: 20px;
+            padding: 20px 0;
         }
         
         .chat-box {
             width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
+            max-width: 100%;
             border: 2px solid #0f0;
             border-radius: 10px;
             background: #0a0a0a;
@@ -439,7 +467,7 @@
         }
         
         .chat-messages {
-            height: 300px;
+            height: 400px;
             overflow-y: auto;
             padding: 15px;
             display: flex;
@@ -499,8 +527,8 @@
             padding: 12px 15px;
             border: 1px solid #0f0;
             border-radius: 20px;
-            background: #000;
-            color: #0f0;
+            background: #111 !important;
+            color: #0f0 !important;
             font-family: 'Courier New', monospace;
             font-size: 13px;
             outline: none;
@@ -541,776 +569,471 @@
         .typing-indicator.visible {
             display: block;
         }
-
-        /* IA Mode Indicator */
-        .ia-indicator {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: rgba(0, 255, 0, 0.2);
-            border: 1px solid #0f0;
-            padding: 5px 10px;
-            font-size: 12px;
-            display: none;
-            z-index: 100;
-        }
-
-        .ia-indicator.active {
-            display: block;
-            animation: pulse 1s infinite;
-        }
-
-        /* ============================ */
-        /* DISEÑO RESPONSIVO - MÓVILES */
-        /* ============================ */
-
-        @media (max-width: 768px) {
-            /* Header vertical */
-            .header {
-                height: auto;
-                flex-direction: column;
-                padding: 10px;
-                gap: 10px;
-                flex-shrink: 0;
-            }
-
-            .logo {
-                font-size: 14px;
-                text-align: center;
-            }
-
-            /* Selector de activos - wrap */
-            .asset-selector {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 5px;
-            }
-
-            .asset-btn {
-                padding: 6px 10px;
-                font-size: 10px;
-            }
-
-            /* Botones de modo más grandes para touch */
-            .view-mode {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .mode-btn {
-                padding: 12px 20px;
-                font-size: 13px;
-                flex: 1;
-                text-align: center;
-                min-height: 48px;
-            }
-
-            /* Main container vertical */
-            .main-container {
-                flex-direction: column;
-                height: auto;
-                min-height: auto;
-                overflow-y: visible !important;
-            }
-
-            /* Chart area - full width */
-            .chart-area {
-                width: 100%;
-                height: auto;
-                min-height: 500px;
-                border-right: none;
-                border-bottom: 2px solid #0f0;
-                flex-shrink: 0;
-                overflow-y: visible;
-            }
-
-            /* BLOQUE 2: Gráfico en móvil */
-            .chart-block {
-                min-height: 500px;
-                height: 500px;
-                margin-bottom: 20px;
-                width: 100%;
-                max-width: 100vw;
-                overflow-x: hidden;
-            }
-            
-            .chart-block #tradingview_chart {
-                height: 500px;
-                min-height: 500px;
-                width: 100%;
-            }
-
-            #tradingview_chart {
-                height: 500px;
-                min-height: 500px;
-            }
-
-            /* Trading signals en móvil */
-            .trading-signals {
-                position: relative !important;
-                margin: 15px !important;
-                margin-bottom: 100px !important;
-                margin-top: 30px !important;
-                width: calc(100% - 30px) !important;
-                background: rgba(0, 20, 0, 0.98) !important;
-                border: 3px solid #00ff00 !important;
-                display: block !important;
-                z-index: 999 !important;
-            }
-
-            /* Cerebro IA - panel colapsable */
-            .cerebro-ia {
-                width: 100%;
-                border-left: none;
-                border-top: 2px solid #0f0;
-                max-height: 200px;
-                overflow: hidden;
-            }
-
-            .cerebro-ia.expanded {
-                max-height: 300px;
-            }
-
-            .cerebro-header {
-                cursor: pointer;
-                user-select: none;
-                position: relative;
-            }
-
-            .cerebro-header::after {
-                content: ' ▼';
-                font-size: 12px;
-            }
-
-            .cerebro-ia.expanded .cerebro-header::after {
-                content: ' ▲';
-            }
-
-            .cerebro-logs {
-                max-height: 150px;
-                overflow-y: auto;
-            }
-
-            .cerebro-ia.expanded .cerebro-logs {
-                max-height: 250px;
-            }
-
-            /* Señales panel */
-            .señales-panel {
-                position: relative;
-                height: auto;
-                min-height: 100px;
-                padding: 15px;
-                flex-shrink: 0;
-                z-index: 1;
-                width: 100%;
-                max-width: 100vw;
-                overflow-x: hidden;
-            }
-
-            /* Signals block */
-            .signals-block {
-                width: 100%;
-                max-width: 100vw;
-                overflow-x: hidden;
-            }
-
-            .señales-title {
-                font-size: 12px;
-            }
-
-            .calibrating {
-                font-size: 11px;
-            }
-
-            /* Ajustar body para scroll vertical */
-            body {
-                overflow-x: hidden !important;
-                overflow-y: auto !important;
-                height: auto;
-                min-height: 100vh;
-                max-width: 100vw;
-            }
-        }
-
-        /* Extra small devices */
-        @media (max-width: 480px) {
-            .logo {
-                font-size: 12px;
-            }
-
-            .mode-btn {
-                padding: 14px 10px;
-                font-size: 11px;
-            }
-
-            .asset-btn {
-                padding: 5px 8px;
-                font-size: 9px;
-            }
-
-            .chart-area {
-                min-height: 400px;
-                height: auto;
-                overflow-y: visible;
-            }
-
-            #tradingview_chart {
-                height: 400px;
-                min-height: 400px;
-            }
-
-            .cerebro-logs {
-                font-size: 10px;
-            }
-
-            .log-entry {
-                padding: 5px;
-            }
-
-            /* Trading signals responsive */
-            .signal-row {
-                flex-wrap: wrap;
-                gap: 8px;
-            }
-
-            .signal-prices {
-                width: 100%;
-                justify-content: space-around;
-            }
-        }
-
-        /* ============================ */
-        /* PANEL DE ADMINISTRADOR SECRETO */
-        /* ============================ */
-
-        .admin-panel {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 90%;
-            max-width: 500px;
-            background: #1a0000;
-            border: 3px solid #ff0000;
-            border-radius: 10px;
-            padding: 30px;
-            z-index: 9999;
-            display: none;
-            box-shadow: 0 0 50px rgba(255, 0, 0, 0.5), inset 0 0 30px rgba(255, 0, 0, 0.1);
-        }
-
-        .admin-panel.visible {
-            display: block;
-            animation: adminAppear 0.5s ease-out;
-        }
-
-        @keyframes adminAppear {
-            from {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1);
-            }
-        }
-
-        .admin-header {
-            background: #ff0000;
-            color: #fff;
-            padding: 15px;
-            margin: -30px -30px 20px -30px;
-            border-radius: 7px 7px 0 0;
-            text-align: center;
-            font-weight: bold;
-            font-size: 18px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        .admin-stats {
-            color: #fff;
-            font-size: 16px;
-            text-align: center;
-            margin: 20px 0;
-            padding: 20px;
-            border: 1px solid #ff3333;
-            background: rgba(255, 0, 0, 0.1);
-        }
-
-        .admin-stats .count {
-            font-size: 48px;
-            font-weight: bold;
-            color: #ff0000;
-            text-shadow: 0 0 20px #ff0000;
-            display: block;
-            margin: 10px 0;
-        }
-
-        .admin-close {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            color: #fff;
-            font-size: 24px;
-            cursor: pointer;
-            background: none;
-            border: none;
-            font-weight: bold;
-        }
-
-        .admin-close:hover {
-            color: #ff6666;
-        }
-
-        .admin-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 9998;
-            display: none;
-        }
-
-        .admin-overlay.visible {
-            display: block;
-        }
-
-        .admin-hint {
-            color: #666;
-            font-size: 10px;
-            text-align: center;
-            margin-top: 15px;
-        }
-
-        /* ============================ */
-        /* CEREBRO DE TRADING - SEÑALES */
-        /* ============================ */
-
-        /* Selector de Activo para IA */
-        .ia-focus-selector {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 15px;
-            background: rgba(0, 20, 0, 0.9);
-            border: 2px solid #00ff00;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .ia-focus-label {
-            font-size: 14px;
-            font-weight: bold;
-            color: #00ff00;
-            text-shadow: 0 0 10px #00ff00;
-        }
-
-        .ia-focus-buttons {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .ia-focus-btn {
-            background: transparent;
-            border: 1px solid #00ff00;
-            color: #00ff00;
-            padding: 8px 14px;
-            font-size: 12px;
-            font-family: 'Courier New', monospace;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: all 0.3s;
-        }
-
-        .ia-focus-btn:hover {
-            background: rgba(0, 255, 0, 0.2);
-            box-shadow: 0 0 10px #00ff00;
-        }
-
-        .ia-focus-btn.active {
-            background: #00ff00;
-            color: #000;
-            font-weight: bold;
-            box-shadow: 0 0 15px #00ff00;
-        }
-
-        .ia-focus-status {
-            width: 100%;
-            text-align: center;
-            font-size: 13px;
-            color: #00ff00;
-            padding: 10px;
-            background: rgba(0, 255, 0, 0.1);
-            border-radius: 4px;
-            margin-top: 10px;
-            animation: pulse 2s infinite;
-        }
-
-        .trading-signals {
-            position: relative !important;
-            bottom: auto !important;
-            left: auto !important;
-            right: auto !important;
-            top: auto !important;
-            width: calc(100% - 40px) !important;
-            margin: 30px !important;
-            margin-bottom: 120px !important;
-            background: rgba(0, 20, 0, 0.98) !important;
-            border: 3px solid #00ff00 !important;
-            border-radius: 8px;
-            padding: 20px !important;
-            display: block !important;
-            z-index: 999 !important;
-            box-shadow: 0 0 30px rgba(0, 255, 0, 0.5), inset 0 0 20px rgba(0, 255, 0, 0.1);
-        }
-
-        .trading-signals.active {
-            display: block !important;
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .signal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #0f0;
-            padding-bottom: 5px;
-        }
-
-        .signal-title {
-            font-size: 14px;
-            font-weight: bold;
-            color: #0f0;
-            text-shadow: 0 0 10px #0f0;
-        }
-
-        .effectiveness-badge {
-            background: #0f0;
-            color: #000;
-            padding: 3px 8px;
-            font-size: 10px;
-            font-weight: bold;
-            border-radius: 3px;
-            animation: pulse 1s infinite;
-        }
-
-        .signal-content {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .signal-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px;
-            border: 1px solid #0a0;
-            border-radius: 3px;
-            background: rgba(0, 255, 0, 0.05);
-        }
-
-        .signal-pair {
-            font-weight: bold;
-            font-size: 14px;
-            min-width: 80px;
-        }
-
-        .signal-direction {
-            font-size: 12px;
-            font-weight: bold;
-            padding: 3px 10px;
-            border-radius: 3px;
-            min-width: 60px;
-            text-align: center;
-        }
-
-        .signal-direction.BUY {
-            background: #00ff00;
-            color: #000;
-        }
-
-        .signal-direction.SELL {
-            background: #ff0000;
-            color: #fff;
-        }
-
-        .signal-prices {
-            display: flex;
-            gap: 15px;
-            font-size: 11px;
-        }
-
-        .signal-price {
-            text-align: center;
-        }
-
-        .signal-price-label {
-            color: #0a0;
-            font-size: 9px;
-        }
-
-        .signal-price-value {
-            font-weight: bold;
-        }
-
-        .signal-confidence {
-            font-size: 10px;
-            color: #0f0;
-            text-align: right;
-            min-width: 80px;
-        }
-
-        .scanner-status {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-            padding: 8px;
-            background: rgba(0, 255, 0, 0.1);
-            border-radius: 3px;
-        }
-
-        .scanner-dot {
-            width: 10px;
-            height: 10px;
-            background: #0f0;
-            border-radius: 50%;
-            animation: blink 0.5s infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-
-        .scanner-text {
-            font-size: 11px;
-            color: #0f0;
-        }
-
-        .scanner-progress {
-            display: flex;
-            gap: 5px;
-            font-size: 10px;
-        }
-
-        .scanner-asset {
-            padding: 2px 6px;
-            border: 1px solid #0a0;
-            border-radius: 2px;
-            color: #0a0;
-        }
-
-        .scanner-asset.active {
-            background: #0f0;
-            color: #000;
-        }
-
-        .smc-analysis {
-            font-size: 10px;
-            color: #0a0;
-            margin-top: 5px;
-            padding-top: 5px;
-            border-top: 1px dashed #0a0;
-        }
-
-        .signal-legend {
-            display: flex;
-            gap: 15px;
-            font-size: 9px;
-            color: #0a0;
-            margin-top: 8px;
-            padding-top: 5px;
-            border-top: 1px solid #0a0;
-        }
     </style>
 </head>
 <body>
-    <!-- LAYOUT PRINCIPAL CON 3 BLOQUES -->
-    <div class="layout-container">
-    
-    <!-- BLOQUE 1: Header (Menú y Selectores) -->
-    <div class="header header-block">
-    <div class="header">
-        <div class="logo">🤖 MiBot Trading Terminal</div>
+    <!-- Header Principal -->
+    <header class="main-header">
+        <div class="logo">🤖 MiBot Trading IA</div>
         
         <!-- Selector de Activos -->
-        <div class="asset-selector">
-            <button class="asset-btn active" data-symbol="OANDA:XAUUSD" data-name="XAUUSD">XAUUSD</button>
-            <button class="asset-btn" data-symbol="OANDA:EURUSD" data-name="EURUSD">EURUSD</button>
-            <button class="asset-btn" data-symbol="OANDA:GBPUSD" data-name="GBPUSD">GBPUSD</button>
-            <button class="asset-btn" data-symbol="OANDA:USDJPY" data-name="USDJPY">USDJPY</button>
-            <button class="asset-btn" data-symbol="OANDA:AUDUSD" data-name="AUDUSD">AUDUSD</button>
-            <button class="asset-btn" data-symbol="OANDA:USDCHF" data-name="USDCHF">USDCHF</button>
+        <div class="asset-selector" id="assetSelector">
+            <button class="asset-btn active" data-symbol="XAUUSD">XAUUSD</button>
+            <button class="asset-btn" data-symbol="EURUSD">EURUSD</button>
+            <button class="asset-btn" data-symbol="GBPUSD">GBPUSD</button>
+            <button class="asset-btn" data-symbol="USDJPY">USDJPY</button>
+            <button class="asset-btn" data-symbol="AUDUSD">AUDUSD</button>
+            <button class="asset-btn" data-symbol="USDCHF">USDCHF</button>
         </div>
-
+        
         <!-- Modo de Visualización Dual -->
-        <div class="view-mode">
-            <button class="mode-btn active" data-mode="normal">📊 Gráfico Común</button>
-            <button class="mode-btn" data-mode="ia">🧠 Gráfico IA</button>
+        <div class="view-mode-btns">
+            <button class="view-btn active" id="btnGraficoComun">📊 Gráfico Común</button>
+            <button class="view-btn" id="btnGraficoIA">🧠 Gráfico IA</button>
         </div>
-    </div>
-    <!-- FIN BLOQUE 1: Header -->
-
-    <!-- BLOQUE 2: Gráfico -->
-    <div class="chart-block">
-        <div id="tradingview_chart"></div>
-    </div>
-    <!-- FIN BLOQUE 2: Gráfico -->
-
-    <!-- BLOQUE 3: Señales -->
-    <div class="signals-block">
-    <!-- Panel de Señales de Trading -->
+    </header>
+    
+    <!-- Contenedor Principal -->
     <div class="main-container">
-        <!-- Chart Area -->
-        <div class="chart-area">
-            <div class="ia-indicator" id="iaIndicator">🧠 MODO IA ACTIVADO - Indicadores de Alta Precisión</div>
+        <!-- Sección del Gráfico -->
+        <section class="chart-section">
+            <div class="chart-header">
+                <div class="chart-title" id="chartTitle">XAUUSD - Oro</div>
+                <div class="chart-mode-indicator" id="chartModeIndicator">Modo: GRÁFICO COMÚN</div>
+            </div>
+            <div class="tradingview-container" id="tradingviewChart"></div>
+        </section>
+        
+        <!-- Sidebar CEREBRO IA -->
+        <aside class="cerebro-ia">
+            <div class="cerebro-header">
+                <div class="cerebro-title">🧠 CEREBRO IA</div>
+                <div class="cerebro-subtitle">Procesando millones de datos en tiempo real...</div>
+            </div>
             
-            <!-- Panel de Señales de Trading -->
-            <div class="trading-signals" id="tradingSignals">
-                <div class="signal-header">
-                    <span class="signal-title">🧠 CEREBRO DE TRADING SMC</span>
-                    <span class="effectiveness-badge">1.000.000% EFECTIVIDAD</span>
+            <!-- Panel de Indicadores IA -->
+            <div class="indicators-panel">
+                <div class="indicators-title">📈 INDICADORES EN VIVO</div>
+                <div class="indicator-item">
+                    <span>RSI (14)</span>
+                    <span class="indicator-value indicator-buy" id="rsiValue">42.5 - SOBREVENTA</span>
                 </div>
-                
-                <!-- Selector de Enfoque IA -->
-                <div class="ia-focus-selector">
-                    <span class="ia-focus-label">🎯 ENFOQUE IA:</span>
-                    <div class="ia-focus-buttons">
-                        <button class="ia-focus-btn active" data-focus="ALL">TODOS</button>
-                        <button class="ia-focus-btn" data-focus="XAUUSD">XAUUSD</button>
-                        <button class="ia-focus-btn" data-focus="EURUSD">EURUSD</button>
-                        <button class="ia-focus-btn" data-focus="GBPUSD">GBPUSD</button>
-                        <button class="ia-focus-btn" data-focus="USDJPY">USDJPY</button>
-                        <button class="ia-focus-btn" data-focus="AUDUSD">AUDUSD</button>
-                        <button class="ia-focus-btn" data-focus="USDCHF">USDCHF</button>
-                    </div>
-                    <div class="ia-focus-status" id="iaFocusStatus">
-                        IA ANALIZANDO: TODOS LOS ACTIVOS
-                    </div>
+                <div class="indicator-item">
+                    <span>BB (20,2)</span>
+                    <span class="indicator-value" id="bbValue">2658.50 - MEDIA</span>
                 </div>
-                
-                <div class="scanner-status">
-                    <div class="scanner-dot"></div>
-                    <span class="scanner-text" id="scannerText">Iniciando scanner SMC...</span>
-                    <div class="scanner-progress" id="scannerProgress"></div>
+                <div class="indicator-item">
+                    <span>VOLUMEN</span>
+                    <span class="indicator-value indicator-neutral" id="volumeValue">ALTO - 145%</span>
                 </div>
-                
-                <div class="signal-content" id="signalContent">
-                    <!-- Las señales se generarán dinámicamente -->
-                </div>
-                
-                <div class="smc-analysis" id="smcAnalysis">
-                    Analizando estructuras de mercado...
-                </div>
-                
-                <div class="signal-legend">
-                    <span>📈 BUY = Entrada LARGA</span>
-                    <span>📉 SELL = Entrada CORTA</span>
-                    <span>🔒 SL = Stop Loss</span>
-                    <span>🎯 TP = Take Profit</span>
+                <div class="indicator-item">
+                    <span>TENDENCIA</span>
+                    <span class="indicator-value indicator-buy" id="trendValue">ALCISTA 🟢</span>
                 </div>
             </div>
-    <!-- FIN BLOQUE 3: Señales de Trading -->
-    </div>
-    <!-- FIN signals-block -->
-
-    <!-- Señales Panel -->
-    <div class="señales-panel">
-        <div class="señales-content">
-            <div class="señales-title">⚡ SEÑALES DE ALTA PRECISIÓN 1000000% EFECTIVAS ⚡</div>
-            <div class="calibrating">
-                <span class="loader"></span>
-                Calibrando algoritmo cuántico...
+            
+            <!-- Scanner de Liquidez -->
+            <div class="liquidity-scanner">
+                <div class="scanner-title">
+                    <div class="scanner-radar"></div>
+                    🔍 ESCÁNER DE LIQUIDEZ
+                </div>
+                <div class="scanner-results" id="liquidityResults">
+                    Buscando zonas de liquidez...
+                </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Acceso QR Inteligente -->
-    <div class="qr-access-container">
-        <div class="qr-access-title">📱 Acceso Rápido IA</div>
-        <div class="qr-code-wrapper">
-            <img id="qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://chat-trading-ia.vercel.app" style="width: 180px; height: 180px; display: block; margin: 0 auto; border-radius: 8px;">
-        </div>
-        <div class="qr-access-text">📱 Escanea para llevar la IA en tu celular</div>
-        <div class="qr-timer" id="qrTimer">Actualizando en: 7:00:00</div>
+            
+            <!-- Detector de Order Blocks -->
+            <div class="orderblock-detector">
+                <div class="ob-title">🎯 ORDER BLOCKS DETECTADOS</div>
+                <div class="ob-display" id="obDisplay">
+                    <div class="ob-zone">Cargando OB...</div>
+                </div>
+            </div>
+            
+            <!-- Logs del Cerebro IA -->
+            <div class="cerebro-logs" id="cerebroLogs">
+                <div class="log-entry">
+                    <div class="log-time">00:00:00</div>
+                    <div class="log-text log-scanning">🔄 Inicializando sistema neuronal...</div>
+                </div>
+            </div>
+        </aside>
     </div>
     
-    <!-- Script para actualizar QR cada 7 horas -->
+    <!-- Sección de Señales -->
+    <section class="signals-section">
+        <div class="signals-header">
+            <div class="signals-title">📡 SEÑALES DE ALTA PRECISIÓN 1000000% EFECTIVAS</div>
+            <div class="signal-status">🔄 CALIBRANDO</div>
+        </div>
+        
+        <div class="calibrating-message">
+            <div class="calibrating-icon">⚙️</div>
+            <div class="calibrating-text">Calibrando algoritmo cuántico...</div>
+            <div class="calibrating-subtext">El sistema está analizando millones de patrones de mercado para generar señales infallibles.</div>
+        </div>
+    </section>
+    
+    <!-- Chat con IA -->
+    <div class="chat-container">
+        <div class="chat-box">
+            <div class="chat-header">
+                <div class="chat-avatar">🤖</div>
+                <div>
+                    <div class="chat-title">Chat Trading IA</div>
+                    <div class="chat-status">● Especialista en SMC y análisis de mercado</div>
+                </div>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message ai">
+                    ¡Hola! Soy tu asistente de trading 🤖
+                    <br><br>
+                    Soy experta en <strong>Smart Money Concepts (SMC)</strong> y puedo ayudarte con:
+                    <br>• Análisis de estructura de mercado
+                    <br>• Detección de Order Blocks
+                    <br>• Identificación de liquidez
+                    <br>• Señales de trading en tiempo real
+                    <br><br>
+                    ¿Sobre qué activo quieres analizar?
+                    <div class="message-time">Ahora</div>
+                </div>
+            </div>
+            <div class="typing-indicator" id="typingIndicator">
+                📝 Escribiendo...
+            </div>
+            <div class="chat-input-area">
+                <input type="text" class="chat-input" id="chatInput" placeholder="Pregúntale a la IA sobre el próximo movimiento...">
+                <button class="chat-send-btn" id="chatSendBtn">⚡</button>
+            </div>
+        </div>
+    </div>
+    
     <script>
-        setInterval(function() {
-            document.getElementById('qr-image').src = 'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://chat-trading-ia.vercel.app&v=' + Date.now();
-        }, 25200000);
-    </script>
-
-    <!-- Chat con IA - Funcionalidad -->
-    <script>
-        // Variables del chat
+        // Variables globales
+        let currentSymbol = 'XAUUSD';
+        let isAIMode = false;
+        let tradingViewWidget = null;
+        
+        // Configuración de activos
+        const assetsConfig = {
+            'XAUUSD': { name: 'Oro', symbol: 'XAUUSD' },
+            'EURUSD': { name: 'Euro/Dólar', symbol: 'EURUSD' },
+            'GBPUSD': { name: 'Libra/Dólar', symbol: 'GBPUSD' },
+            'USDJPY': { name: 'Dólar/Yen', symbol: 'USDJPY' },
+            'AUDUSD': { name: 'Dólar Australiano', symbol: 'AUDUSD' },
+            'USDCHF': { name: 'Dólar/Francos', symbol: 'USDCHF' }
+        };
+        
+        // Indicadores para modo IA
+        const indicators = {
+            'RSI': { value: 42.5, status: 'SOBREVENTA', type: 'buy' },
+            'BB': { value: 2658.50, status: 'MEDIA', type: 'neutral' },
+            'VOLUME': { value: 145, status: 'ALTO', type: 'neutral' },
+            'TREND': { value: 'ALCISTA', status: '🟢', type: 'buy' }
+        };
+        
+        // Logs del Cerebro IA
+        const cerebroLogs = [
+            '🔍 Escaneando estructura de mercado en H4...',
+            '💧 Buscando liquidez en zonas de acumulación...',
+            '📊 Analizando Order Blocks...',
+            '🎯 Calculando probabilidad de reversal...',
+            '⚡ Procesando datos de volumen institucional...',
+            '🧠 Identificando manipulaciones de mercado...',
+            '📈 Buscando divergencias RSI...',
+            '💎 Detectando zonas de soporte/resistencia...'
+        ];
+        
+        // Mensajes de Order Blocks
+        const obMessages = [
+            'Order Block Alcista detectado en 2650.00',
+            'Order Block Bajista detectado en 2680.50',
+            'Zona de manipulación detectada',
+            'Fair Value Gap en 2665.25'
+        ];
+        
+        // Inicializar gráfico TradingView
+        function initChart(symbol, isAI) {
+            const container = document.getElementById('tradingviewChart');
+            container.innerHTML = '';
+            
+            // Indicadores para modo IA
+            let studies = [];
+            let drawings = [];
+            
+            if (isAI) {
+                studies = [
+                    'RSI@tv-basicstudies',
+                    'BB@tv-basicstudies',
+                    'Volume@tv-basicstudies'
+                ];
+                drawings = true;
+            }
+            
+            tradingViewWidget = new TradingView.widget({
+                width: '100%',
+                height: 500,
+                symbol: 'OANDA:' + symbol,
+                interval: '60',
+                timezone: 'Etc/UTC',
+                theme: 'dark',
+                style: '1',
+                locale: 'es',
+                toolbar_bg: '#000000',
+                enable_publishing: false,
+                hide_side_toolbar: false,
+                allow_symbol_change: false,
+                container_id: 'tradingviewChart',
+                studies: studies,
+                show_popup_button: true,
+                popup_width: '1000',
+                popup_height: '650',
+                hide_top_toolbar: !isAI,
+                disabled_features: isAI ? [] : ['header_symbol_search'],
+                enabled_features: isAI ? ['show_logo_on_chart'] : []
+            });
+        }
+        
+        // Cambiar activo
+        function changeAsset(symbol) {
+            currentSymbol = symbol;
+            
+            // Actualizar botones
+            document.querySelectorAll('.asset-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.symbol === symbol) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Actualizar título
+            const config = assetsConfig[symbol];
+            document.getElementById('chartTitle').textContent = `${symbol} - ${config.name}`;
+            
+            // Reinicializar gráfico
+            initChart(symbol, isAIMode);
+            
+            // Agregar log
+            addLog(`🔄 Cambiando a ${symbol}...`);
+            
+            // Actualizar indicadores
+            updateIndicators(symbol);
+        }
+        
+        // Cambiar modo de visualización
+        function toggleViewMode(isAI) {
+            isAIMode = isAI;
+            
+            // Actualizar botones
+            document.getElementById('btnGraficoComun').classList.toggle('active', !isAI);
+            document.getElementById('btnGraficoIA').classList.toggle('active', isAI);
+            
+            // Actualizar indicador
+            const modeText = isAI ? 'Modo: GRÁFICO IA - Indicadores Activados' : 'Modo: GRÁFICO COMÚN';
+            document.getElementById('chartModeIndicator').textContent = modeText;
+            
+            // Reinicializar gráfico
+            initChart(currentSymbol, isAI);
+            
+            // Agregar log
+            if (isAI) {
+                addLog('🧠 Modo IA Activado - Cargando indicadores de alta precisión...');
+                addLog('📊 RSI, Bandas de Bollinger y Volumen institucional activados');
+                addLog('✏️ Herramientas de dibujo activadas');
+            } else {
+                addLog('📊 Cambiando a Gráfico Común...');
+            }
+        }
+        
+        // Actualizar indicadores
+        function updateIndicators(symbol) {
+            // Simular valores aleatorios para cada activo
+            const rsi = (Math.random() * 60 + 20).toFixed(1);
+            const rsiStatus = rsi < 30 ? 'SOBREVENTA' : rsi > 70 ? 'SOBRECOMPRA' : 'NEUTRAL';
+            const rsiType = rsi < 30 ? 'buy' : rsi > 70 ? 'sell' : 'neutral';
+            
+            const basePrice = symbol === 'XAUUSD' ? 2650 : symbol === 'EURUSD' ? 1.08 : symbol === 'GBPUSD' ? 1.26 : symbol === 'USDJPY' ? 150 : symbol === 'AUDUSD' ? 0.65 : 0.88;
+            const price = basePrice + (Math.random() * 0.02 - 0.01);
+            
+            const volume = Math.floor(Math.random() * 100 + 80);
+            
+            const trend = Math.random() > 0.5 ? 'ALCISTA 🟢' : 'BAJISTA 🔴';
+            const trendType = trend.includes('ALCISTA') ? 'buy' : 'sell';
+            
+            document.getElementById('rsiValue').textContent = `${rsi} - ${rsiStatus}`;
+            document.getElementById('rsiValue').className = `indicator-value indicator-${rsiType}`;
+            
+            document.getElementById('bbValue').textContent = `${price.toFixed(5)} - MEDIA`;
+            
+            document.getElementById('volumeValue').textContent = volume > 100 ? `ALTO - ${volume}%` : `NORMAL - ${volume}%`;
+            
+            document.getElementById('trendValue').textContent = trend;
+            document.getElementById('trendValue').className = `indicator-value indicator-${trendType}`;
+        }
+        
+        // Agregar log al cerebro
+        function addLog(text) {
+            const logsContainer = document.getElementById('cerebroLogs');
+            const now = new Date();
+            const time = now.toTimeString().split(' ')[0];
+            
+            const logEntry = document.createElement('div');
+            logEntry.className = 'log-entry';
+            logEntry.innerHTML = `
+                <div class="log-time">${time}</div>
+                <div class="log-text">${text}</div>
+            `;
+            
+            logsContainer.insertBefore(logEntry, logsContainer.firstChild);
+            
+            // Mantener solo los últimos 50 logs
+            while (logsContainer.children.length > 50) {
+                logsContainer.removeChild(logsContainer.lastChild);
+            }
+        }
+        
+        // Actualizar scanner de liquidez
+        function updateLiquidityScanner() {
+            const zones = [
+                'Zona de absorción: 2655.00',
+                'Zona de stop hunt: 2658.00',
+                ' liquidity pool: 2660.00',
+                'Zona de acumulación institucional'
+            ];
+            
+            const result = zones[Math.floor(Math.random() * zones.length)];
+            document.getElementById('liquidityResults').innerHTML = `
+                ✓ ${result}<br>
+                ✓ Buscando breakout...<br>
+                ✓ Calculando SL óptimo...
+            `;
+        }
+        
+        // Actualizar Order Blocks
+        function updateOrderBlocks() {
+            const obs = [
+                '<div class="ob-zone">🟢 OB Alcista: 2650.00</div>',
+                '<div class="ob-zone">🔴 OB Bajista: 2680.50</div>',
+                '<div class="ob-zone">⚡ FVG: 2665.25</div>'
+            ];
+            
+            const display = document.getElementById('obDisplay');
+            display.innerHTML = obs.slice(0, 2 + Math.floor(Math.random() * 2)).join('');
+        }
+        
+        // Simular actividad del cerebro IA
+        function simulateBrainActivity() {
+            // Agregar logs aleatorios
+            if (Math.random() > 0.7) {
+                const randomLog = cerebroLogs[Math.floor(Math.random() * cerebroLogs.length)];
+                addLog(randomLog);
+            }
+            
+            // Actualizar scanner
+            if (Math.random() > 0.5) {
+                updateLiquidityScanner();
+            }
+            
+            // Actualizar Order Blocks
+            if (Math.random() > 0.6) {
+                updateOrderBlocks();
+            }
+            
+            // Actualizar indicadores
+            updateIndicators(currentSymbol);
+        }
+        
+        // Event Listeners
+        document.getElementById('assetSelector').addEventListener('click', function(e) {
+            if (e.target.classList.contains('asset-btn')) {
+                changeAsset(e.target.dataset.symbol);
+            }
+        });
+        
+        document.getElementById('btnGraficoComun').addEventListener('click', function() {
+            toggleViewMode(false);
+        });
+        
+        document.getElementById('btnGraficoIA').addEventListener('click', function() {
+            toggleViewMode(true);
+        });
+        
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar gráfico
+            initChart('XAUUSD', false);
+            
+            // Agregar log inicial
+            addLog('🚀 Sistema iniciado correctamente');
+            addLog('📊 Conectando con servidores de datos...');
+            addLog('🧠 Cargando modelo de IA...');
+            
+            // Simular actividad del cerebro cada 3 segundos
+            setInterval(simulateBrainActivity, 3000);
+            
+            // Actualizar indicadores iniciales
+            updateIndicators('XAUUSD');
+        });
+        
+        // ==================== CHAT CON IA ====================
+        
+        // Elementos del chat
         const chatMessages = document.getElementById('chatMessages');
         const chatInput = document.getElementById('chatInput');
         const chatSendBtn = document.getElementById('chatSendBtn');
         const typingIndicator = document.getElementById('typingIndicator');
         
-        // Contexto de trading (se actualiza con las señales)
-        let tradingContext = {
+        // Contexto de trading
+        const tradingContext = {
             currentSignal: null,
-            focus: 'TODOS',
-            lastAnalysis: []
+            currentPair: 'XAUUSD',
+            isAIMode: false
         };
         
-        // Respuestas de la IA (simuladas para SMC)
+        // Respuestas de la IA basadas en SMC
         const aiResponses = {
             greeting: [
-                "¡Hola! Soy tu asesora de trading especializada en Smart Money Concepts. ¿Qué activo te interesa analizar?",
-                "¡Bienvenido! Estoy lista para ayudarte con análisis SMC. ¿Sobre qué par quieres información?",
-                "¡Excelente! Soy tu asistente IA de trading. Pregúntame sobre análisis de mercado o señales."
+                "¡Hola! Estoy analizando el mercado en tiempo real. ¿Qué activo te gustaría analizar?",
+                "¡Bienvenido! Puedo darte análisis de Smart Money Concepts. ¿Sobre qué par quieres información?",
+                "¡Saludos! Estoy detectando movimientos institucionales. ¿En qué puedo ayudarte?"
             ],
             oro: [
-                "📊 Análisis de XAUUSD (ORO):\n\n• Tendencia: Alcista en temporalidades mayores\n• Order Block detectado en zona 2640-2650\n• RSI en zona de sobrecompra\n• Recomendación: Esperar retroceso a zona de demanda para entrada BUY\n\n🎯 Señal actual: BUY si rompe 2660 con alto volumen",
-                "🟡 XAUUSD:\n\n• Estructura: Cambio de carácter (CHoCH) en H1\n• Liquidity sweep detectado en zona alta\n• Fair Value Gap en 2645-2650\n• Entrada sugerida: BUY en 2648\n• SL: 2638 | TP: 2680"
+                "📊 Análisis de XAUUSD:\n\nEl precio está formando un Order Block Alcista en la zona 2650-2655.\n\n🧠 Según SMC, los institucionales están acumulando en esta zona. El RSI muestra divergencia alcista en 42.5.\n\n🎯 Dirección sugerida: COMPRA\n.entry: 2655.00\nSL: 2645.00\nTP: 2680.00",
+                "💰 XAUUSD:\n\nBuscando liquidez en máximos anteriores. El volumen institucional está 145% por encima de la media.\n\n📈 Estructura: Alcista en H4\n🟢 Order Block en 2650.00\n🎯 Expectativa: Continuidad alcista",
+                "🟡 Oro (XAUUSD):\n\nZona de manipulación detectada en 2660. Fair Value Gap en 2658-2662.\n\n💎 La smart money está acumulando, prepara tu entrada en el rebote."
             ],
             eur: [
-                "📊 EURUSD:\n\n• Estructura: Mercado lateral con sesgo bajista\n• Order Block bearish en 1.0880\n• Alta volatilidad esperada por noticias ECB\n• Recomendación: Esperar confirmación\n\n🎯 Señal: VENDER si rompe 1.0820"
+                "📊 EURUSD:\n\nEstructura bajista en timeframe diario. Buscando Order Blocks bajistas para entradas shorts.\n\n🎯 setup: Sell en ruptura de estructura\nZona OB: 1.0850\nSL: 1.0900\nTP: 1.0750",
+                "💶 Euro/Dólar:\n\nEl precio está buscando liquidez en mínimos. Detecto manipulación en 1.0880.\n\n📉 Tendencia: Bajista\n🎯 Esperar ruptura de swap para entrada"
             ],
             GBP: [
-                "📊 GBPUSD:\n\n• Estructura: Tendencia bajista en D1\n• Order Block de continuación en 1.2700\n• Liquidity grabber en zona alta\n• Recomendación: Entradas SELL en retrocesos\n\n🎯 Señal: SELL en 1.2750 | SL: 1.2800 | TP: 1.2600"
+                "📊 GBPUSD:\n\nLa libra está fuerte contra el dólar. Order Block Alcista en 1.2650.\n\n🟢 Dirección: COMPRA\nEntry: 1.2670\nSL: 1.2620\nTP: 1.2800",
+                "💷 Libra:\n\nZona de acumulación institucional detectada. El precio está formando un triángulo alcista."
             ],
             jpy: [
-                "📊 USDJPY:\n\n• Estructura: Alcista en temporalidades cortas\n• Zona de demanda fuerte en 148.50-149.00\n• Intervención del Banco de Japón posible\n• Precaución con entradas largas\n\n🎯 Señal: BUY en 149.00 | SL: 148.50 | TP: 150.00"
+                "📊 USDJPY:\n\nEl yen se está debilitando. Buscando entradas compradoras en zonas de soporte.\n\n🎯 Compra en 149.50\nSL: 149.00\nTP: 151.00",
+                "💴 Yen:\n\nLiquidez en máximos alcanzado. El Banco de Japón podría intervenir."
             ],
             aud: [
-                "📊 AUDUSD:\n\n• Estructura: Tendencia bajista\n• Order Block bullish en 0.6520 (potencial reversión)\n• Correlación con metales\n• Recomendación: Esperar confirmación\n\n🎯 Señal: BUY si mantiene 0.6550"
+                "📊 AUDUSD:\n\nDólar australiano en zona de soporte. Order Block Alcista en 0.6550.\n\n🟢 setup: Compra\nEntry: 0.6580\nSL: 0.6520",
+                "🦘 Aussie:\n\nZona de demanda institucional detectada. Esperar reacción del precio."
             ],
             chf: [
-                "📊 USDCHF:\n\n• Estructura: Lateral con sesgo alcista\n• Zona de oferta en 0.8900\n• Safe haven - comportamiento estable\n• Recomendación: Operaciones cortas\n\n🎯 Señal: SELL en 0.8920"
+                "📊 USDCHF:\n\nFranco suizo en zona de resistencia. Buscar ventas en 0.8850.\n\n🔴 setup: Venta\nEntry: 0.8850\nSL: 0.8900\nTP: 0.8750",
+                "💵 Franco:\n\nEl precio encontró resistencia en 0.8820. Order Block bajista formándose."
             ],
             signal: [
-                "📡 Señal activa detectada:\n\n• Activo: {pair}\n• Dirección: {direction}\n• Entrada: {entry}\n• SL: {sl} | TP: {tp}\n• Confianza: {confidence}%\n\n💡 Mi recomendación: {'Seguir la señal' if confidence > 90 else 'Precaución - confianza media'}",
-                "🎯 Basado en el análisis SMC actual:\n\n• {smc}\n• La mejor oportunidad está en {pair}\n• Dirección preferida: {direction}\n• Confianza: {confidence}%"
+                "📡 SEÑAL ACTIVA para {pair}:\n\n🎯 Dirección: {direction}\n.entry: {entry}\nSL: {sl}\nTP: {tp}\n\n📊 Confianza: {confidence}%\n\n🧠 Análisis SMC: {smc}"
             ],
             help: [
-                "📚 Puedo ayudarte con:\n\n• Análisis de cualquier activo (XAUUSD, EURUSD, etc.)\n• Señales activas del cerebro de trading\n• Explicación de conceptos SMC:\n  - Order Blocks\n  - Liquidity Sweeps\n  - Fair Value Gaps\n  - Break of Structure\n• Recomendaciones de entrada/salida\n\n¿qué te gustaría saber?",
-                "🤖 Mis capacidades:\n\n• Análisis en tiempo real de 6 activos\n• Detección de patrones SMC\n• Señales con SL y TP\n• Recomendaciones personalizadas\n\nPreguntame sobre cualquier activo o señal activa!"
+                "🤖 Puedo ayudarte con:\n\n• Análisis de cualquier activo (XAUUSD, EURUSD, GBPUSD, USDJPY, AUDUSD, USDCHF)\n• Detección de Order Blocks\n• Identificación de zonas de liquidez\n• Señales de trading\n• Análisis de estructura de mercado\n\n¡Pregúntame sobre el activo que quieras analizar!",
+                "📚 Mis capacidades:\n\n✓ Análisis de Smart Money Concepts\n✓ Detección de Order Blocks alcistas y bajistas\n✓ Identificación de Fair Value Gaps\n✓ Escaneo de zonas de liquidez\n✓ Señales de alta precisión\n\n¿Qué quieres saber?"
             ],
             default: [
-                "🤔 No entendí completamente. ¿Podrías reformular?\n\nPuedo ayudarte con análisis de:\n• XAUUSD (Oro)\n• EURUSD\n• GBPUSD\n• USDJPY\n• AUDUSD\n• USDCHF\n\nO pregunta por la señal activa.",
-                "❓ No tengo información sobre eso. ¿Te gustaría analizar un activo específico o ver las señales actuales?",
-                "💡 Preguntame sobre:\n• '¿Qué hago con el Oro?'\n• 'Señales activas'\n• 'Análisis de EURUSD'\n• 'Explica Order Block'"
+                "🤔 No entendí tu pregunta. ¿Puedes ser más específico?\n\nPuedo analizar: XAUUSD, EURUSD, GBPUSD, USDJPY, AUDUSD, USDCHF\n\nO pregunta por 'señales' para ver operaciones activas.",
+                "❓ Pregunta sobre un activo específico o solicita 'señales' para ver oportunidades de trading.",
+                "💡 Puedo ayudarte mejor si me dices qué activo quieres analizar o si solicitas 'señales'."
             ]
         };
         
@@ -1366,7 +1089,7 @@
                         .replace('{confidence}', tradingContext.currentSignal.confidence)
                         .replace('{smc}', tradingContext.currentSignal.smc);
                 }
-                return "📡 No hay señales activas en este momento. Activa el modo IA para generar señales en tiempo real.";
+                return "📡 Generando análisis SMC para " + tradingContext.currentPair + "...\n\n🟢 Order Block Alcista detectado en zona de demanda.\n\n📊 Configuración de trading:\n.entry: Precio actual + 10 pips\nSL: Último swing bajo\nTP: Ratio 1:2\n\n🎯 Confianza: 78%\n\n🧠 Contexto: Los institucionales están acumulando. Esperar confirmación de entrada.";
             }
             
             // Ayuda
@@ -1388,6 +1111,7 @@
             messageDiv.innerHTML = text + `<div class="message-time">${time}</div>`;
             
             chatMessages.appendChild(messageDiv);
+            // Auto-scroll al final
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
         
@@ -1415,6 +1139,7 @@
         // Event listeners
         chatSendBtn.addEventListener('click', sendMessage);
         
+        // Enter para enviar
         chatInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 sendMessage();
@@ -1425,599 +1150,6 @@
         window.updateTradingContext = function(signal) {
             tradingContext.currentSignal = signal;
         };
-    </script>
-
-    <!-- Chat con IA -->
-    <div class="chat-container">
-        <div class="chat-box">
-            <div class="chat-header">
-                <div class="chat-avatar">🤖</div>
-                <div>
-                    <div class="chat-title">Chat Trading IA</div>
-                    <div class="chat-status">● Especialista en SMC y análisis de mercado</div>
-                </div>
-            </div>
-            <div class="chat-messages" id="chatMessages">
-                <div class="message ai">
-                    ¡Hola! Soy tu asistente de trading 🤖
-                    <br><br>
-                    Soy experta en <strong>Smart Money Concepts (SMC)</strong> y puedo ayudarte con:
-                    <br>• Análisis de estructura de mercado
-                    <br>• Detección de Order Blocks
-                    <br>• Identificación de liquidez
-                    <br>• Señales de trading en tiempo real
-                    <br><br>
-                    ¿Sobre qué activo quieres analizar?
-                    <div class="message-time">Ahora</div>
-                </div>
-            </div>
-            <div class="typing-indicator" id="typingIndicator">
-                📝 Escribiendo...
-            </div>
-            <div class="chat-input-area">
-                <input type="text" class="chat-input" id="chatInput" placeholder="Pregúntale a la IA sobre el próximo movimiento...">
-                <button class="chat-send-btn" id="chatSendBtn">⚡</button>
-            </div>
-        </div>
-    </div>
-
-    </div>
-    <!-- FIN LAYOUT CONTAINER -->
-
-    <!-- Panel de Administrador Secreto (Oculto) -->
-    <div class="admin-overlay" id="adminOverlay"></div>
-    <div class="admin-panel" id="adminPanel">
-        <button class="admin-close" id="adminClose">&times;</button>
-        <div class="admin-header">🔒 PANEL DEL CREADOR</div>
-        <div class="admin-stats">
-            <span id="adminCount">0</span>
-            <span>usuarios han analizado el mercado</span>
-        </div>
-        <div class="admin-hint">Acceso restringido - Solo personal autorizado</div>
-    </div>
-
-    <script type="text/javascript">
-        // Variables globales
-        let currentSymbol = 'OANDA:XAUUSD';
-        let currentMode = 'normal';
-        let chartWidget = null;
-        let logInterval = null;
-
-        // Indicadores para modo IA
-        const iaStudies = [
-            // RSI
-            {
-                "id": "RSI@tv-basicstudies",
-                "metainfo": {
-                    "name": "RSI"
-                },
-                "params": {
-                    "length": 14,
-                    "overbought": 70,
-                    "oversold": 30
-                }
-            },
-            // Bandas de Bollinger
-            {
-                "id": "BB@tv-basicstudies",
-                "metainfo": {
-                    "name": "Bollinger Bands"
-                },
-                "params": {
-                    "length": 20,
-                    "stdDev": 2,
-                    "source": "close"
-                }
-            },
-            // Volumen
-            {
-                "id": "volume@tv-basicstudies",
-                "metainfo": {
-                    "name": "Volume"
-                },
-                "params": {
-                    "color": "green"
-                }
-            }
-        ];
-
-        // Tools de dibujo para IA
-        const iaDrawings = [
-            "trendline",
-            "horizontalLine",
-            "verticalLine",
-            "fibonacci",
-            "drawIcon"
-        ];
-
-        // Mensajes de log simulados
-        const logMessages = [
-            "Buscando liquidez en H4...",
-            "Analizando estructura de mercado...",
-            "Order Block detectado en ZS",
-            "Escaneando millones de datos...",
-            "Buscando liquidez en M15...",
-            "Detectandomanipulación de institucional...",
-            "Buscando liquidez en H1...",
-            "Order Block bulls detectado",
-            "Analizando volumen atypico...",
-            "Buscando liquidity grabber...",
-            "Escaneando mercado forex...",
-            "Zona de Reversión identificada",
-            "Buscando liquidez en D1...",
-            "Detecting Smart Money Concept...",
-            "Analizando fluxo de órdenes..."
-        ];
-
-        // Inicializar widget de TradingView
-        function initChart(symbol, studies = []) {
-            const container = document.getElementById('tradingview_chart');
-            container.innerHTML = '';
-
-            const config = {
-                "autosize": true,
-                "symbol": symbol,
-                "interval": "15",
-                "timezone": "Etc/UTC",
-                "theme": "dark",
-                "style": "1",
-                "locale": "es",
-                "toolbar_bg": "#000000",
-                "enable_publishing": false,
-                "hide_side_toolbar": false,
-                "allow_symbol_change": false,
-                "container_id": "tradingview_chart",
-                "studies": studies,
-                "show_popup_button": true,
-                "popup_width": "1000",
-                "popup_height": "650"
-            };
-
-            chartWidget = new TradingView.widget(config);
-        }
-
-        // Cambiar símbolo
-        function changeSymbol(symbol) {
-            currentSymbol = symbol;
-            const studies = currentMode === 'ia' ? iaStudies : [];
-            initChart(symbol, studies);
-            addLog(`Cambiando a ${symbol.split(':')[1]}...`);
-        }
-
-        // Cambiar modo de visualización
-        function changeMode(mode) {
-            currentMode = mode;
-            const studies = mode === 'ia' ? iaStudies : [];
-            initChart(currentSymbol, studies);
-            
-            const indicator = document.getElementById('iaIndicator');
-            if (mode === 'ia') {
-                indicator.classList.add('active');
-                startLogSimulation();
-                addLog('🧠 MODO IA ACTIVADO - Cargando indicadores...');
-            } else {
-                indicator.classList.remove('active');
-                stopLogSimulation();
-                addLog('📊 Modo común activado');
-            }
-        }
-
-        // Agregar log al cerebro IA
-        function addLog(message) {
-            const logsContainer = document.getElementById('cerebroLogs');
-            const now = new Date();
-            const time = now.toLocaleTimeString('es-ES');
-            
-            const logEntry = document.createElement('div');
-            logEntry.className = 'log-entry';
-            logEntry.innerHTML = `
-                <div class="log-time">[${time}]</div>
-                <div class="log-text">${message}</div>
-            `;
-            
-            logsContainer.appendChild(logEntry);
-            logsContainer.scrollTop = logsContainer.scrollHeight;
-        }
-
-        // Simulación de logs
-        function startLogSimulation() {
-            logInterval = setInterval(() => {
-                const randomMsg = logMessages[Math.floor(Math.random() * logMessages.length)];
-                addLog(randomMsg);
-            }, 2500);
-        }
-
-        function stopLogSimulation() {
-            if (logInterval) {
-                clearInterval(logInterval);
-                logInterval = null;
-            }
-        }
-
-        // Event Listeners
-        document.querySelectorAll('.asset-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.asset-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                changeSymbol(this.dataset.symbol);
-            });
-        });
-
-        document.querySelectorAll('.mode-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                changeMode(this.dataset.mode);
-            });
-        });
-
-        // Inicializar al cargar
-        window.addEventListener('load', function() {
-            initChart(currentSymbol);
-            addLog('Sistema de trading inicializado');
-            addLog('Listo para recibir órdenes');
-
-            // Panel colapsable del Cerebro IA en móviles
-            const cerebroHeader = document.querySelector('.cerebro-header');
-            const cerebroIa = document.querySelector('.cerebro-ia');
-
-            if (cerebroHeader && cerebroIa) {
-                cerebroHeader.addEventListener('click', function() {
-                    cerebroIa.classList.toggle('expanded');
-                });
-            }
-
-            // ========================================
-            // PANEL DE ADMINISTRADOR SECRETO
-            // ========================================
-
-            // Contador de visitantes usando localStorage
-            function getVisitorCount() {
-                const count = localStorage.getItem('mibot_visitor_count');
-                return count ? parseInt(count) : 0;
-            }
-
-            function incrementVisitorCount() {
-                let count = getVisitorCount();
-                count++;
-                localStorage.setItem('mibot_visitor_count', count.toString());
-                return count;
-            }
-
-            // Inicializar contador
-            const visitorCount = incrementVisitorCount();
-
-            // Elementos del panel de admin
-            const adminPanel = document.getElementById('adminPanel');
-            const adminOverlay = document.getElementById('adminOverlay');
-            const adminClose = document.getElementById('adminClose');
-            const adminCount = document.getElementById('adminCount');
-
-            // Clave secreta
-            const SECRET_KEY = 'admin123';
-            let typedBuffer = '';
-
-            // Escuchar teclado
-            document.addEventListener('keydown', function(e) {
-                // Añadir carácter al buffer
-                typedBuffer += e.key.toLowerCase();
-
-                // Mantener solo los últimos caracteres iguales a la clave
-                if (typedBuffer.length > SECRET_KEY.length * 2) {
-                    typedBuffer = typedBuffer.slice(-SECRET_KEY.length);
-                }
-
-                // Verificar si la clave está en el buffer
-                if (typedBuffer.includes(SECRET_KEY)) {
-                    showAdminPanel();
-                    typedBuffer = '';
-                }
-            });
-
-            // Mostrar panel de admin
-            function showAdminPanel() {
-                adminCount.textContent = visitorCount;
-                adminPanel.classList.add('visible');
-                adminOverlay.classList.add('visible');
-            }
-
-            // Ocultar panel de admin
-            function hideAdminPanel() {
-                adminPanel.classList.remove('visible');
-                adminOverlay.classList.remove('visible');
-            }
-
-            // Event listeners para cerrar
-            adminClose.addEventListener('click', hideAdminPanel);
-            adminOverlay.addEventListener('click', hideAdminPanel);
-
-            // Prevenir cierre con Escape
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && adminPanel.classList.contains('visible')) {
-                    hideAdminPanel();
-                }
-            });
-
-            // ========================================
-            // CEREBRO DE TRADING SMC - SEÑALES
-            // ========================================
-
-            // Activos a escanear
-            const assets = [
-                { symbol: 'OANDA:XAUUSD', name: 'XAUUSD', basePrice: 2650.00 },
-                { symbol: 'OANDA:EURUSD', name: 'EURUSD', basePrice: 1.0850 },
-                { symbol: 'OANDA:GBPUSD', name: 'GBPUSD', basePrice: 1.2650 },
-                { symbol: 'OANDA:USDJPY', name: 'USDJPY', basePrice: 149.50 },
-                { symbol: 'OANDA:AUDUSD', name: 'AUDUSD', basePrice: 0.6550 },
-                { symbol: 'OANDA:USDCHF', name: 'USDCHF', basePrice: 0.8850 }
-            ];
-
-            // Conceptos SMC para análisis simulado
-            const smcConcepts = [
-                'Order Block Bullish',
-                'Order Block Bearish',
-                'Liquidity Sweep',
-                'Fair Value Gap',
-                'Break of Structure',
-                'Change of Character',
-                'Order Block Confirmado',
-                'Stop Hunt detected',
-                'Institutional Floor',
-                'High Volume Node'
-            ];
-
-            // Estado del scanner
-            let tradingBrainActive = false;
-            let currentScanAsset = 0;
-            let generatedSignals = [];
-            let scannerInterval = null;
-            let signalInterval = null;
-
-            // Elementos del DOM
-            const tradingSignals = document.getElementById('tradingSignals');
-            const scannerText = document.getElementById('scannerText');
-            const scannerProgress = document.getElementById('scannerProgress');
-            const signalContent = document.getElementById('signalContent');
-            const smcAnalysis = document.getElementById('smcAnalysis');
-            const iaFocusStatus = document.getElementById('iaFocusStatus');
-
-            // Variable de enfoque IA
-            let iaFocus = 'ALL';
-            let focusedAsset = null;
-
-            // Función para cambiar el enfoque de la IA
-            function setIAFocus(focus) {
-                iaFocus = focus;
-                
-                // Actualizar botones
-                document.querySelectorAll('.ia-focus-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                    if (btn.dataset.focus === focus) {
-                        btn.classList.add('active');
-                    }
-                });
-
-                // Actualizar estado
-                if (focus === 'ALL') {
-                    iaFocusStatus.textContent = 'IA ANALIZANDO: TODOS LOS ACTIVOS';
-                    focusedAsset = null;
-                } else {
-                    iaFocusStatus.textContent = 'IA ENFOCADA EN: ' + focus;
-                    // Encontrar el asset seleccionado
-                    focusedAsset = assets.find(a => a.name === focus);
-                }
-
-                addLog('🎯 IA enfocada en: ' + (focus === 'ALL' ? 'TODOS LOS ACTIVOS' : focus));
-            }
-
-            // Event listeners para los botones de enfoque
-            document.querySelectorAll('.ia-focus-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    setIAFocus(this.dataset.focus);
-                });
-            });
-
-            // Función para generar precio aleatorio cercano al base
-            function generatePrice(base, variation) {
-                return (base + (Math.random() - 0.5) * variation).toFixed(
-                    base > 100 ? 2 : 4
-                );
-            }
-
-            // Función para generar señal SMC
-            function generateSMCSignal(asset) {
-                const isBuy = Math.random() > 0.5;
-                const direction = isBuy ? 'BUY' : 'SELL';
-                
-                // Generar precios
-                const entry = parseFloat(generatePrice(asset.basePrice, asset.basePrice * 0.002));
-                const slPips = (asset.basePrice > 100 ? 300 : 30) * (Math.random() * 0.5 + 0.5);
-                const tpPips = slPips * (Math.random() * 1 + 2); // 2:1 a 3:1 ratio
-                
-                let sl, tp;
-                if (asset.basePrice > 100) {
-                    // Para oro y yenes
-                    sl = isBuy ? entry - slPips * 0.01 : entry + slPips * 0.01;
-                    tp = isBuy ? entry + tpPips * 0.01 : entry - tpPips * 0.01;
-                } else {
-                    sl = isBuy ? entry - slPips * 0.0001 : entry + slPips * 0.0001;
-                    tp = isBuy ? entry + tpPips * 0.0001 : entry - tpPips * 0.0001;
-                }
-
-                const confidence = (85 + Math.random() * 14).toFixed(1);
-                const smcConcept = smcConcepts[Math.floor(Math.random() * smcConcepts.length)];
-
-                return {
-                    pair: asset.name,
-                    direction: direction,
-                    entry: entry.toFixed(asset.basePrice > 100 ? 2 : 4),
-                    sl: sl.toFixed(asset.basePrice > 100 ? 2 : 4),
-                    tp: tp.toFixed(asset.basePrice > 100 ? 2 : 4),
-                    confidence: confidence,
-                    smc: smcConcept,
-                    time: new Date().toLocaleTimeString('es-ES')
-                };
-            }
-
-            // Función para mostrar señal
-            function displaySignal(signal) {
-                const html = `
-                    <div class="signal-row">
-                        <span class="signal-pair">${signal.pair}</span>
-                        <span class="signal-direction ${signal.direction}">${signal.direction}</span>
-                        <div class="signal-prices">
-                            <div class="signal-price">
-                                <div class="signal-price-label">ENTRY</div>
-                                <div class="signal-price-value">${signal.entry}</div>
-                            </div>
-                            <div class="signal-price">
-                                <div class="signal-price-label">SL</div>
-                                <div class="signal-price-value" style="color: #ff3333;">${signal.sl}</div>
-                            </div>
-                            <div class="signal-price">
-                                <div class="signal-price-label">TP</div>
-                                <div class="signal-price-value" style="color: #00ff00;">${signal.tp}</div>
-                            </div>
-                        </div>
-                        <span class="signal-confidence">${signal.confidence}% Conf.</span>
-                    </div>
-                `;
-                signalContent.innerHTML = html;
-            }
-
-            // Función para iniciar el scanner
-            function startTradingBrain() {
-                if (tradingBrainActive) return;
-                tradingBrainActive = true;
-                
-                // Mostrar panel de señales
-                tradingSignals.classList.add('active');
-                
-                // Inicializar progress dots
-                scannerProgress.innerHTML = assets.map(a => 
-                    `<span class="scanner-asset" id="asset-${a.name}">${a.name}</span>`
-                ).join('');
-
-                let scanCount = 0;
-                
-                // Scanner de activos
-                scannerInterval = setInterval(() => {
-                    // Determinar qué activos escanear según el enfoque
-                    let assetsToScan = (iaFocus === 'ALL') ? assets : (focusedAsset ? [focusedAsset] : assets);
-                    
-                    if (assetsToScan.length === 0) assetsToScan = assets;
-                    
-                    const asset = assetsToScan[currentScanAsset % assetsToScan.length];
-                    const assetEl = document.getElementById(`asset-${asset.name}`);
-                    
-                    // Marcar como escaneado
-                    if (assetEl) assetEl.classList.add('active');
-                    
-                    // Actualizar texto según el enfoque
-                    if (iaFocus === 'ALL') {
-                        scannerText.textContent = `Escaneando ${asset.name} con SMC...`;
-                    } else {
-                        scannerText.textContent = `🧠 IA ENFOCADA: Analizando ${asset.name}...`;
-                    }
-                    
-                    // Analisis SMC
-                    const concept = smcConcepts[Math.floor(Math.random() * smcConcepts.length)];
-                    smcAnalysis.textContent = `SMC: ${concept} detectado en ${asset.name} | Analizando flujo de órdenes...`;
-                    
-                    currentScanAsset++;
-                    scanCount++;
-
-                    // Después de 3 ciclos, generar señales
-                    if (scanCount >= 3 * assetsToScan.length) {
-                        generateAllSignals();
-                        scanCount = 0;
-                    }
-                }, iaFocus === 'ALL' ? 2000 : 1000); // Más rápido cuando está enfocado
-
-                // Generar señales cada 15 segundos
-                signalInterval = setInterval(generateAllSignals, 15000);
-
-                // Primera generación después de 5 segundos
-                setTimeout(generateAllSignals, 5000);
-
-                addLog('🧠 Cerebro de Trading SMC iniciado');
-                addLog('🎯 Usa el selector para enfocar la IA en un activo');
-            }
-
-            // Función para generar todas las señales
-            function generateAllSignals() {
-                generatedSignals = [];
-                
-                // Determinar qué activos analizar según el enfoque
-                let assetsToAnalyze;
-                let focusMessage;
-                
-                if (iaFocus === 'ALL') {
-                    // Analizar todos los activos
-                    assetsToAnalyze = assets;
-                    focusMessage = 'Analizando TODOS LOS ACTIVOS';
-                } else {
-                    // Analizar solo el activo enfocado
-                    assetsToAnalyze = focusedAsset ? [focusedAsset] : assets;
-                    focusMessage = 'IA ENFOCADA EN: ' + iaFocus;
-                }
-                
-                scannerText.textContent = focusMessage;
-                
-                // Generar 1-3 señales por ciclo
-                const numSignals = Math.min(Math.floor(Math.random() * 3) + 1, assetsToAnalyze.length);
-                const shuffled = [...assetsToAnalyze].sort(() => 0.5 - Math.random());
-                
-                for (let i = 0; i < numSignals; i++) {
-                    generatedSignals.push(generateSMCSignal(shuffled[i]));
-                }
-
-                // Mostrar la señal más fuerte
-                const bestSignal = generatedSignals.reduce((a, b) => 
-                    parseFloat(a.confidence) > parseFloat(b.confidence) ? a : b
-                );
-                
-                displaySignal(bestSignal);
-                smcAnalysis.textContent = `MEJOR SEÑAL: ${bestSignal.smc} en ${bestSignal.pair} | Confianza: ${bestSignal.confidence}%`;
-                
-                // Actualizar contexto para el chat
-                if (window.updateTradingContext) {
-                    window.updateTradingContext(bestSignal);
-                }
-                
-                addLog(`✅ Señal ${bestSignal.direction} en ${bestSignal.pair}: E:${bestSignal.entry} SL:${bestSignal.sl} TP:${bestSignal.tp}`);
-            }
-
-            // Función para detener el scanner
-            function stopTradingBrain() {
-                if (!tradingBrainActive) return;
-                tradingBrainActive = false;
-                
-                clearInterval(scannerInterval);
-                clearInterval(signalInterval);
-                
-                tradingSignals.classList.remove('active');
-                addLog('🛑 Cerebro de Trading detenido');
-            }
-
-            // Iniciar cerebro cuando se activa modo IA
-            const originalChangeMode = changeMode;
-            changeMode = function(mode) {
-                originalChangeMode(mode);
-                if (mode === 'ia') {
-                    setTimeout(startTradingBrain, 2000);
-                } else {
-                    stopTradingBrain();
-                }
-            };
-
-            // ========================================
-            // ACCESO QR INTELIGENTE
-            // ========================================
-            
-            // El QR se actualiza automáticamente cada 7 horas mediante el script en el HTML
-            addLog('📱 Código QR de acceso móvil cargado');
-        });
     </script>
 </body>
 </html>
