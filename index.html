@@ -1009,11 +1009,22 @@
             ]
         };
         
+        // Normalizador: quita tildes/acentos y pasa a minúsculas para búsqueda flexible
+        function normalizarTexto(texto) {
+            if (!texto || typeof texto !== 'string') return '';
+            return texto
+                .toLowerCase()
+                .trim()
+                .normalize('NFD')
+                .replace(/\p{Diacritic}/gu, '');
+        }
+        
         // Función para obtener respuesta de la IA (usa conocimiento real, sin plantillas)
         function getAIResponse(message) {
             const msg = message.toLowerCase().trim();
+            const msgNorm = normalizarTexto(message);  // mensaje sin acentos ni mayúsculas
             
-            // 1) Buscar en base de conocimiento real (Colón, guerras, medicina, ciencia, etc.)
+            // 1) Buscar en base de conocimiento (ignorando acentos y mayúsculas; acepta coincidencia flexible)
             const claves = Object.keys(baseConocimiento).sort((a, b) => b.length - a.length);
             for (let i = 0; i < claves.length; i++) {
                 if (msg.includes(claves[i])) {
