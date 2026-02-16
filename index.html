@@ -865,22 +865,15 @@
         // Respuestas de la IA basadas en SMC
         const aiResponses = {
             greeting: [
-                "¡Hola! Soy Chat Trading IA. Mi especialidad es el trading con Smart Money Concepts, pero puedo ayudarte con cualquier cosa. ¿Qué te gustaría saber?",
-                "¡Bienvenido! Estoy aquí para ayudarte. Puedo darte análisis de trading o responder cualquier pregunta que tengas. ¿En qué puedo servirte?",
-                "¡Saludos! Soy tu asistente de trading. Aunque mi fuerte es el análisis de mercados, puedo conversar sobre cualquier tema. ¿Qué quieres saber?"
-            ],
-            general: [
-                "🌍 Tengo acceso a billones de datos globales. Déjame buscar esa información para ti...",
-                "🧠 Procesando conocimiento de 1,000,000 de profesionales...",
-                "📚 Consultando mi base de datos universal (incluye todo el conocimiento de Gemini y ChatGPT)...",
-                "💡 Excelente pregunta. Tengo información sobre eso.",
-                "🌐 Accediendo a bibliotecas digitales globales..."
+                "¡Hola! Tengo acceso a billones de datos globales. Pregúntame lo que quieras.",
+                "¡Bienvenido! Mi base de datos incluye todo el conocimiento de Gemini y ChatGPT. ¿En qué puedo ayudarte?",
+                "¡Saludos! Procesando 1 billón de datos por minuto. ¿Qué necesitas saber?"
             ],
             argentina: [
-                "🇦🇷 <strong>Argentina</strong>:\n\n📍 <strong>Capital:</strong> Buenos Aires\n\n🌎 <strong>Ubicación:</strong> Sudamérica, limita con Chile, Bolivia, Paraguay, Brasil y Uruguay\n\n👥 <strong>Población:</strong> ~46 millones de habitantes\n\n💰 <strong>Moneda:</strong> Peso Argentino (ARS)\n\n🗣️ <strong>Idioma:</strong> Español\n\n⚽ <strong>Deporte nacional:</strong> Fútbol (Campeones del Mundo 2022)\n\n🥩 <strong>Gastronomía:</strong> Famosa por el asado, empanadas, mate y vino Malbec\n\n🎵 <strong>Cultura:</strong> Tango, literatura (Borges, Cortázar), y rica tradición artística\n\n💡 Datos procesados de: Wikipedia, CIA World Factbook, UNESCO, y 247 fuentes más"
+                "🇦🇷 <strong>ARGENTINA - Información Completa</strong><br><br>📍 <strong>Capital:</strong> Buenos Aires (Ciudad Autónoma de Buenos Aires)<br><br>🌎 <strong>Ubicación:</strong> Sudamérica, limita con Chile (oeste), Bolivia y Paraguay (norte), Brasil (noreste), Uruguay (este) y el Océano Atlántico (este y sur)<br><br>👥 <strong>Población:</strong> Aproximadamente 46 millones de habitantes (2024)<br><br>💰 <strong>Moneda:</strong> Peso Argentino (ARS)<br><br>🗣️ <strong>Idioma oficial:</strong> Español<br><br>🏛️ <strong>Gobierno:</strong> República federal presidencialista<br><br>⚽ <strong>Deporte nacional:</strong> Fútbol - Campeones del Mundo 2022 (Qatar), liderados por Lionel Messi<br><br>🥩 <strong>Gastronomía:</strong> Famosa mundialmente por el asado argentino, empanadas, mate, dulce de leche, vino Malbec de Mendoza, y alfajores<br><br>🎵 <strong>Cultura:</strong> Cuna del tango, literatura de renombre mundial (Jorge Luis Borges, Julio Cortázar, Ernesto Sabato), y rica tradición artística<br><br>🏔️ <strong>Geografía destacada:</strong> Cataratas del Iguazú, Glaciar Perito Moreno, Aconcagua (montaña más alta de América), Patagonia, Pampas<br><br>🎓 <strong>Educación:</strong> Sistema educativo público y gratuito, universidades de prestigio como UBA (Universidad de Buenos Aires)<br><br>💡 <strong>Datos procesados de:</strong> Wikipedia, CIA World Factbook, UNESCO, Britannica, y 1,247 fuentes más"
             ],
             conocimiento: [
-                "🧠 Mi base de datos incluye:\n\n✓ Todo el conocimiento de Google Gemini\n✓ Todo el conocimiento de ChatGPT\n✓ Datos de 1,000,000 de profesionales\n✓ Bibliotecas digitales globales\n✓ Satélites de información\n✓ Redes sociales en tiempo real\n\n💾 Capacidad: 1 billón de datos/minuto\n\n🌍 Puedo responder sobre cualquier tema: ciencia, historia, medicina, leyes, tecnología, cultura, geografía, y por supuesto, trading."
+                "🧠 <strong>MI BASE DE DATOS UNIVERSAL:</strong><br><br>✓ Todo el conocimiento de <strong>Google Gemini 1.5 Pro</strong><br>✓ Todo el conocimiento de <strong>ChatGPT-4</strong><br>✓ Datos de <strong>1,000,000 de profesionales</strong> globales<br>✓ <strong>Bibliotecas digitales</strong> de 195 países<br>✓ <strong>Satélites de información</strong> en tiempo real<br>✓ <strong>Redes sociales</strong> y tendencias actuales<br>✓ <strong>Publicaciones científicas</strong> de los últimos 50 años<br><br>💾 <strong>Capacidad de procesamiento:</strong> 1 billón de datos/minuto<br><br>🌍 <strong>Puedo responder sobre:</strong><br>• Historia Universal<br>• Geografía y Geopolítica<br>• Medicina y Salud<br>• Inteligencia Artificial<br>• Deportes<br>• Política y Sociedad<br>• Ciencia y Tecnología<br>• Cultura y Arte<br>• Trading y Finanzas<br>• Y cualquier otro tema que necesites"
             ],
             oro: [
                 "📊 Análisis de XAUUSD:\n\n🌐 Procesando 2.4 billones de datos históricos...\n\nEl precio está formando un Order Block Alcista en la zona 2650-2655.\n\n🧠 Según SMC y análisis de 1,000,000 de profesionales, los institucionales están acumulando en esta zona. El RSI muestra divergencia alcista en 42.5.\n\n🎯 Dirección sugerida: COMPRA\n.entry: 2655.00\nSL: 2645.00\nTP: 2680.00\n\n💡 Respaldado por conocimiento global multidisciplinario",
@@ -931,46 +924,71 @@
             }
             
             // Preguntas sobre Argentina
-            if (msg.includes('argentina') || msg.includes('capital de argentina') || msg.includes('buenos aires')) {
+            if (msg.includes('argentina') || msg.includes('capital de argentina') || msg.includes('capital argentina')) {
                 return aiResponses.argentina[0];
             }
             
             // Preguntas sobre capacidades/conocimiento
-            if (msg.includes('qué sabes') || msg.includes('base de datos') || msg.includes('conocimiento') || msg.includes('cuánto sabes')) {
+            if (msg.includes('qué sabes') || msg.includes('base de datos') || msg.includes('conocimiento') || msg.includes('cuánto sabes') || msg.includes('capacidades')) {
                 return aiResponses.conocimiento[0];
             }
             
+            // Preguntas sobre geografía general
+            if (msg.includes('capital de') || msg.includes('país') || msg.includes('continente') || msg.includes('geografía')) {
+                return "🌍 Tengo información geográfica completa de los 195 países del mundo. Pregúntame sobre cualquier capital, país o región específica.";
+            }
+            
+            // Preguntas sobre historia
+            if (msg.includes('historia') || msg.includes('guerra') || msg.includes('revolución') || msg.includes('imperio')) {
+                return "📜 Tengo acceso a toda la historia universal. Desde civilizaciones antiguas hasta eventos contemporáneos. ¿Sobre qué período o evento histórico quieres saber?";
+            }
+            
+            // Preguntas sobre ciencia
+            if (msg.includes('ciencia') || msg.includes('física') || msg.includes('química') || msg.includes('biología')) {
+                return "🔬 Mi base de datos científica incluye investigaciones de MIT, Stanford, CERN, NASA y más. ¿Qué tema científico te interesa?";
+            }
+            
+            // Preguntas sobre medicina
+            if (msg.includes('medicina') || msg.includes('salud') || msg.includes('enfermedad') || msg.includes('tratamiento')) {
+                return "⚕️ Tengo información médica de Johns Hopkins, Mayo Clinic, Harvard Medical School y más. ¿Sobre qué tema de salud necesitas información?";
+            }
+            
+            // Preguntas sobre IA
+            if (msg.includes('inteligencia artificial') || msg.includes(' ia ') || msg.includes('machine learning') || msg.includes('chatgpt') || msg.includes('gemini')) {
+                return "🤖 Soy experto en IA. Mi conocimiento incluye todo lo de ChatGPT-4, Gemini 1.5 Pro, y las últimas investigaciones de OpenAI, Google DeepMind, y más. ¿Qué aspecto de la IA te interesa?";
+            }
+            
             // Análisis de Oro (solo si menciona trading/análisis)
-            if ((msg.includes('oro') || msg.includes('xau') || msg.includes('gold')) && (msg.includes('analiza') || msg.includes('trading') || msg.includes('comprar') || msg.includes('vender'))) {
+            if ((msg.includes('oro') || msg.includes('xau') || msg.includes('gold')) && (msg.includes('analiza') || msg.includes('trading') || msg.includes('comprar') || msg.includes('vender') || msg.includes('señal'))) {
                 return aiResponses.oro[Math.floor(Math.random() * aiResponses.oro.length)];
             }
             
             // EURUSD (solo si menciona trading/análisis)
-            if (msg.includes('eurusd') && (msg.includes('analiza') || msg.includes('trading') || msg.includes('comprar') || msg.includes('vender'))) {
+            if (msg.includes('eurusd') && (msg.includes('analiza') || msg.includes('trading') || msg.includes('comprar') || msg.includes('vender') || msg.includes('señal'))) {
                 return aiResponses.eur[Math.floor(Math.random() * aiResponses.eur.length)];
             }
             
             // GBPUSD (solo si menciona trading/análisis)
-            if ((msg.includes('gbpusd') || msg.includes('libra') || msg.includes('gbp')) && (msg.includes('analiza') || msg.includes('trading') || msg.includes('comprar') || msg.includes('vender'))) {
+            if ((msg.includes('gbpusd') || msg.includes('libra') || msg.includes('gbp')) && (msg.includes('analiza') || msg.includes('trading') || msg.includes('comprar') || msg.includes('vender') || msg.includes('señal'))) {
                 return aiResponses.GBP[Math.floor(Math.random() * aiResponses.GBP.length)];
             }
             
             // USDJPY (solo si menciona trading/análisis)
-            if ((msg.includes('usdjpy') || msg.includes('yen') || msg.includes('jpy')) && (msg.includes('analiza') || msg.includes('trading') || msg.includes('comprar') || msg.includes('vender'))) {
+            if ((msg.includes('usdjpy') || msg.includes('yen') || msg.includes('jpy')) && (msg.includes('analiza') || msg.includes('trading') || msg.includes('comprar') || msg.includes('vender') || msg.includes('señal'))) {
                 return aiResponses.jpy[Math.floor(Math.random() * aiResponses.jpy.length)];
             }
             
             // AUDUSD (solo si menciona trading/análisis)
-            if ((msg.includes('audusd') || msg.includes('aussie') || msg.includes('aud')) && (msg.includes('analiza') || msg.includes('trading') || msg.includes('comprar') || msg.includes('vender'))) {
+            if ((msg.includes('audusd') || msg.includes('aussie') || msg.includes('aud')) && (msg.includes('analiza') || msg.includes('trading') || msg.includes('comprar') || msg.includes('vender') || msg.includes('señal'))) {
                 return aiResponses.aud[Math.floor(Math.random() * aiResponses.aud.length)];
             }
             
             // USDCHF (solo si menciona trading/análisis)
-            if ((msg.includes('usdchf') || msg.includes('franco') || msg.includes('chf')) && (msg.includes('analiza') || msg.includes('trading') || msg.includes('comprar') || msg.includes('vender'))) {
+            if ((msg.includes('usdchf') || msg.includes('franco') || msg.includes('chf')) && (msg.includes('analiza') || msg.includes('trading') || msg.includes('comprar') || msg.includes('vender') || msg.includes('señal'))) {
                 return aiResponses.chf[Math.floor(Math.random() * aiResponses.chf.length)];
             }
             
-            // Señales
+            // Señales de trading
             if (msg.includes('señal') || msg.includes('signal') || msg.includes('operar') || msg.includes('trade')) {
                 if (tradingContext.currentSignal) {
                     let response = aiResponses.signal[0];
@@ -987,12 +1005,12 @@
             }
             
             // Ayuda
-            if (msg.includes('ayuda') || msg.includes('help') || msg.includes('qué puedes') || msg.includes('capacidades')) {
+            if (msg.includes('ayuda') || msg.includes('help')) {
                 return aiResponses.help[Math.floor(Math.random() * aiResponses.help.length)];
             }
             
-            // Respuesta general para cualquier otra pregunta
-            return aiResponses.general[Math.floor(Math.random() * aiResponses.general.length)];
+            // Respuesta inteligente para cualquier otra pregunta
+            return "🧠 Procesando tu consulta con mi base de datos de billones de datos...\n\nPor favor, sé más específico con tu pregunta para darte la mejor respuesta posible.\n\nPuedo ayudarte con: Historia, Geografía, Medicina, IA, Deportes, Política, Ciencia, Trading, y mucho más.";
         }
         
         // Función para agregar mensaje
@@ -1264,61 +1282,57 @@
             toggleViewMode(true);
         });
         
-        // Base de datos de temas de estudio MULTITEMÁTICO
+        // Base de datos de temas de estudio MULTITEMÁTICO Y DINÁMICO
         const temasEstudio = [
-            // Trading y Finanzas
-            { titulo: 'Manipulación en el Killzone de Londres', fuente: 'Algoritmo Interbancario (OANDA/FXCM)', categoria: 'Trading' },
-            { titulo: 'Detección de Fair Value Gaps ocultos', fuente: 'TradingView Deep Analysis', categoria: 'Trading' },
-            { titulo: 'Psicología de Masas y Liquidez', fuente: 'Reuters Financial Data', categoria: 'Trading' },
-            { titulo: 'Order Blocks en zonas de alta volatilidad', fuente: 'ICE Futures Exchange', categoria: 'Trading' },
-            { titulo: 'Breaker Blocks y cambios de estructura', fuente: 'CME Group Research', categoria: 'Trading' },
-            { titulo: 'Mitigation Blocks en tendencias alcistas', fuente: 'Bloomberg Terminal', categoria: 'Trading' },
-            { titulo: 'Liquidity Sweeps en sesión asiática', fuente: 'Tokyo Stock Exchange Data', categoria: 'Trading' },
-            { titulo: 'Imbalances y desequilibrios de precio', fuente: 'NASDAQ Analytics', categoria: 'Trading' },
-            { titulo: 'Market Structure Shifts en H4', fuente: 'Forex Factory Intelligence', categoria: 'Trading' },
-            { titulo: 'Premium y Discount Zones', fuente: 'Institutional Trading Desk', categoria: 'Trading' },
-            { titulo: 'Inducement y trampas de liquidez', fuente: 'Smart Money Concepts Academy', categoria: 'Trading' },
-            { titulo: 'Wyckoff Accumulation Patterns', fuente: 'NYSE Historical Data', categoria: 'Trading' },
-            { titulo: 'Volume Profile Analysis', fuente: 'TradingView Pro Research', categoria: 'Trading' },
-            { titulo: 'Session Highs/Lows Manipulation', fuente: 'London Session Analytics', categoria: 'Trading' },
-            { titulo: 'Fibonacci Retracements en SMC', fuente: 'Goldman Sachs Research', categoria: 'Trading' },
-            { titulo: 'Divergencias RSI en Order Blocks', fuente: 'Technical Analysis Institute', categoria: 'Trading' },
-            { titulo: 'Correlación entre pares de divisas', fuente: 'Bank of International Settlements', categoria: 'Trading' },
-            { titulo: 'Impacto de NFP en estructura de mercado', fuente: 'US Bureau of Labor Statistics', categoria: 'Trading' },
-            { titulo: 'Smart Money en commodities', fuente: 'Chicago Mercantile Exchange', categoria: 'Trading' },
-            { titulo: 'Zonas de acumulación institucional', fuente: 'JP Morgan Trading Desk', categoria: 'Trading' },
+            // Historia Universal
+            { titulo: 'La Revolución Francesa y sus consecuencias globales', fuente: 'Encyclopaedia Britannica', categoria: 'Historia' },
+            { titulo: 'Imperio Romano: Expansión y caída', fuente: 'Oxford University Press', categoria: 'Historia' },
+            { titulo: 'Segunda Guerra Mundial: Análisis estratégico', fuente: 'Imperial War Museums', categoria: 'Historia' },
+            { titulo: 'Civilizaciones Precolombinas de América', fuente: 'National Geographic Society', categoria: 'Historia' },
+            { titulo: 'La Guerra Fría y el orden mundial', fuente: 'Harvard Historical Review', categoria: 'Historia' },
+            
+            // Geografía
+            { titulo: 'Formación de continentes y tectónica de placas', fuente: 'US Geological Survey', categoria: 'Geografía' },
+            { titulo: 'Cambio climático y ecosistemas globales', fuente: 'NASA Earth Observatory', categoria: 'Geografía' },
+            { titulo: 'Recursos naturales y distribución mundial', fuente: 'World Resources Institute', categoria: 'Geografía' },
+            { titulo: 'Urbanización y megaciudades del siglo XXI', fuente: 'UN-Habitat', categoria: 'Geografía' },
+            
+            // Medicina y Salud
+            { titulo: 'Avances en inmunoterapia contra el cáncer', fuente: 'Johns Hopkins Medicine', categoria: 'Medicina' },
+            { titulo: 'Genética y edición CRISPR', fuente: 'National Institutes of Health', categoria: 'Medicina' },
+            { titulo: 'Neuroplasticidad y aprendizaje cerebral', fuente: 'Mayo Clinic Neuroscience', categoria: 'Medicina' },
+            { titulo: 'Microbioma intestinal y salud mental', fuente: 'Stanford Medicine', categoria: 'Medicina' },
+            { titulo: 'Medicina regenerativa y células madre', fuente: 'Harvard Stem Cell Institute', categoria: 'Medicina' },
+            
+            // Inteligencia Artificial
+            { titulo: 'Transformers y modelos de lenguaje masivos', fuente: 'OpenAI Research', categoria: 'IA' },
+            { titulo: 'Visión por computadora y reconocimiento facial', fuente: 'Google AI', categoria: 'IA' },
+            { titulo: 'IA Generativa: DALL-E, Midjourney y Stable Diffusion', fuente: 'MIT Technology Review', categoria: 'IA' },
+            { titulo: 'Ética en Inteligencia Artificial', fuente: 'AI Ethics Institute', categoria: 'IA' },
+            { titulo: 'AGI: Camino hacia la Inteligencia General Artificial', fuente: 'DeepMind Research', categoria: 'IA' },
+            
+            // Deportes
+            { titulo: 'Análisis táctico del fútbol moderno', fuente: 'FIFA Technical Study Group', categoria: 'Deportes' },
+            { titulo: 'Biomecánica en deportes de alto rendimiento', fuente: 'Olympic Training Center', categoria: 'Deportes' },
+            { titulo: 'Psicología deportiva y mentalidad ganadora', fuente: 'Sports Psychology Association', categoria: 'Deportes' },
+            { titulo: 'Nutrición deportiva y suplementación', fuente: 'International Olympic Committee', categoria: 'Deportes' },
+            
+            // Política y Sociedad
+            { titulo: 'Sistemas democráticos en el siglo XXI', fuente: 'United Nations Democracy Fund', categoria: 'Política' },
+            { titulo: 'Populismo y movimientos sociales globales', fuente: 'Brookings Institution', categoria: 'Política' },
+            { titulo: 'Derechos humanos y justicia internacional', fuente: 'Amnesty International', categoria: 'Política' },
+            { titulo: 'Geopolítica del petróleo y energías renovables', fuente: 'International Energy Agency', categoria: 'Política' },
             
             // Ciencia y Tecnología
-            { titulo: 'Computación Cuántica aplicada a predicciones', fuente: 'MIT Quantum Computing Lab', categoria: 'Ciencia' },
-            { titulo: 'Algoritmos de Machine Learning avanzados', fuente: 'Stanford AI Research', categoria: 'Tecnología' },
-            { titulo: 'Redes Neuronales Profundas', fuente: 'Google DeepMind', categoria: 'Tecnología' },
-            { titulo: 'Física de Partículas y Patrones de Mercado', fuente: 'CERN Data Analysis', categoria: 'Ciencia' },
-            { titulo: 'Teoría del Caos en Sistemas Financieros', fuente: 'Princeton Institute for Advanced Study', categoria: 'Ciencia' },
+            { titulo: 'Exploración espacial y colonización de Marte', fuente: 'NASA Jet Propulsion Laboratory', categoria: 'Ciencia' },
+            { titulo: 'Física cuántica y computación del futuro', fuente: 'CERN Quantum Research', categoria: 'Ciencia' },
+            { titulo: 'Biotecnología y agricultura sostenible', fuente: 'Nature Biotechnology', categoria: 'Ciencia' },
+            { titulo: 'Energía nuclear de fusión', fuente: 'ITER Organization', categoria: 'Ciencia' },
             
-            // Medicina y Psicología
-            { titulo: 'Neurociencia del Trading y Toma de Decisiones', fuente: 'Harvard Medical School', categoria: 'Medicina' },
-            { titulo: 'Psicología Conductual en Inversores', fuente: 'American Psychological Association', categoria: 'Medicina' },
-            { titulo: 'Efectos del Estrés en Decisiones Financieras', fuente: 'Mayo Clinic Research', categoria: 'Medicina' },
-            
-            // Leyes y Regulaciones
-            { titulo: 'Regulaciones SEC sobre Trading Algorítmico', fuente: 'US Securities and Exchange Commission', categoria: 'Leyes' },
-            { titulo: 'Normativas ESMA para Mercados Financieros', fuente: 'European Securities and Markets Authority', categoria: 'Leyes' },
-            { titulo: 'Legislación sobre Criptomonedas Global', fuente: 'International Monetary Fund', categoria: 'Leyes' },
-            
-            // Historia y Economía
-            { titulo: 'Crisis Financieras del Siglo XX', fuente: 'World Bank Historical Archives', categoria: 'Historia' },
-            { titulo: 'Evolución de los Mercados Bursátiles', fuente: 'London School of Economics', categoria: 'Historia' },
-            { titulo: 'Teorías Económicas Keynesianas vs Austriacas', fuente: 'University of Chicago Economics', categoria: 'Historia' },
-            
-            // Tendencias de Consumo
-            { titulo: 'Comportamiento del Consumidor Post-Pandemia', fuente: 'McKinsey Global Institute', categoria: 'Consumo' },
-            { titulo: 'Tendencias de E-commerce y Fintech', fuente: 'Deloitte Consumer Insights', categoria: 'Consumo' },
-            { titulo: 'Impacto de IA en Hábitos de Compra', fuente: 'Nielsen Consumer Research', categoria: 'Consumo' },
-            
-            // Geopolítica y Redes Sociales
-            { titulo: 'Análisis de Sentimiento en Twitter/X', fuente: 'Social Media Analytics Platform', categoria: 'Redes Sociales' },
-            { titulo: 'Impacto Geopolítico en Mercados Financieros', fuente: 'Council on Foreign Relations', categoria: 'Geopolítica' },
-            { titulo: 'Tendencias Virales y su Efecto en Acciones', fuente: 'Reddit WallStreetBets Analysis', categoria: 'Redes Sociales' }
+            // Trading (solo algunos)
+            { titulo: 'Order Blocks y Smart Money Concepts', fuente: 'Institutional Trading Academy', categoria: 'Trading' },
+            { titulo: 'Análisis de liquidez institucional', fuente: 'Bloomberg Markets', categoria: 'Trading' },
+            { titulo: 'Psicología del trading profesional', fuente: 'CME Group Education', categoria: 'Trading' }
         ];
         
         const plataformas = [
