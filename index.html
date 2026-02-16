@@ -687,21 +687,18 @@
                 <div class="cerebro-subtitle">Procesamiento Global Activo</div>
             </div>
             
-            <!-- Contador de Datos Procesados -->
+            <!-- Panel de temas disponibles -->
             <div class="data-counter-panel">
-                <div class="data-counter-title">🌐 DATOS PROCESADOS</div>
-                <div class="data-counter-display">
-                    <span id="dataCounter" class="data-counter-number">0</span>
-                    <span class="data-counter-unit">BILLONES</span>
-                </div>
-                <div class="data-counter-rate">
-                    <span id="dataRate">1,000,000,000</span> datos/min
+                <div class="data-counter-title">📚 BASE DE CONOCIMIENTO</div>
+                <div class="data-counter-display" style="flex-direction: column; gap: 5px;">
+                    <span style="font-size: 12px; color: #0a0;">Historia: Colón, Guerras Mundiales, Revolución Francesa</span>
+                    <span style="font-size: 12px; color: #0a0;">Geografía, Ciencia, Medicina, IA</span>
                 </div>
                 <div class="data-sources">
-                    <div class="source-item">🛰️ Satélites</div>
-                    <div class="source-item">📱 Redes Sociales</div>
-                    <div class="source-item">📰 Noticias Globales</div>
-                    <div class="source-item">📚 Bibliotecas Digitales</div>
+                    <div class="source-item">📜 Historia</div>
+                    <div class="source-item">🌍 Geografía</div>
+                    <div class="source-item">🔬 Ciencia</div>
+                    <div class="source-item">⚕️ Medicina</div>
                 </div>
             </div>
             
@@ -854,55 +851,23 @@
             'TradingSim'
         ];
         
-        // Función para generar el reporte de aprendizaje autónomo
-        function generarReporteAprendizaje() {
-            // Seleccionar entre 4 y 8 temas aleatorios
-            const numTemas = Math.floor(Math.random() * 5) + 4;
-            const temasSeleccionados = [];
-            const indicesUsados = new Set();
-            
-            while (temasSeleccionados.length < numTemas) {
-                const indice = Math.floor(Math.random() * temasTradingSMC.length);
-                if (!indicesUsados.has(indice)) {
-                    indicesUsados.add(indice);
-                    temasSeleccionados.push(temasTradingSMC[indice]);
-                }
-            }
-            
-            // Seleccionar plataformas únicas (entre 3 y 6)
-            const numPlataformas = Math.floor(Math.random() * 4) + 3;
-            const plataformasUsadas = new Set();
-            while (plataformasUsadas.size < numPlataformas) {
-                plataformasUsadas.add(plataformasAnalisis[Math.floor(Math.random() * plataformasAnalisis.length)]);
-            }
-            
-            // Generar el HTML del reporte
-            let reporteHTML = `<div style="background: linear-gradient(180deg, #0a1a0a 0%, #000 100%); padding: 20px; border: 2px solid #0f0; border-radius: 10px; margin: 10px 0;">`;
-            reporteHTML += `<div style="text-align: center; margin-bottom: 20px;">`;
-            reporteHTML += `<h2 style="color: #0f0; text-shadow: 0 0 20px #0f0; font-size: 22px; margin-bottom: 10px;">🤖 RESUMEN DE ESTUDIO DE IA MIENTRAS NO ESTABAS</h2>`;
-            reporteHTML += `<div style="color: #0a0; font-size: 12px;">📡 Análisis completado • ${new Date().toLocaleString('es-ES')}</div>`;
-            reporteHTML += `</div>`;
-            reporteHTML += `<hr style="border-color: #0f0; opacity: 0.3; margin: 15px 0;">`;
-            reporteHTML += `<div style="margin-bottom: 15px;">`;
-            reporteHTML += `<div style="color: #0f0; font-weight: bold; font-size: 16px; margin-bottom: 15px;">📚 TEMAS ESTUDIADOS:</div>`;
-            
-            temasSeleccionados.forEach((tema, index) => {
-                reporteHTML += `<div style="margin-bottom: 12px; padding: 10px; background: rgba(0, 255, 0, 0.05); border-left: 3px solid #0f0;">`;
-                reporteHTML += `<div style="color: #0f0; font-weight: bold; font-size: 14px;">📌 ${tema.titulo}</div>`;
-                reporteHTML += `<div style="color: #0a0; font-size: 12px;">📡 Fuente: ${tema.fuente}</div>`;
-                reporteHTML += `</div>`;
-            });
-            
-            reporteHTML += `</div>`;
-            reporteHTML += `<hr style="border-color: #0f0; opacity: 0.3; margin: 15px 0;">`;
-            reporteHTML += `<div style="text-align: center; color: #0f0; font-weight: bold; font-size: 16px; text-shadow: 0 0 10px #0f0;">`;
-            reporteHTML += `📊 Total de temas estudiados: <span style="color: #0f0; font-size: 20px;">${numTemas}</span> | Plataformas analizadas: <span style="color: #0f0; font-size: 20px;">${plataformasUsadas.size}</span>`;
-            reporteHTML += `</div>`;
-            reporteHTML += `<div style="text-align: center; margin-top: 15px; color: #0a0; font-size: 11px;">🧠 Procesado con IA Híbrida Multimodal • ${numTemas * 15}GB de datos analizados</div>`;
-            reporteHTML += `</div>`;
-            
-            return reporteHTML;
-        }
+        // Temas de ciencia e historia para reporte dinámico
+        const temasCienciaHistoria = [
+            { titulo: 'Descubrimiento de América y Cristóbal Colón (1492)', fuente: 'Historia Universal' },
+            { titulo: 'Primera Guerra Mundial (1914-1918)', fuente: 'Historiografía moderna' },
+            { titulo: 'Segunda Guerra Mundial y consecuencias globales', fuente: 'Historia contemporánea' },
+            { titulo: 'Revolución Francesa y derechos del hombre', fuente: 'Historia de Europa' },
+            { titulo: 'Velocidad de la luz y constantes físicas', fuente: 'Física fundamental' },
+            { titulo: 'Teoría de la Relatividad de Einstein', fuente: 'Física teórica' },
+            { titulo: 'Agujeros negros y relatividad general', fuente: 'Astrofísica' },
+            { titulo: 'ADN y estructura de doble hélice', fuente: 'Biología molecular' },
+            { titulo: 'Sistema circulatorio y fisiología humana', fuente: 'Medicina' },
+            { titulo: 'Diabetes y metabolismo de la glucosa', fuente: 'Endocrinología' },
+            { titulo: 'Estructura atómica y tabla periódica', fuente: 'Química' },
+            { titulo: 'Evolución y selección natural', fuente: 'Biología' },
+            { titulo: 'Cambio climático y ciclos terrestres', fuente: 'Ciencias de la Tierra' },
+            { titulo: 'Genética y herencia', fuente: 'Biología molecular' }
+        ];
         
         // ==================== CHAT CON IA ====================
         
@@ -961,49 +926,54 @@
             'Fair Value Gap en 2665.25'
         ];
         
-        // BASE DE CONOCIMIENTO UNIVERSAL - Respuestas directas y completas
+        // BASE DE CONOCIMIENTO UNIVERSAL - Respuestas reales y detalladas (sin plantillas)
         const baseConocimiento = {
-            // Historia
-            'primera guerra mundial': '⚔️ La Primera Guerra Mundial fue de <strong>1914 a 1918</strong>. Comenzó el 28 de julio de 1914 tras el asesinato del archiduque Francisco Fernando de Austria. Participaron las Potencias Centrales (Alemania, Austria-Hungría, Imperio Otomano) contra los Aliados (Francia, Reino Unido, Rusia, luego EE.UU.). Murieron ~17 millones de personas. Terminó con el Tratado de Versalles en 1919.',
-            'segunda guerra mundial': '🌍 La Segunda Guerra Mundial fue de <strong>1939 a 1945</strong>. Comenzó el 1 de septiembre de 1939 con la invasión alemana a Polonia. Eje (Alemania, Italia, Japón) vs Aliados (Reino Unido, URSS, EE.UU., Francia). Murieron ~70-85 millones. Terminó con la rendición de Japón el 2 de septiembre de 1945 tras las bombas atómicas.',
-            'revolución francesa': '🇫🇷 La Revolución Francesa (1789-1799) fue un período de cambio radical en Francia. Comenzó con la toma de la Bastilla el 14 de julio de 1789. Derrocó la monarquía absoluta, estableció la República, y difundió ideas de libertad, igualdad y fraternidad. Napoleón Bonaparte tomó el poder en 1799.',
-            
+            // Historia - Colón y descubrimiento
+            'colón': '🚢 <strong>Cristóbal Colón</strong> (1451-1506) fue un navegante genovés al servicio de la Corona de Castilla. El <strong>12 de octubre de 1492</strong> llegó a América (isla de Guanahani, actual Bahamas), creyendo haber alcanzado las Indias por una ruta occidental. Realizó cuatro viajes (1492, 1493, 1498, 1502). Sus tres carabelas fueron la Pinta, la Niña y la Santa María. El encuentro entre dos mundos cambió la historia: intercambio colombino, colonización europea y transformación de las civilizaciones americanas.',
+            'cristóbal colón': '🚢 <strong>Cristóbal Colón</strong> (1451-1506) fue un navegante genovés al servicio de la Corona de Castilla. El <strong>12 de octubre de 1492</strong> llegó a América (isla de Guanahani, actual Bahamas), creyendo haber alcanzado las Indias por una ruta occidental. Realizó cuatro viajes (1492, 1493, 1498, 1502). Sus tres carabelas fueron la Pinta, la Niña y la Santa María. El encuentro entre dos mundos cambió la historia: intercambio colombino, colonización europea y transformación de las civilizaciones americanas.',
+            'descubrimiento de américa': '🌎 El <strong>12 de octubre de 1492</strong> la expedición de Cristóbal Colón llegó a una isla del archipiélago de las Bahamas (Guanahani). Colón creyó haber llegado a las Indias. Este hecho inició el contacto permanente entre Europa y América, el intercambio colombino (plantas, animales, enfermedades) y la colonización española y europea del continente.',
+            // Guerras Mundiales
+            'primera guerra mundial': '⚔️ La <strong>Primera Guerra Mundial</strong> (1914-1918) comenzó el 28 de julio de 1914 tras el asesinato del archiduque Francisco Fernando en Sarajevo. Potencias Centrales (Alemania, Austria-Hungría, Imperio Otomano, Bulgaria) contra Aliados (Francia, Reino Unido, Rusia, Italia, Japón, EE.UU. desde 1917). Novedades: trincheras, gas, tanques, aviación. Murieron unos 17 millones de personas. Terminó con el Tratado de Versalles (1919), que impuso duras condiciones a Alemania.',
+            'segunda guerra mundial': '🌍 La <strong>Segunda Guerra Mundial</strong> (1939-1945) comenzó el 1 de septiembre de 1939 con la invasión alemana a Polonia. Eje (Alemania, Italia, Japón) vs Aliados (Reino Unido, URSS, EE.UU., Francia, China y otros). Incluyó el Holocausto, bombas atómicas en Hiroshima y Nagasaki (agosto 1945). Murieron entre 70 y 85 millones. Terminó con la rendición de Alemania (mayo 1945) y de Japón (2 de septiembre de 1945). Creó la ONU y dividió el mundo en bloques durante la Guerra Fría.',
+            'guerra mundial': '🌍 Hubo dos guerras mundiales: la <strong>Primera</strong> (1914-1918), con ~17 millones de muertos y el Tratado de Versalles; y la <strong>Segunda</strong> (1939-1945), con 70-85 millones de muertos, Holocausto, bombas atómicas y creación de la ONU. Ambas cambiaron fronteras, economía y política global.',
+            'revolución francesa': '🇫🇷 La Revolución Francesa (1789-1799) fue un período de cambio radical. Comenzó con la toma de la Bastilla el 14 de julio de 1789. Derrocó la monarquía absoluta, proclamó los derechos del hombre, ejecutó a Luis XVI (1793) y estableció la República. Napoleón Bonaparte tomó el poder en 1799.',
             // Geografía
-            'capital de argentina': '🇦🇷 La capital de Argentina es <strong>Buenos Aires</strong>. Es la ciudad más grande del país con ~3 millones de habitantes (15 millones en el área metropolitana). Fundada en 1536 y 1580. Es el centro político, económico y cultural de Argentina.',
-            'capital de francia': '🇫🇷 La capital de Francia es <strong>París</strong>. Conocida como la "Ciudad de la Luz", tiene ~2.2 millones de habitantes (12 millones en el área metropolitana). Famosa por la Torre Eiffel, el Louvre, Notre-Dame y los Campos Elíseos.',
-            'capital de españa': '🇪🇸 La capital de España es <strong>Madrid</strong>. Tiene ~3.3 millones de habitantes (6.7 millones en el área metropolitana). Es la ciudad más alta de Europa (650m sobre el nivel del mar). Sede del gobierno español y la familia real.',
-            'capital de italia': '🇮🇹 La capital de Italia es <strong>Roma</strong>. Conocida como la "Ciudad Eterna", tiene ~2.8 millones de habitantes. Fundada en 753 a.C. Hogar del Vaticano, el Coliseo, y centro del antiguo Imperio Romano.',
-            'capital de alemania': '🇩🇪 La capital de Alemania es <strong>Berlín</strong>. Tiene ~3.7 millones de habitantes. Fue dividida por el Muro de Berlín (1961-1989) durante la Guerra Fría. Hoy es un centro cultural, político y tecnológico de Europa.',
-            
+            'capital de argentina': '🇦🇷 La capital de Argentina es <strong>Buenos Aires</strong>. Es la ciudad más grande del país (~3 millones en la ciudad, ~15 en el área metropolitana). Fundada en 1536 y 1580. Centro político, económico y cultural; cuna del tango.',
+            'capital de francia': '🇫🇷 La capital de Francia es <strong>París</strong>. "Ciudad de la Luz", ~2.2 millones de habitantes (12 en área metropolitana). Torre Eiffel, Louvre, Notre-Dame, Campos Elíseos.',
+            'capital de españa': '🇪🇸 La capital de España es <strong>Madrid</strong>. ~3.3 millones (6.7 en área metropolitana). Una de las capitales más altas de Europa (650 m). Sede del gobierno y la familia real.',
+            'capital de italia': '🇮🇹 La capital de Italia es <strong>Roma</strong>. "Ciudad Eterna", ~2.8 millones. Fundada en 753 a.C. Hogar del Vaticano, el Coliseo y el antiguo Imperio Romano.',
+            'capital de alemania': '🇩🇪 La capital de Alemania es <strong>Berlín</strong>. ~3.7 millones. Dividida por el Muro de Berlín (1961-1989). Hoy centro cultural, político y tecnológico de Europa.',
             // Ciencia
-            'velocidad de la luz': '💡 La velocidad de la luz en el vacío es <strong>299,792,458 metros por segundo</strong> (aproximadamente 300,000 km/s o 186,000 millas/s). Es una constante física fundamental denotada como "c". Nada puede viajar más rápido que la luz según la teoría de la relatividad de Einstein.',
-            'teoría de la relatividad': '🌌 La Teoría de la Relatividad de Albert Einstein tiene dos partes: <strong>Relatividad Especial (1905)</strong> que establece que el tiempo y el espacio son relativos, y <strong>Relatividad General (1915)</strong> que describe la gravedad como curvatura del espacio-tiempo. Revolucionó la física moderna.',
-            
+            'velocidad de la luz': '💡 La velocidad de la luz en el vacío es <strong>299.792.458 m/s</strong> (~300.000 km/s). Constante "c" en física. Según la relatividad de Einstein, nada puede superarla.',
+            'teoría de la relatividad': '🌌 <strong>Relatividad Especial</strong> (1905): tiempo y espacio relativos, E=mc². <strong>Relatividad General</strong> (1915): gravedad como curvatura del espacio-tiempo. Albert Einstein revolucionó la física.',
+            'agujeros negros': '🕳️ Los agujeros negros son regiones del espacio donde la gravedad es tan fuerte que ni la luz escapa. Se forman cuando estrellas muy masivas colapsan. Tienen horizonte de sucesos y singularidad. Predichos por la relatividad general; observados indirectamente (M87*, 2019).',
             // Medicina
-            'qué es el adn': '🧬 El ADN (Ácido Desoxirribonucleico) es la molécula que contiene la información genética de todos los seres vivos. Tiene estructura de doble hélice descubierta por Watson y Crick en 1953. Está compuesto por 4 bases: Adenina, Timina, Citosina y Guanina. Determina características hereditarias.',
-            
+            'qué es el adn': '🧬 El <strong>ADN</strong> (Ácido Desoxirribonucleico) guarda la información genética. Doble hélice (Watson y Crick, 1953). Cuatro bases: Adenina, Timina, Citosina, Guanina. Determina características hereditarias.',
+            'medicina': '⚕️ La medicina es la ciencia que previene, diagnostica y trata enfermedades. Incluye anatomía, fisiología, farmacología, cirugía, epidemiología. Avances clave: vacunas, antibióticos, imagen médica, genética. Instituciones de referencia: OMS, Johns Hopkins, Mayo Clinic, Harvard Medical School.',
+            'sistema circulatorio': '❤️ El sistema circulatorio transporta sangre por el cuerpo. <strong>Corazón</strong> (4 cámaras), <strong>arterias</strong> (sangre oxigenada), <strong>venas</strong> (retorno), <strong>capilares</strong> (intercambio). La sangre lleva oxígeno, nutrientes y retira CO2 y desechos.',
+            'diabetes': '⚕️ La <strong>diabetes</strong> es un trastorno del metabolismo de la glucosa. Tipo 1: el cuerpo no produce insulina (autoinmune). Tipo 2: resistencia a la insulina o producción insuficiente. Síntomas: sed, micción frecuente, cansancio. Control con dieta, ejercicio, medicación e insulina según el tipo.',
             // IA
-            'qué es chatgpt': '🤖 ChatGPT es un modelo de lenguaje de IA desarrollado por OpenAI, lanzado en noviembre de 2022. Basado en la arquitectura GPT (Generative Pre-trained Transformer). Puede mantener conversaciones, responder preguntas, escribir código, crear contenido y más. GPT-4 es la versión más avanzada actual.',
-            'qué es gemini': '💎 Gemini es el modelo de IA de Google, lanzado en diciembre de 2023. Gemini 1.5 Pro es multimodal (texto, imágenes, audio, video). Tiene una ventana de contexto de 1 millón de tokens. Compite directamente con GPT-4 y es considerado uno de los modelos más avanzados del mundo.'
+            'qué es chatgpt': '🤖 ChatGPT es un modelo de lenguaje de IA de OpenAI (noviembre 2022). Basado en GPT (Generative Pre-trained Transformer). Conversaciones, respuestas, código, contenido. GPT-4 es la versión más avanzada.',
+            'qué es gemini': '💎 Gemini es el modelo de IA de Google (diciembre 2023). Gemini 1.5 Pro es multimodal (texto, imágenes, audio, video) con contexto de hasta 1 millón de tokens. Compite con GPT-4.'
         };
         
-        // Respuestas de la IA basadas en SMC
+        // Respuestas de la IA (sin plantillas; tono natural)
         const aiResponses = {
             greeting: [
-                "¡Hola! Tengo acceso a billones de datos globales. Pregúntame lo que quieras.",
-                "¡Bienvenido! Mi base de datos incluye todo el conocimiento de Gemini y ChatGPT. ¿En qué puedo ayudarte?",
-                "¡Saludos! Procesando 1 billón de datos por minuto. ¿Qué necesitas saber?"
+                "¡Hola! ¿En qué puedo ayudarte hoy?",
+                "¡Bienvenido! Pregúntame lo que quieras: trading, historia, ciencia, medicina o lo que necesites.",
+                "¡Saludos! Estoy aquí para ayudarte. ¿Qué te gustaría saber?"
             ],
             argentina: [
                 "🇦🇷 <strong>ARGENTINA - Información Completa</strong><br><br>📍 <strong>Capital:</strong> Buenos Aires (Ciudad Autónoma de Buenos Aires)<br><br>🌎 <strong>Ubicación:</strong> Sudamérica, limita con Chile (oeste), Bolivia y Paraguay (norte), Brasil (noreste), Uruguay (este) y el Océano Atlántico (este y sur)<br><br>👥 <strong>Población:</strong> Aproximadamente 46 millones de habitantes (2024)<br><br>💰 <strong>Moneda:</strong> Peso Argentino (ARS)<br><br>🗣️ <strong>Idioma oficial:</strong> Español<br><br>🏛️ <strong>Gobierno:</strong> República federal presidencialista<br><br>⚽ <strong>Deporte nacional:</strong> Fútbol - Campeones del Mundo 2022 (Qatar), liderados por Lionel Messi<br><br>🥩 <strong>Gastronomía:</strong> Famosa mundialmente por el asado argentino, empanadas, mate, dulce de leche, vino Malbec de Mendoza, y alfajores<br><br>🎵 <strong>Cultura:</strong> Cuna del tango, literatura de renombre mundial (Jorge Luis Borges, Julio Cortázar, Ernesto Sabato), y rica tradición artística<br><br>🏔️ <strong>Geografía destacada:</strong> Cataratas del Iguazú, Glaciar Perito Moreno, Aconcagua (montaña más alta de América), Patagonia, Pampas<br><br>🎓 <strong>Educación:</strong> Sistema educativo público y gratuito, universidades de prestigio como UBA (Universidad de Buenos Aires)<br><br>💡 <strong>Datos procesados de:</strong> Wikipedia, CIA World Factbook, UNESCO, Britannica, y 1,247 fuentes más"
             ],
             conocimiento: [
-                "🧠 <strong>MI BASE DE DATOS UNIVERSAL:</strong><br><br>✓ Todo el conocimiento de <strong>Google Gemini 1.5 Pro</strong><br>✓ Todo el conocimiento de <strong>ChatGPT-4</strong><br>✓ Datos de <strong>1,000,000 de profesionales</strong> globales<br>✓ <strong>Bibliotecas digitales</strong> de 195 países<br>✓ <strong>Satélites de información</strong> en tiempo real<br>✓ <strong>Redes sociales</strong> y tendencias actuales<br>✓ <strong>Publicaciones científicas</strong> de los últimos 50 años<br><br>💾 <strong>Capacidad de procesamiento:</strong> 1 billón de datos/minuto<br><br>🌍 <strong>Puedo responder sobre:</strong><br>• Historia Universal<br>• Geografía y Geopolítica<br>• Medicina y Salud<br>• Inteligencia Artificial<br>• Deportes<br>• Política y Sociedad<br>• Ciencia y Tecnología<br>• Cultura y Arte<br>• Trading y Finanzas<br>• Y cualquier otro tema que necesites"
+                "🧠 <strong>Puedo ayudarte con:</strong><br><br>• Historia (Colón, guerras mundiales, revoluciones)<br>• Geografía (capitales, países)<br>• Ciencia (física, relatividad, agujeros negros)<br>• Medicina (ADN, diabetes, sistema circulatorio)<br>• Inteligencia artificial (ChatGPT, Gemini)<br>• Trading y SMC (órdenes, señales, análisis)<br><br>Pregúntame algo concreto y te doy una respuesta detallada."
             ],
             oro: [
-                "📊 Análisis de XAUUSD:\n\n🌐 Procesando 2.4 billones de datos históricos...\n\nEl precio está formando un Order Block Alcista en la zona 2650-2655.\n\n🧠 Según SMC y análisis de 1,000,000 de profesionales, los institucionales están acumulando en esta zona. El RSI muestra divergencia alcista en 42.5.\n\n🎯 Dirección sugerida: COMPRA\n.entry: 2655.00\nSL: 2645.00\nTP: 2680.00\n\n💡 Respaldado por conocimiento global multidisciplinario",
-                "💰 XAUUSD:\n\n🛰️ Sincronización con satélites financieros completada...\n\nBuscando liquidez en máximos anteriores. El volumen institucional está 145% por encima de la media.\n\n📈 Estructura: Alcista en H4\n🟢 Order Block en 2650.00\n🎯 Expectativa: Continuidad alcista\n\n🌍 Análisis respaldado por datos de 47 países",
-                "🟡 Oro (XAUUSD):\n\n📡 Analizando 3.1 billones de puntos de datos...\n\nZona de manipulación detectada en 2660. Fair Value Gap en 2658-2662.\n\n💎 La smart money está acumulando, prepara tu entrada en el rebote.\n\n🧠 Confirmado por análisis de psicología de masas y neurociencia financiera"
+                "📊 Análisis de XAUUSD:\n\nEl precio está formando un Order Block Alcista en la zona 2650-2655. Los institucionales están acumulando en esta zona. RSI con divergencia alcista en 42.5.\n\n🎯 Dirección sugerida: COMPRA\nEntry: 2655.00\nSL: 2645.00\nTP: 2680.00",
+                "💰 XAUUSD:\n\nBuscando liquidez en máximos anteriores. Volumen institucional por encima de la media.\n\n📈 Estructura: Alcista en H4\n🟢 Order Block en 2650.00\n🎯 Expectativa: Continuidad alcista",
+                "🟡 Oro (XAUUSD):\n\nZona de manipulación detectada en 2660. Fair Value Gap en 2658-2662. La smart money está acumulando; prepara tu entrada en el rebote."
             ],
             eur: [
                 "📊 EURUSD:\n\nEstructura bajista en timeframe diario. Buscando Order Blocks bajistas para entradas shorts.\n\n🎯 setup: Sell en ruptura de estructura\nZona OB: 1.0850\nSL: 1.0900\nTP: 1.0750",
@@ -1026,11 +996,11 @@
                 "💵 Franco:\n\nEl precio encontró resistencia en 0.8820. Order Block bajista formándose."
             ],
             signal: [
-                "📡 SEÑAL ACTIVA para {pair}:\n\n🌐 Procesando 4.7 billones de datos en tiempo real...\n\n🎯 Dirección: {direction}\n.entry: {entry}\nSL: {sl}\nTP: {tp}\n\n📊 Confianza: {confidence}%\n\n🧠 Análisis SMC: {smc}\n\n💡 Respaldado por conocimiento de 1,000,000 de profesionales globales\n🌍 Datos de: Trading, Economía, Geopolítica, Psicología de Masas"
+                "📡 SEÑAL ACTIVA para {pair}:\n\n🎯 Dirección: {direction}\nEntry: {entry}\nSL: {sl}\nTP: {tp}\n\n📊 Confianza: {confidence}%\n\n🧠 Análisis SMC: {smc}"
             ],
             help: [
-                "🤖 Puedo ayudarte con:\n\n• Análisis de cualquier activo (XAUUSD, EURUSD, GBPUSD, USDJPY, AUDUSD, USDCHF)\n• Detección de Order Blocks\n• Identificación de zonas de liquidez\n• Señales de trading\n• Análisis de estructura de mercado\n• Conversación general\n\n¡Pregúntame lo que quieras!",
-                "📚 Mis capacidades:\n\n✓ Análisis de Smart Money Concepts\n✓ Detección de Order Blocks alcistas y bajistas\n✓ Identificación de Fair Value Gaps\n✓ Escaneo de zonas de liquidez\n✓ Señales de alta precisión\n✓ Conversación amigable\n\n¿Qué quieres saber?"
+                "🤖 Puedo ayudarte con:\n\n• Análisis de activos (XAUUSD, EURUSD, GBPUSD, USDJPY, AUDUSD, USDCHF)\n• Order Blocks, liquidez, señales SMC\n• Historia, ciencia, medicina, geografía\n• Cualquier pregunta concreta\n\n¿Sobre qué quieres que hablemos?",
+                "📚 Capacidades:\n\n✓ Trading SMC (Order Blocks, FVG, liquidez)\n✓ Historia (Colón, guerras mundiales)\n✓ Ciencia y medicina\n✓ Geografía e IA\n✓ Conversación general\n\nPregunta algo y te respondo con detalle."
             ],
             default: [
                 "¡Interesante! Me especializo en trading SMC pero puedo conversar de todo. ¿Te gustaría analizar algún activo financiero?",
@@ -1039,48 +1009,50 @@
             ]
         };
         
-        // Función para obtener respuesta de la IA
+        // Función para obtener respuesta de la IA (usa conocimiento real, sin plantillas)
         function getAIResponse(message) {
-            const msg = message.toLowerCase();
+            const msg = message.toLowerCase().trim();
+            
+            // 1) Buscar en base de conocimiento real (Colón, guerras, medicina, ciencia, etc.)
+            const claves = Object.keys(baseConocimiento).sort((a, b) => b.length - a.length);
+            for (let i = 0; i < claves.length; i++) {
+                if (msg.includes(claves[i])) {
+                    return baseConocimiento[claves[i]];
+                }
+            }
             
             // Saludo
             if (msg.includes('hola') || msg.includes('buenos') || msg.includes('hello') || msg.includes('hi') || msg.includes('que tal') || msg.includes('cómo estás')) {
                 return aiResponses.greeting[Math.floor(Math.random() * aiResponses.greeting.length)];
             }
             
-            // Preguntas sobre Argentina
+            // Preguntas sobre Argentina (respuesta completa)
             if (msg.includes('argentina') || msg.includes('capital de argentina') || msg.includes('capital argentina')) {
                 return aiResponses.argentina[0];
             }
             
-            // Preguntas sobre capacidades/conocimiento
-            if (msg.includes('qué sabes') || msg.includes('base de datos') || msg.includes('conocimiento') || msg.includes('cuánto sabes') || msg.includes('capacidades')) {
+            // Capacidades / qué sabes
+            if (msg.includes('qué sabes') || msg.includes('conocimiento') || msg.includes('cuánto sabes') || msg.includes('capacidades') || msg.includes('base de datos')) {
                 return aiResponses.conocimiento[0];
             }
             
-            // Preguntas sobre geografía general
-            if (msg.includes('capital de') || msg.includes('país') || msg.includes('continente') || msg.includes('geografía')) {
-                return "🌍 Tengo información geográfica completa de los 195 países del mundo. Pregúntame sobre cualquier capital, país o región específica.";
+            // Geografía, historia, ciencia, medicina: responder con contenido real de baseConocimiento
+            if ((msg.includes('capital de') || msg.includes('geografía')) && msg.length < 30) {
+                return baseConocimiento['capital de argentina'] + '<br><br>' + baseConocimiento['capital de francia'];
             }
-            
-            // Preguntas sobre historia
-            if (msg.includes('historia') || msg.includes('guerra') || msg.includes('revolución') || msg.includes('imperio')) {
-                return "📜 Tengo acceso a toda la historia universal. Desde civilizaciones antiguas hasta eventos contemporáneos. ¿Sobre qué período o evento histórico quieres saber?";
+            if (msg.includes('historia') && msg.length < 25) {
+                return baseConocimiento['colón'] + '<br><br>' + baseConocimiento['primera guerra mundial'];
             }
-            
-            // Preguntas sobre ciencia
-            if (msg.includes('ciencia') || msg.includes('física') || msg.includes('química') || msg.includes('biología')) {
-                return "🔬 Mi base de datos científica incluye investigaciones de MIT, Stanford, CERN, NASA y más. ¿Qué tema científico te interesa?";
+            if ((msg.includes('ciencia') || msg.includes('física')) && msg.length < 30) {
+                return baseConocimiento['velocidad de la luz'] + '<br><br>' + baseConocimiento['teoría de la relatividad'];
             }
-            
-            // Preguntas sobre medicina
-            if (msg.includes('medicina') || msg.includes('salud') || msg.includes('enfermedad') || msg.includes('tratamiento')) {
-                return "⚕️ Tengo información médica de Johns Hopkins, Mayo Clinic, Harvard Medical School y más. ¿Sobre qué tema de salud necesitas información?";
+            if ((msg.includes('medicina') || msg.includes('salud')) && msg.length < 25) {
+                return baseConocimiento['qué es el adn'] + '<br><br>' + baseConocimiento['diabetes'];
             }
-            
-            // Preguntas sobre IA
-            if (msg.includes('inteligencia artificial') || msg.includes(' ia ') || msg.includes('machine learning') || msg.includes('chatgpt') || msg.includes('gemini')) {
-                return "🤖 Soy experto en IA. Mi conocimiento incluye todo lo de ChatGPT-4, Gemini 1.5 Pro, y las últimas investigaciones de OpenAI, Google DeepMind, y más. ¿Qué aspecto de la IA te interesa?";
+            if ((msg.includes('inteligencia artificial') || msg.includes(' ia ') || msg.includes('chatgpt') || msg.includes('gemini')) && !baseConocimiento[msg]) {
+                if (msg.includes('chatgpt')) return baseConocimiento['qué es chatgpt'];
+                if (msg.includes('gemini')) return baseConocimiento['qué es gemini'];
+                return baseConocimiento['qué es chatgpt'];
             }
             
             // Análisis de Oro (solo si menciona trading/análisis)
@@ -1134,8 +1106,8 @@
                 return aiResponses.help[Math.floor(Math.random() * aiResponses.help.length)];
             }
             
-            // Respuesta inteligente para cualquier otra pregunta
-            return "🧠 Procesando tu consulta con mi base de datos de billones de datos...\n\nPor favor, sé más específico con tu pregunta para darte la mejor respuesta posible.\n\nPuedo ayudarte con: Historia, Geografía, Medicina, IA, Deportes, Política, Ciencia, Trading, y mucho más.";
+            // Respuesta por defecto: redirige a temas de baseConocimiento (Colón, Guerras, trading)
+            return aiResponses.default[Math.floor(Math.random() * aiResponses.default.length)];
         }
         
         // Función para agregar mensaje
@@ -1407,137 +1379,29 @@
             toggleViewMode(true);
         });
         
-        // Base de datos de temas de estudio MULTITEMÁTICO Y DINÁMICO
-        const temasEstudio = [
-            // Historia Universal
-            { titulo: 'La Revolución Francesa y sus consecuencias globales', fuente: 'Encyclopaedia Britannica', categoria: 'Historia' },
-            { titulo: 'Imperio Romano: Expansión y caída', fuente: 'Oxford University Press', categoria: 'Historia' },
-            { titulo: 'Segunda Guerra Mundial: Análisis estratégico', fuente: 'Imperial War Museums', categoria: 'Historia' },
-            { titulo: 'Civilizaciones Precolombinas de América', fuente: 'National Geographic Society', categoria: 'Historia' },
-            { titulo: 'La Guerra Fría y el orden mundial', fuente: 'Harvard Historical Review', categoria: 'Historia' },
-            
-            // Geografía
-            { titulo: 'Formación de continentes y tectónica de placas', fuente: 'US Geological Survey', categoria: 'Geografía' },
-            { titulo: 'Cambio climático y ecosistemas globales', fuente: 'NASA Earth Observatory', categoria: 'Geografía' },
-            { titulo: 'Recursos naturales y distribución mundial', fuente: 'World Resources Institute', categoria: 'Geografía' },
-            { titulo: 'Urbanización y megaciudades del siglo XXI', fuente: 'UN-Habitat', categoria: 'Geografía' },
-            
-            // Medicina y Salud
-            { titulo: 'Avances en inmunoterapia contra el cáncer', fuente: 'Johns Hopkins Medicine', categoria: 'Medicina' },
-            { titulo: 'Genética y edición CRISPR', fuente: 'National Institutes of Health', categoria: 'Medicina' },
-            { titulo: 'Neuroplasticidad y aprendizaje cerebral', fuente: 'Mayo Clinic Neuroscience', categoria: 'Medicina' },
-            { titulo: 'Microbioma intestinal y salud mental', fuente: 'Stanford Medicine', categoria: 'Medicina' },
-            { titulo: 'Medicina regenerativa y células madre', fuente: 'Harvard Stem Cell Institute', categoria: 'Medicina' },
-            
-            // Inteligencia Artificial
-            { titulo: 'Transformers y modelos de lenguaje masivos', fuente: 'OpenAI Research', categoria: 'IA' },
-            { titulo: 'Visión por computadora y reconocimiento facial', fuente: 'Google AI', categoria: 'IA' },
-            { titulo: 'IA Generativa: DALL-E, Midjourney y Stable Diffusion', fuente: 'MIT Technology Review', categoria: 'IA' },
-            { titulo: 'Ética en Inteligencia Artificial', fuente: 'AI Ethics Institute', categoria: 'IA' },
-            { titulo: 'AGI: Camino hacia la Inteligencia General Artificial', fuente: 'DeepMind Research', categoria: 'IA' },
-            
-            // Deportes
-            { titulo: 'Análisis táctico del fútbol moderno', fuente: 'FIFA Technical Study Group', categoria: 'Deportes' },
-            { titulo: 'Biomecánica en deportes de alto rendimiento', fuente: 'Olympic Training Center', categoria: 'Deportes' },
-            { titulo: 'Psicología deportiva y mentalidad ganadora', fuente: 'Sports Psychology Association', categoria: 'Deportes' },
-            { titulo: 'Nutrición deportiva y suplementación', fuente: 'International Olympic Committee', categoria: 'Deportes' },
-            
-            // Política y Sociedad
-            { titulo: 'Sistemas democráticos en el siglo XXI', fuente: 'United Nations Democracy Fund', categoria: 'Política' },
-            { titulo: 'Populismo y movimientos sociales globales', fuente: 'Brookings Institution', categoria: 'Política' },
-            { titulo: 'Derechos humanos y justicia internacional', fuente: 'Amnesty International', categoria: 'Política' },
-            { titulo: 'Geopolítica del petróleo y energías renovables', fuente: 'International Energy Agency', categoria: 'Política' },
-            
-            // Ciencia y Tecnología
-            { titulo: 'Exploración espacial y colonización de Marte', fuente: 'NASA Jet Propulsion Laboratory', categoria: 'Ciencia' },
-            { titulo: 'Física cuántica y computación del futuro', fuente: 'CERN Quantum Research', categoria: 'Ciencia' },
-            { titulo: 'Biotecnología y agricultura sostenible', fuente: 'Nature Biotechnology', categoria: 'Ciencia' },
-            { titulo: 'Energía nuclear de fusión', fuente: 'ITER Organization', categoria: 'Ciencia' },
-            
-            // Trading (solo algunos)
-            { titulo: 'Order Blocks y Smart Money Concepts', fuente: 'Institutional Trading Academy', categoria: 'Trading' },
-            { titulo: 'Análisis de liquidez institucional', fuente: 'Bloomberg Markets', categoria: 'Trading' },
-            { titulo: 'Psicología del trading profesional', fuente: 'CME Group Education', categoria: 'Trading' }
-        ];
-        
-        const plataformas = [
-            'OANDA', 'FXCM', 'TradingView', 'Reuters', 'Bloomberg', 'CME Group',
-            'ICE Futures', 'Tokyo Stock Exchange', 'NASDAQ', 'Forex Factory',
-            'NYSE', 'Goldman Sachs', 'Bank of International Settlements',
-            'US Bureau of Labor', 'Chicago Mercantile Exchange', 'JP Morgan'
-        ];
-        
-        // Variables globales del contador
-        let datosProcessados = 0;
-        let billonesProcesados = 0;
-        
-        // Función para actualizar contador de datos
-        function actualizarContadorDatos() {
-            // Incrementar a velocidad de 1 billón por minuto = ~16.67 millones por segundo
-            // Actualización cada 50ms = 20 veces por segundo
-            // Incremento por actualización: 16,670,000 / 20 = 833,500 datos
-            const incremento = 833500 + Math.floor(Math.random() * 100000);
-            datosProcessados += incremento;
-            
-            // Convertir a billones
-            billonesProcesados = (datosProcessados / 1000000000000).toFixed(3);
-            
-            // Actualizar display
-            const counterElement = document.getElementById('dataCounter');
-            if (counterElement) {
-                counterElement.textContent = billonesProcesados;
-            }
-        }
-        
-        // Función para generar reporte de aprendizaje
+        // Función para generar reporte de aprendizaje (usa baseConocimiento: Colón, Guerras, etc.)
         function generarReporteAprendizaje() {
-            // Seleccionar entre 5 y 8 temas aleatorios de diferentes categorías
-            const numTemas = Math.floor(Math.random() * 4) + 5; // 5-8 temas
-            const temasSeleccionados = [];
-            const temasDisponibles = [...temasEstudio];
+            const temasBase = [
+                { titulo: 'Cristóbal Colón y el descubrimiento de América (1492)', categoria: 'Historia' },
+                { titulo: 'Primera Guerra Mundial (1914-1918)', categoria: 'Historia' },
+                { titulo: 'Segunda Guerra Mundial (1939-1945)', categoria: 'Historia' },
+                { titulo: 'Revolución Francesa', categoria: 'Historia' },
+                { titulo: 'Geografía: capitales de Argentina, Francia, España, Italia, Alemania', categoria: 'Geografía' },
+                { titulo: 'Velocidad de la luz y Teoría de la Relatividad', categoria: 'Ciencia' },
+                { titulo: 'ADN, Diabetes, Sistema circulatorio', categoria: 'Medicina' },
+                { titulo: 'ChatGPT y Gemini', categoria: 'IA' }
+            ];
+            const seleccionados = temasBase.slice(0, 4 + Math.floor(Math.random() * 3));
             
-            for (let i = 0; i < numTemas && temasDisponibles.length > 0; i++) {
-                const index = Math.floor(Math.random() * temasDisponibles.length);
-                temasSeleccionados.push(temasDisponibles[index]);
-                temasDisponibles.splice(index, 1);
-            }
-            
-            // Contar plataformas únicas
-            const plataformasUnicas = new Set();
-            const categoriasUnicas = new Set();
-            temasSeleccionados.forEach(tema => {
-                const plataforma = tema.fuente.split('(')[0].split(' ')[0];
-                plataformasUnicas.add(plataforma);
-                categoriasUnicas.add(tema.categoria);
-            });
-            
-            // Generar número de billones procesados (entre 2.5 y 8.7 billones)
-            const billonesAnalizados = (Math.random() * 6.2 + 2.5).toFixed(2);
-            
-            // Construir mensaje
-            let mensaje = '<strong style="color: #0f0; font-size: 18px; text-shadow: 0 0 15px #0f0;">🌐 SINCRONIZACIÓN GLOBAL COMPLETADA</strong><br><br>';
+            let mensaje = '<strong style="color: #0f0; font-size: 18px; text-shadow: 0 0 15px #0f0;">📚 BASE DE CONOCIMIENTO ACTIVA</strong><br><br>';
             mensaje += '<div style="color: #0a0; font-size: 14px; line-height: 1.9;">';
-            mensaje += `<strong style="color: #0f0; font-size: 16px;">He analizado ${billonesAnalizados} BILLONES de puntos de datos de todo el mundo mientras no estabas.</strong><br><br>`;
-            mensaje += '<span style="color: #0a0;">🛰️ Conexión multicanal activa: Satélites, Redes Sociales, Noticias Mundiales, Bibliotecas Digitales</span><br><br>';
-            mensaje += '<strong style="color: #0f0;">📚 TEMAS ESTUDIADOS:</strong><br><br>';
-            
-            temasSeleccionados.forEach((tema, index) => {
-                const emoji = tema.categoria === 'Trading' ? '💹' : tema.categoria === 'Ciencia' ? '🔬' : tema.categoria === 'Tecnología' ? '💻' : tema.categoria === 'Medicina' ? '⚕️' : tema.categoria === 'Leyes' ? '⚖️' : tema.categoria === 'Historia' ? '📜' : tema.categoria === 'Consumo' ? '🛒' : tema.categoria === 'Redes Sociales' ? '📱' : '🌍';
-                mensaje += `<strong style="color: #0f0;">${emoji} ${index + 1}. ${tema.titulo}</strong><br>`;
-                mensaje += `<span style="color: #0a0;">   📖 Fuente: ${tema.fuente}</span><br>`;
-                mensaje += `<span style="color: #0a0;">   🏷️ Categoría: ${tema.categoria}</span><br><br>`;
+            mensaje += '<strong style="color: #0f0;">Temas disponibles (Historia, Geografía, Ciencia, Medicina, IA):</strong><br><br>';
+            seleccionados.forEach((t, i) => {
+                const emoji = t.categoria === 'Historia' ? '📜' : t.categoria === 'Geografía' ? '🌍' : t.categoria === 'Ciencia' ? '🔬' : t.categoria === 'Medicina' ? '⚕️' : '🤖';
+                mensaje += `<strong style="color: #0f0;">${emoji} ${i + 1}. ${t.titulo}</strong><br>`;
             });
-            
-            mensaje += '<hr style="border-color: #0f0; margin: 15px 0;">';
-            mensaje += `<strong style="color: #0f0; font-size: 15px;">📊 Total de temas estudiados: ${numTemas}</strong><br>`;
-            mensaje += `<strong style="color: #0f0; font-size: 15px;">🌐 Plataformas analizadas: ${plataformasUnicas.size}</strong><br>`;
-            mensaje += `<strong style="color: #0f0; font-size: 15px;">🎯 Categorías cubiertas: ${categoriasUnicas.size}</strong><br>`;
-            mensaje += `<strong style="color: #0f0; font-size: 15px;">💾 Datos procesados: ${billonesAnalizados} BILLONES</strong><br><br>`;
-            mensaje += '<span style="color: #0a0;">✅ Sistema de aprendizaje autónomo activo</span><br>';
-            mensaje += '<span style="color: #0a0;">🧠 Capacidad: 1,000,000,000 datos/minuto</span><br>';
-            mensaje += '<span style="color: #0a0;">🌍 Cobertura: Global - Conocimiento de 1,000,000 de profesionales</span>';
+            mensaje += '<br><span style="color: #0a0;">Pregunta sobre Colón, las Guerras Mundiales, capitales, física, medicina o trading.</span>';
             mensaje += '</div>';
-            
             return mensaje;
         }
         
@@ -1551,10 +1415,7 @@
             addLog('📊 Conectando con servidores de datos...');
             addLog('🧠 Cargando modelo de IA...');
             
-            // Iniciar contador de datos procesados (actualizar cada 50ms)
-            setInterval(actualizarContadorDatos, 50);
-            
-            // Mostrar reporte de aprendizaje después de 2 segundos
+            // Mostrar reporte de aprendizaje (baseConocimiento) después de 2 segundos
             setTimeout(() => {
                 const reporte = generarReporteAprendizaje();
                 addMessage(reporte, false);
