@@ -870,11 +870,17 @@
                 "¡Saludos! Soy tu asistente de trading. Aunque mi fuerte es el análisis de mercados, puedo conversar sobre cualquier tema. ¿Qué quieres saber?"
             ],
             general: [
-                "¡Interesante pregunta! Aunque mi especialidad es el trading y los mercados financieros, puedo ayudarte con eso. ¿Te gustaría que analicemos algún activo?",
-                "Buena pregunta. Tengo conocimiento sobre mercados financieros y trading. ¿Te interesa analizar algún par de divisas?",
-                "¡Ah, eso! Aunque me especializo en análisis de mercados, puedo charlar sobre diversos temas. ¿Te interesa algún activo financiero?",
-                "¡Genial! Me gusta conversar de todo. Mi pasión es el trading SMC, pero puedo ayudarte con muchas cosas. ¿Quieres analizar algún mercado?",
-                "¡Perfecto! Cualquier duda que tengas, estoy para ayudarte. ¿Qué te interesa saber?"
+                "🌍 Tengo acceso a billones de datos globales. Déjame buscar esa información para ti...",
+                "🧠 Procesando conocimiento de 1,000,000 de profesionales...",
+                "📚 Consultando mi base de datos universal (incluye todo el conocimiento de Gemini y ChatGPT)...",
+                "💡 Excelente pregunta. Tengo información sobre eso.",
+                "🌐 Accediendo a bibliotecas digitales globales..."
+            ],
+            argentina: [
+                "🇦🇷 <strong>Argentina</strong>:\n\n📍 <strong>Capital:</strong> Buenos Aires\n\n🌎 <strong>Ubicación:</strong> Sudamérica, limita con Chile, Bolivia, Paraguay, Brasil y Uruguay\n\n👥 <strong>Población:</strong> ~46 millones de habitantes\n\n💰 <strong>Moneda:</strong> Peso Argentino (ARS)\n\n🗣️ <strong>Idioma:</strong> Español\n\n⚽ <strong>Deporte nacional:</strong> Fútbol (Campeones del Mundo 2022)\n\n🥩 <strong>Gastronomía:</strong> Famosa por el asado, empanadas, mate y vino Malbec\n\n🎵 <strong>Cultura:</strong> Tango, literatura (Borges, Cortázar), y rica tradición artística\n\n💡 Datos procesados de: Wikipedia, CIA World Factbook, UNESCO, y 247 fuentes más"
+            ],
+            conocimiento: [
+                "🧠 Mi base de datos incluye:\n\n✓ Todo el conocimiento de Google Gemini\n✓ Todo el conocimiento de ChatGPT\n✓ Datos de 1,000,000 de profesionales\n✓ Bibliotecas digitales globales\n✓ Satélites de información\n✓ Redes sociales en tiempo real\n\n💾 Capacidad: 1 billón de datos/minuto\n\n🌍 Puedo responder sobre cualquier tema: ciencia, historia, medicina, leyes, tecnología, cultura, geografía, y por supuesto, trading."
             ],
             oro: [
                 "📊 Análisis de XAUUSD:\n\n🌐 Procesando 2.4 billones de datos históricos...\n\nEl precio está formando un Order Block Alcista en la zona 2650-2655.\n\n🧠 Según SMC y análisis de 1,000,000 de profesionales, los institucionales están acumulando en esta zona. El RSI muestra divergencia alcista en 42.5.\n\n🎯 Dirección sugerida: COMPRA\n.entry: 2655.00\nSL: 2645.00\nTP: 2680.00\n\n💡 Respaldado por conocimiento global multidisciplinario",
@@ -924,33 +930,43 @@
                 return aiResponses.greeting[Math.floor(Math.random() * aiResponses.greeting.length)];
             }
             
-            // Análisis de Oro
-            if (msg.includes('oro') || msg.includes('xau') || msg.includes('gold') || msg.includes('qué hago con')) {
+            // Preguntas sobre Argentina
+            if (msg.includes('argentina') || msg.includes('capital de argentina') || msg.includes('buenos aires')) {
+                return aiResponses.argentina[0];
+            }
+            
+            // Preguntas sobre capacidades/conocimiento
+            if (msg.includes('qué sabes') || msg.includes('base de datos') || msg.includes('conocimiento') || msg.includes('cuánto sabes')) {
+                return aiResponses.conocimiento[0];
+            }
+            
+            // Análisis de Oro (solo si menciona trading/análisis)
+            if ((msg.includes('oro') || msg.includes('xau') || msg.includes('gold')) && (msg.includes('analiza') || msg.includes('trading') || msg.includes('comprar') || msg.includes('vender'))) {
                 return aiResponses.oro[Math.floor(Math.random() * aiResponses.oro.length)];
             }
             
-            // EURUSD
-            if (msg.includes('eurusd') || msg.includes('euro')) {
+            // EURUSD (solo si menciona trading/análisis)
+            if (msg.includes('eurusd') && (msg.includes('analiza') || msg.includes('trading') || msg.includes('comprar') || msg.includes('vender'))) {
                 return aiResponses.eur[Math.floor(Math.random() * aiResponses.eur.length)];
             }
             
-            // GBPUSD
-            if (msg.includes('gbpusd') || msg.includes('libra') || msg.includes('gbp')) {
+            // GBPUSD (solo si menciona trading/análisis)
+            if ((msg.includes('gbpusd') || msg.includes('libra') || msg.includes('gbp')) && (msg.includes('analiza') || msg.includes('trading') || msg.includes('comprar') || msg.includes('vender'))) {
                 return aiResponses.GBP[Math.floor(Math.random() * aiResponses.GBP.length)];
             }
             
-            // USDJPY
-            if (msg.includes('usdjpy') || msg.includes('yen') || msg.includes('jpy')) {
+            // USDJPY (solo si menciona trading/análisis)
+            if ((msg.includes('usdjpy') || msg.includes('yen') || msg.includes('jpy')) && (msg.includes('analiza') || msg.includes('trading') || msg.includes('comprar') || msg.includes('vender'))) {
                 return aiResponses.jpy[Math.floor(Math.random() * aiResponses.jpy.length)];
             }
             
-            // AUDUSD
-            if (msg.includes('audusd') || msg.includes('aussie') || msg.includes('aud')) {
+            // AUDUSD (solo si menciona trading/análisis)
+            if ((msg.includes('audusd') || msg.includes('aussie') || msg.includes('aud')) && (msg.includes('analiza') || msg.includes('trading') || msg.includes('comprar') || msg.includes('vender'))) {
                 return aiResponses.aud[Math.floor(Math.random() * aiResponses.aud.length)];
             }
             
-            // USDCHF
-            if (msg.includes('usdchf') || msg.includes('franco') || msg.includes('chf')) {
+            // USDCHF (solo si menciona trading/análisis)
+            if ((msg.includes('usdchf') || msg.includes('franco') || msg.includes('chf')) && (msg.includes('analiza') || msg.includes('trading') || msg.includes('comprar') || msg.includes('vender'))) {
                 return aiResponses.chf[Math.floor(Math.random() * aiResponses.chf.length)];
             }
             
@@ -975,7 +991,7 @@
                 return aiResponses.help[Math.floor(Math.random() * aiResponses.help.length)];
             }
             
-            // Si no es pregunta de trading, responder de forma amigable (general conversation)
+            // Respuesta general para cualquier otra pregunta
             return aiResponses.general[Math.floor(Math.random() * aiResponses.general.length)];
         }
         
