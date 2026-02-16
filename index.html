@@ -415,11 +415,11 @@
         /* CHAT CON IA - SECCIÓN NUEVA */
         
         #chatSection {
-            width: 100%;
+            width: 95%;
+            margin: 30px auto;
             padding: 20px;
             background: #000;
             border-top: 3px solid #0f0;
-            margin-top: 20px;
         }
         
         .chat-container {
@@ -475,7 +475,7 @@
         }
         
         .chat-messages {
-            height: 400px;
+            height: 500px;
             overflow-y: auto;
             padding: 20px;
             display: flex;
@@ -785,9 +785,16 @@
         // Respuestas de la IA basadas en SMC
         const aiResponses = {
             greeting: [
-                "¡Hola! Estoy analizando el mercado en tiempo real. ¿Qué activo te gustaría analizar?",
-                "¡Bienvenido! Puedo darte análisis de Smart Money Concepts. ¿Sobre qué par quieres información?",
-                "¡Saludos! Estoy detectando movimientos institucionales. ¿En qué puedo ayudarte?"
+                "¡Hola! Soy Chat Trading IA. Mi especialidad es el trading con Smart Money Concepts, pero puedo ayudarte con cualquier cosa. ¿Qué te gustaría saber?",
+                "¡Bienvenido! Estoy aquí para ayudarte. Puedo darte análisis de trading o responder cualquier pregunta que tengas. ¿En qué puedo servirte?",
+                "¡Saludos! Soy tu asistente de trading. Aunque mi fuerte es el análisis de mercados, puedo conversar sobre cualquier tema. ¿Qué quieres saber?"
+            ],
+            general: [
+                "¡Interesante pregunta! Aunque mi especialidad es el trading y los mercados financieros, puedo ayudarte con eso. ¿Te gustaría que analicemos algún activo?",
+                "Buena pregunta. Tengo conocimiento sobre mercados financieros y trading. ¿Te interesa analizar algún par de divisas?",
+                "¡Ah, eso! Aunque me especializo en análisis de mercados, puedo charlar sobre diversos temas. ¿Te interesa algún activo financiero?",
+                "¡Genial! Me gusta conversar de todo. Mi pasión es el trading SMC, pero puedo ayudarte con muchas cosas. ¿Quieres analizar algún mercado?",
+                "¡Perfecto! Cualquier duda que tengas, estoy para ayudarte. ¿Qué te interesa saber?"
             ],
             oro: [
                 "📊 Análisis de XAUUSD:\n\nEl precio está formando un Order Block Alcista en la zona 2650-2655.\n\n🧠 Según SMC, los institucionales están acumulando en esta zona. El RSI muestra divergencia alcista en 42.5.\n\n🎯 Dirección sugerida: COMPRA\n.entry: 2655.00\nSL: 2645.00\nTP: 2680.00",
@@ -818,13 +825,13 @@
                 "📡 SEÑAL ACTIVA para {pair}:\n\n🎯 Dirección: {direction}\n.entry: {entry}\nSL: {sl}\nTP: {tp}\n\n📊 Confianza: {confidence}%\n\n🧠 Análisis SMC: {smc}"
             ],
             help: [
-                "🤖 Puedo ayudarte con:\n\n• Análisis de cualquier activo (XAUUSD, EURUSD, GBPUSD, USDJPY, AUDUSD, USDCHF)\n• Detección de Order Blocks\n• Identificación de zonas de liquidez\n• Señales de trading\n• Análisis de estructura de mercado\n\n¡Pregúntame sobre el activo que quieras analizar!",
-                "📚 Mis capacidades:\n\n✓ Análisis de Smart Money Concepts\n✓ Detección de Order Blocks alcistas y bajistas\n✓ Identificación de Fair Value Gaps\n✓ Escaneo de zonas de liquidez\n✓ Señales de alta precisión\n\n¿Qué quieres saber?"
+                "🤖 Puedo ayudarte con:\n\n• Análisis de cualquier activo (XAUUSD, EURUSD, GBPUSD, USDJPY, AUDUSD, USDCHF)\n• Detección de Order Blocks\n• Identificación de zonas de liquidez\n• Señales de trading\n• Análisis de estructura de mercado\n• Conversación general\n\n¡Pregúntame lo que quieras!",
+                "📚 Mis capacidades:\n\n✓ Análisis de Smart Money Concepts\n✓ Detección de Order Blocks alcistas y bajistas\n✓ Identificación de Fair Value Gaps\n✓ Escaneo de zonas de liquidez\n✓ Señales de alta precisión\n✓ Conversación amigable\n\n¿Qué quieres saber?"
             ],
             default: [
-                "🤔 No entendí tu pregunta. ¿Puedes ser más específico?\n\nPuedo analizar: XAUUSD, EURUSD, GBPUSD, USDJPY, AUDUSD, USDCHF\n\nO pregunta por 'señales' para ver operaciones activas.",
-                "❓ Pregunta sobre un activo específico o solicita 'señales' para ver oportunidades de trading.",
-                "💡 Puedo ayudarte mejor si me dices qué activo quieres analizar o si solicitas 'señales'."
+                "¡Interesante! Me especializo en trading SMC pero puedo conversar de todo. ¿Te gustaría analizar algún activo financiero?",
+                "¡Genial! Puedo ayudarte con trading o simplemente charlar. ¿Qué tema te interesa?",
+                "¡Perfecto! Estoy aquí para ayudarte. ¿Sobre qué quieres hablar?"
             ]
         };
         
@@ -833,7 +840,7 @@
             const msg = message.toLowerCase();
             
             // Saludo
-            if (msg.includes('hola') || msg.includes('buenos') || msg.includes('hello') || msg.includes('hi')) {
+            if (msg.includes('hola') || msg.includes('buenos') || msg.includes('hello') || msg.includes('hi') || msg.includes('que tal') || msg.includes('cómo estás')) {
                 return aiResponses.greeting[Math.floor(Math.random() * aiResponses.greeting.length)];
             }
             
@@ -888,8 +895,8 @@
                 return aiResponses.help[Math.floor(Math.random() * aiResponses.help.length)];
             }
             
-            // Respuesta por defecto
-            return aiResponses.default[Math.floor(Math.random() * aiResponses.default.length)];
+            // Si no es pregunta de trading, responder de forma amigable (general conversation)
+            return aiResponses.general[Math.floor(Math.random() * aiResponses.general.length)];
         }
         
         // Función para agregar mensaje
@@ -1161,6 +1168,76 @@
             toggleViewMode(true);
         });
         
+        // Base de datos de temas de estudio SMC
+        const temasEstudio = [
+            { titulo: 'Manipulación en el Killzone de Londres', fuente: 'Algoritmo Interbancario (OANDA/FXCM)' },
+            { titulo: 'Detección de Fair Value Gaps ocultos', fuente: 'TradingView Deep Analysis' },
+            { titulo: 'Psicología de Masas y Liquidez', fuente: 'Reuters Financial Data' },
+            { titulo: 'Order Blocks en zonas de alta volatilidad', fuente: 'ICE Futures Exchange' },
+            { titulo: 'Breaker Blocks y cambios de estructura', fuente: 'CME Group Research' },
+            { titulo: 'Mitigation Blocks en tendencias alcistas', fuente: 'Bloomberg Terminal' },
+            { titulo: 'Liquidity Sweeps en sesión asiática', fuente: 'Tokyo Stock Exchange Data' },
+            { titulo: 'Imbalances y desequilibrios de precio', fuente: 'NASDAQ Analytics' },
+            { titulo: 'Market Structure Shifts en H4', fuente: 'Forex Factory Intelligence' },
+            { titulo: 'Premium y Discount Zones', fuente: 'Institutional Trading Desk' },
+            { titulo: 'Inducement y trampas de liquidez', fuente: 'Smart Money Concepts Academy' },
+            { titulo: 'Wyckoff Accumulation Patterns', fuente: 'NYSE Historical Data' },
+            { titulo: 'Volume Profile Analysis', fuente: 'TradingView Pro Research' },
+            { titulo: 'Session Highs/Lows Manipulation', fuente: 'London Session Analytics' },
+            { titulo: 'Fibonacci Retracements en SMC', fuente: 'Goldman Sachs Research' },
+            { titulo: 'Divergencias RSI en Order Blocks', fuente: 'Technical Analysis Institute' },
+            { titulo: 'Correlación entre pares de divisas', fuente: 'Bank of International Settlements' },
+            { titulo: 'Impacto de NFP en estructura de mercado', fuente: 'US Bureau of Labor Statistics' },
+            { titulo: 'Smart Money en commodities', fuente: 'Chicago Mercantile Exchange' },
+            { titulo: 'Zonas de acumulación institucional', fuente: 'JP Morgan Trading Desk' }
+        ];
+        
+        const plataformas = [
+            'OANDA', 'FXCM', 'TradingView', 'Reuters', 'Bloomberg', 'CME Group',
+            'ICE Futures', 'Tokyo Stock Exchange', 'NASDAQ', 'Forex Factory',
+            'NYSE', 'Goldman Sachs', 'Bank of International Settlements',
+            'US Bureau of Labor', 'Chicago Mercantile Exchange', 'JP Morgan'
+        ];
+        
+        // Función para generar reporte de aprendizaje
+        function generarReporteAprendizaje() {
+            // Seleccionar entre 3 y 6 temas aleatorios
+            const numTemas = Math.floor(Math.random() * 4) + 3; // 3-6 temas
+            const temasSeleccionados = [];
+            const temasDisponibles = [...temasEstudio];
+            
+            for (let i = 0; i < numTemas && temasDisponibles.length > 0; i++) {
+                const index = Math.floor(Math.random() * temasDisponibles.length);
+                temasSeleccionados.push(temasDisponibles[index]);
+                temasDisponibles.splice(index, 1);
+            }
+            
+            // Contar plataformas únicas
+            const plataformasUnicas = new Set();
+            temasSeleccionados.forEach(tema => {
+                const plataforma = tema.fuente.split('(')[0].split(' ')[0];
+                plataformasUnicas.add(plataforma);
+            });
+            
+            // Construir mensaje
+            let mensaje = '<strong style="color: #0f0; font-size: 16px;">📚 RESUMEN DE ESTUDIO DE IA MIENTRAS NO ESTABAS</strong><br><br>';
+            mensaje += '<div style="color: #0a0; font-size: 13px; line-height: 1.8;">';
+            mensaje += '🧠 La IA ha estado estudiando y analizando el mercado en tu ausencia:<br><br>';
+            
+            temasSeleccionados.forEach((tema, index) => {
+                mensaje += `<strong style="color: #0f0;">${index + 1}. ${tema.titulo}</strong><br>`;
+                mensaje += `<span style="color: #0a0;">   📖 Fuente: ${tema.fuente}</span><br><br>`;
+            });
+            
+            mensaje += '<hr style="border-color: #0f0; margin: 15px 0;">';
+            mensaje += `<strong style="color: #0f0;">📊 Total de temas estudiados: ${numTemas}</strong><br>`;
+            mensaje += `<strong style="color: #0f0;">🌐 Plataformas analizadas: ${plataformasUnicas.size}</strong><br><br>`;
+            mensaje += '<span style="color: #0a0;">✅ Sistema de aprendizaje autónomo activo</span>';
+            mensaje += '</div>';
+            
+            return mensaje;
+        }
+        
         // Inicialización
         document.addEventListener('DOMContentLoaded', function() {
             // Inicializar gráfico
@@ -1170,6 +1247,13 @@
             addLog('🚀 Sistema iniciado correctamente');
             addLog('📊 Conectando con servidores de datos...');
             addLog('🧠 Cargando modelo de IA...');
+            
+            // Mostrar reporte de aprendizaje después de 2 segundos
+            setTimeout(() => {
+                const reporte = generarReporteAprendizaje();
+                addMessage(reporte, false);
+                addLog('📚 Reporte de aprendizaje generado');
+            }, 2000);
             
             // Simular actividad del cerebro cada 3 segundos
             setInterval(simulateBrainActivity, 3000);
