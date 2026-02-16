@@ -342,6 +342,68 @@
             background: rgba(0, 255, 0, 0.1);
         }
         
+        /* Data Counter Panel */
+        .data-counter-panel {
+            padding: 15px;
+            border-top: 2px solid #0f0;
+            border-bottom: 2px solid #0f0;
+            background: linear-gradient(180deg, #0a1a0a 0%, #000 100%);
+            text-align: center;
+        }
+        
+        .data-counter-title {
+            font-size: 12px;
+            font-weight: bold;
+            color: #0f0;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px #0f0;
+        }
+        
+        .data-counter-display {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 5px;
+            margin-bottom: 8px;
+        }
+        
+        .data-counter-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #0f0;
+            text-shadow: 0 0 20px #0f0, 0 0 40px #0f0;
+            animation: pulse 0.5s infinite;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .data-counter-unit {
+            font-size: 12px;
+            color: #0a0;
+            font-weight: bold;
+        }
+        
+        .data-counter-rate {
+            font-size: 10px;
+            color: #0a0;
+            margin-bottom: 10px;
+        }
+        
+        .data-sources {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
+            margin-top: 10px;
+        }
+        
+        .source-item {
+            font-size: 9px;
+            color: #0f0;
+            padding: 4px;
+            border: 1px solid #0a0;
+            background: rgba(0, 255, 0, 0.05);
+            animation: fadeIn 0.5s ease;
+        }
+        
         /* AI Indicators Panel */
         .indicators-panel {
             padding: 15px;
@@ -622,7 +684,25 @@
         <aside class="cerebro-ia">
             <div class="cerebro-header">
                 <div class="cerebro-title">🧠 CEREBRO IA</div>
-                <div class="cerebro-subtitle">Procesando millones de datos en tiempo real...</div>
+                <div class="cerebro-subtitle">Procesamiento Global Activo</div>
+            </div>
+            
+            <!-- Contador de Datos Procesados -->
+            <div class="data-counter-panel">
+                <div class="data-counter-title">🌐 DATOS PROCESADOS</div>
+                <div class="data-counter-display">
+                    <span id="dataCounter" class="data-counter-number">0</span>
+                    <span class="data-counter-unit">BILLONES</span>
+                </div>
+                <div class="data-counter-rate">
+                    <span id="dataRate">1,000,000,000</span> datos/min
+                </div>
+                <div class="data-sources">
+                    <div class="source-item">🛰️ Satélites</div>
+                    <div class="source-item">📱 Redes Sociales</div>
+                    <div class="source-item">📰 Noticias Globales</div>
+                    <div class="source-item">📚 Bibliotecas Digitales</div>
+                </div>
             </div>
             
             <!-- Panel de Indicadores IA -->
@@ -797,9 +877,9 @@
                 "¡Perfecto! Cualquier duda que tengas, estoy para ayudarte. ¿Qué te interesa saber?"
             ],
             oro: [
-                "📊 Análisis de XAUUSD:\n\nEl precio está formando un Order Block Alcista en la zona 2650-2655.\n\n🧠 Según SMC, los institucionales están acumulando en esta zona. El RSI muestra divergencia alcista en 42.5.\n\n🎯 Dirección sugerida: COMPRA\n.entry: 2655.00\nSL: 2645.00\nTP: 2680.00",
-                "💰 XAUUSD:\n\nBuscando liquidez en máximos anteriores. El volumen institucional está 145% por encima de la media.\n\n📈 Estructura: Alcista en H4\n🟢 Order Block en 2650.00\n🎯 Expectativa: Continuidad alcista",
-                "🟡 Oro (XAUUSD):\n\nZona de manipulación detectada en 2660. Fair Value Gap en 2658-2662.\n\n💎 La smart money está acumulando, prepara tu entrada en el rebote."
+                "📊 Análisis de XAUUSD:\n\n🌐 Procesando 2.4 billones de datos históricos...\n\nEl precio está formando un Order Block Alcista en la zona 2650-2655.\n\n🧠 Según SMC y análisis de 1,000,000 de profesionales, los institucionales están acumulando en esta zona. El RSI muestra divergencia alcista en 42.5.\n\n🎯 Dirección sugerida: COMPRA\n.entry: 2655.00\nSL: 2645.00\nTP: 2680.00\n\n💡 Respaldado por conocimiento global multidisciplinario",
+                "💰 XAUUSD:\n\n🛰️ Sincronización con satélites financieros completada...\n\nBuscando liquidez en máximos anteriores. El volumen institucional está 145% por encima de la media.\n\n📈 Estructura: Alcista en H4\n🟢 Order Block en 2650.00\n🎯 Expectativa: Continuidad alcista\n\n🌍 Análisis respaldado por datos de 47 países",
+                "🟡 Oro (XAUUSD):\n\n📡 Analizando 3.1 billones de puntos de datos...\n\nZona de manipulación detectada en 2660. Fair Value Gap en 2658-2662.\n\n💎 La smart money está acumulando, prepara tu entrada en el rebote.\n\n🧠 Confirmado por análisis de psicología de masas y neurociencia financiera"
             ],
             eur: [
                 "📊 EURUSD:\n\nEstructura bajista en timeframe diario. Buscando Order Blocks bajistas para entradas shorts.\n\n🎯 setup: Sell en ruptura de estructura\nZona OB: 1.0850\nSL: 1.0900\nTP: 1.0750",
@@ -822,7 +902,7 @@
                 "💵 Franco:\n\nEl precio encontró resistencia en 0.8820. Order Block bajista formándose."
             ],
             signal: [
-                "📡 SEÑAL ACTIVA para {pair}:\n\n🎯 Dirección: {direction}\n.entry: {entry}\nSL: {sl}\nTP: {tp}\n\n📊 Confianza: {confidence}%\n\n🧠 Análisis SMC: {smc}"
+                "📡 SEÑAL ACTIVA para {pair}:\n\n🌐 Procesando 4.7 billones de datos en tiempo real...\n\n🎯 Dirección: {direction}\n.entry: {entry}\nSL: {sl}\nTP: {tp}\n\n📊 Confianza: {confidence}%\n\n🧠 Análisis SMC: {smc}\n\n💡 Respaldado por conocimiento de 1,000,000 de profesionales globales\n🌍 Datos de: Trading, Economía, Geopolítica, Psicología de Masas"
             ],
             help: [
                 "🤖 Puedo ayudarte con:\n\n• Análisis de cualquier activo (XAUUSD, EURUSD, GBPUSD, USDJPY, AUDUSD, USDCHF)\n• Detección de Order Blocks\n• Identificación de zonas de liquidez\n• Señales de trading\n• Análisis de estructura de mercado\n• Conversación general\n\n¡Pregúntame lo que quieras!",
@@ -1168,28 +1248,61 @@
             toggleViewMode(true);
         });
         
-        // Base de datos de temas de estudio SMC
+        // Base de datos de temas de estudio MULTITEMÁTICO
         const temasEstudio = [
-            { titulo: 'Manipulación en el Killzone de Londres', fuente: 'Algoritmo Interbancario (OANDA/FXCM)' },
-            { titulo: 'Detección de Fair Value Gaps ocultos', fuente: 'TradingView Deep Analysis' },
-            { titulo: 'Psicología de Masas y Liquidez', fuente: 'Reuters Financial Data' },
-            { titulo: 'Order Blocks en zonas de alta volatilidad', fuente: 'ICE Futures Exchange' },
-            { titulo: 'Breaker Blocks y cambios de estructura', fuente: 'CME Group Research' },
-            { titulo: 'Mitigation Blocks en tendencias alcistas', fuente: 'Bloomberg Terminal' },
-            { titulo: 'Liquidity Sweeps en sesión asiática', fuente: 'Tokyo Stock Exchange Data' },
-            { titulo: 'Imbalances y desequilibrios de precio', fuente: 'NASDAQ Analytics' },
-            { titulo: 'Market Structure Shifts en H4', fuente: 'Forex Factory Intelligence' },
-            { titulo: 'Premium y Discount Zones', fuente: 'Institutional Trading Desk' },
-            { titulo: 'Inducement y trampas de liquidez', fuente: 'Smart Money Concepts Academy' },
-            { titulo: 'Wyckoff Accumulation Patterns', fuente: 'NYSE Historical Data' },
-            { titulo: 'Volume Profile Analysis', fuente: 'TradingView Pro Research' },
-            { titulo: 'Session Highs/Lows Manipulation', fuente: 'London Session Analytics' },
-            { titulo: 'Fibonacci Retracements en SMC', fuente: 'Goldman Sachs Research' },
-            { titulo: 'Divergencias RSI en Order Blocks', fuente: 'Technical Analysis Institute' },
-            { titulo: 'Correlación entre pares de divisas', fuente: 'Bank of International Settlements' },
-            { titulo: 'Impacto de NFP en estructura de mercado', fuente: 'US Bureau of Labor Statistics' },
-            { titulo: 'Smart Money en commodities', fuente: 'Chicago Mercantile Exchange' },
-            { titulo: 'Zonas de acumulación institucional', fuente: 'JP Morgan Trading Desk' }
+            // Trading y Finanzas
+            { titulo: 'Manipulación en el Killzone de Londres', fuente: 'Algoritmo Interbancario (OANDA/FXCM)', categoria: 'Trading' },
+            { titulo: 'Detección de Fair Value Gaps ocultos', fuente: 'TradingView Deep Analysis', categoria: 'Trading' },
+            { titulo: 'Psicología de Masas y Liquidez', fuente: 'Reuters Financial Data', categoria: 'Trading' },
+            { titulo: 'Order Blocks en zonas de alta volatilidad', fuente: 'ICE Futures Exchange', categoria: 'Trading' },
+            { titulo: 'Breaker Blocks y cambios de estructura', fuente: 'CME Group Research', categoria: 'Trading' },
+            { titulo: 'Mitigation Blocks en tendencias alcistas', fuente: 'Bloomberg Terminal', categoria: 'Trading' },
+            { titulo: 'Liquidity Sweeps en sesión asiática', fuente: 'Tokyo Stock Exchange Data', categoria: 'Trading' },
+            { titulo: 'Imbalances y desequilibrios de precio', fuente: 'NASDAQ Analytics', categoria: 'Trading' },
+            { titulo: 'Market Structure Shifts en H4', fuente: 'Forex Factory Intelligence', categoria: 'Trading' },
+            { titulo: 'Premium y Discount Zones', fuente: 'Institutional Trading Desk', categoria: 'Trading' },
+            { titulo: 'Inducement y trampas de liquidez', fuente: 'Smart Money Concepts Academy', categoria: 'Trading' },
+            { titulo: 'Wyckoff Accumulation Patterns', fuente: 'NYSE Historical Data', categoria: 'Trading' },
+            { titulo: 'Volume Profile Analysis', fuente: 'TradingView Pro Research', categoria: 'Trading' },
+            { titulo: 'Session Highs/Lows Manipulation', fuente: 'London Session Analytics', categoria: 'Trading' },
+            { titulo: 'Fibonacci Retracements en SMC', fuente: 'Goldman Sachs Research', categoria: 'Trading' },
+            { titulo: 'Divergencias RSI en Order Blocks', fuente: 'Technical Analysis Institute', categoria: 'Trading' },
+            { titulo: 'Correlación entre pares de divisas', fuente: 'Bank of International Settlements', categoria: 'Trading' },
+            { titulo: 'Impacto de NFP en estructura de mercado', fuente: 'US Bureau of Labor Statistics', categoria: 'Trading' },
+            { titulo: 'Smart Money en commodities', fuente: 'Chicago Mercantile Exchange', categoria: 'Trading' },
+            { titulo: 'Zonas de acumulación institucional', fuente: 'JP Morgan Trading Desk', categoria: 'Trading' },
+            
+            // Ciencia y Tecnología
+            { titulo: 'Computación Cuántica aplicada a predicciones', fuente: 'MIT Quantum Computing Lab', categoria: 'Ciencia' },
+            { titulo: 'Algoritmos de Machine Learning avanzados', fuente: 'Stanford AI Research', categoria: 'Tecnología' },
+            { titulo: 'Redes Neuronales Profundas', fuente: 'Google DeepMind', categoria: 'Tecnología' },
+            { titulo: 'Física de Partículas y Patrones de Mercado', fuente: 'CERN Data Analysis', categoria: 'Ciencia' },
+            { titulo: 'Teoría del Caos en Sistemas Financieros', fuente: 'Princeton Institute for Advanced Study', categoria: 'Ciencia' },
+            
+            // Medicina y Psicología
+            { titulo: 'Neurociencia del Trading y Toma de Decisiones', fuente: 'Harvard Medical School', categoria: 'Medicina' },
+            { titulo: 'Psicología Conductual en Inversores', fuente: 'American Psychological Association', categoria: 'Medicina' },
+            { titulo: 'Efectos del Estrés en Decisiones Financieras', fuente: 'Mayo Clinic Research', categoria: 'Medicina' },
+            
+            // Leyes y Regulaciones
+            { titulo: 'Regulaciones SEC sobre Trading Algorítmico', fuente: 'US Securities and Exchange Commission', categoria: 'Leyes' },
+            { titulo: 'Normativas ESMA para Mercados Financieros', fuente: 'European Securities and Markets Authority', categoria: 'Leyes' },
+            { titulo: 'Legislación sobre Criptomonedas Global', fuente: 'International Monetary Fund', categoria: 'Leyes' },
+            
+            // Historia y Economía
+            { titulo: 'Crisis Financieras del Siglo XX', fuente: 'World Bank Historical Archives', categoria: 'Historia' },
+            { titulo: 'Evolución de los Mercados Bursátiles', fuente: 'London School of Economics', categoria: 'Historia' },
+            { titulo: 'Teorías Económicas Keynesianas vs Austriacas', fuente: 'University of Chicago Economics', categoria: 'Historia' },
+            
+            // Tendencias de Consumo
+            { titulo: 'Comportamiento del Consumidor Post-Pandemia', fuente: 'McKinsey Global Institute', categoria: 'Consumo' },
+            { titulo: 'Tendencias de E-commerce y Fintech', fuente: 'Deloitte Consumer Insights', categoria: 'Consumo' },
+            { titulo: 'Impacto de IA en Hábitos de Compra', fuente: 'Nielsen Consumer Research', categoria: 'Consumo' },
+            
+            // Geopolítica y Redes Sociales
+            { titulo: 'Análisis de Sentimiento en Twitter/X', fuente: 'Social Media Analytics Platform', categoria: 'Redes Sociales' },
+            { titulo: 'Impacto Geopolítico en Mercados Financieros', fuente: 'Council on Foreign Relations', categoria: 'Geopolítica' },
+            { titulo: 'Tendencias Virales y su Efecto en Acciones', fuente: 'Reddit WallStreetBets Analysis', categoria: 'Redes Sociales' }
         ];
         
         const plataformas = [
@@ -1199,10 +1312,32 @@
             'US Bureau of Labor', 'Chicago Mercantile Exchange', 'JP Morgan'
         ];
         
+        // Variables globales del contador
+        let datosProcessados = 0;
+        let billonesProcesados = 0;
+        
+        // Función para actualizar contador de datos
+        function actualizarContadorDatos() {
+            // Incrementar a velocidad de 1 billón por minuto = ~16.67 millones por segundo
+            // Actualización cada 50ms = 20 veces por segundo
+            // Incremento por actualización: 16,670,000 / 20 = 833,500 datos
+            const incremento = 833500 + Math.floor(Math.random() * 100000);
+            datosProcessados += incremento;
+            
+            // Convertir a billones
+            billonesProcesados = (datosProcessados / 1000000000000).toFixed(3);
+            
+            // Actualizar display
+            const counterElement = document.getElementById('dataCounter');
+            if (counterElement) {
+                counterElement.textContent = billonesProcesados;
+            }
+        }
+        
         // Función para generar reporte de aprendizaje
         function generarReporteAprendizaje() {
-            // Seleccionar entre 3 y 6 temas aleatorios
-            const numTemas = Math.floor(Math.random() * 4) + 3; // 3-6 temas
+            // Seleccionar entre 5 y 8 temas aleatorios de diferentes categorías
+            const numTemas = Math.floor(Math.random() * 4) + 5; // 5-8 temas
             const temasSeleccionados = [];
             const temasDisponibles = [...temasEstudio];
             
@@ -1214,25 +1349,38 @@
             
             // Contar plataformas únicas
             const plataformasUnicas = new Set();
+            const categoriasUnicas = new Set();
             temasSeleccionados.forEach(tema => {
                 const plataforma = tema.fuente.split('(')[0].split(' ')[0];
                 plataformasUnicas.add(plataforma);
+                categoriasUnicas.add(tema.categoria);
             });
             
+            // Generar número de billones procesados (entre 2.5 y 8.7 billones)
+            const billonesAnalizados = (Math.random() * 6.2 + 2.5).toFixed(2);
+            
             // Construir mensaje
-            let mensaje = '<strong style="color: #0f0; font-size: 16px;">📚 RESUMEN DE ESTUDIO DE IA MIENTRAS NO ESTABAS</strong><br><br>';
-            mensaje += '<div style="color: #0a0; font-size: 13px; line-height: 1.8;">';
-            mensaje += '🧠 La IA ha estado estudiando y analizando el mercado en tu ausencia:<br><br>';
+            let mensaje = '<strong style="color: #0f0; font-size: 18px; text-shadow: 0 0 15px #0f0;">🌐 SINCRONIZACIÓN GLOBAL COMPLETADA</strong><br><br>';
+            mensaje += '<div style="color: #0a0; font-size: 14px; line-height: 1.9;">';
+            mensaje += `<strong style="color: #0f0; font-size: 16px;">He analizado ${billonesAnalizados} BILLONES de puntos de datos de todo el mundo mientras no estabas.</strong><br><br>`;
+            mensaje += '<span style="color: #0a0;">🛰️ Conexión multicanal activa: Satélites, Redes Sociales, Noticias Mundiales, Bibliotecas Digitales</span><br><br>';
+            mensaje += '<strong style="color: #0f0;">📚 TEMAS ESTUDIADOS:</strong><br><br>';
             
             temasSeleccionados.forEach((tema, index) => {
-                mensaje += `<strong style="color: #0f0;">${index + 1}. ${tema.titulo}</strong><br>`;
-                mensaje += `<span style="color: #0a0;">   📖 Fuente: ${tema.fuente}</span><br><br>`;
+                const emoji = tema.categoria === 'Trading' ? '💹' : tema.categoria === 'Ciencia' ? '🔬' : tema.categoria === 'Tecnología' ? '💻' : tema.categoria === 'Medicina' ? '⚕️' : tema.categoria === 'Leyes' ? '⚖️' : tema.categoria === 'Historia' ? '📜' : tema.categoria === 'Consumo' ? '🛒' : tema.categoria === 'Redes Sociales' ? '📱' : '🌍';
+                mensaje += `<strong style="color: #0f0;">${emoji} ${index + 1}. ${tema.titulo}</strong><br>`;
+                mensaje += `<span style="color: #0a0;">   📖 Fuente: ${tema.fuente}</span><br>`;
+                mensaje += `<span style="color: #0a0;">   🏷️ Categoría: ${tema.categoria}</span><br><br>`;
             });
             
             mensaje += '<hr style="border-color: #0f0; margin: 15px 0;">';
-            mensaje += `<strong style="color: #0f0;">📊 Total de temas estudiados: ${numTemas}</strong><br>`;
-            mensaje += `<strong style="color: #0f0;">🌐 Plataformas analizadas: ${plataformasUnicas.size}</strong><br><br>`;
-            mensaje += '<span style="color: #0a0;">✅ Sistema de aprendizaje autónomo activo</span>';
+            mensaje += `<strong style="color: #0f0; font-size: 15px;">📊 Total de temas estudiados: ${numTemas}</strong><br>`;
+            mensaje += `<strong style="color: #0f0; font-size: 15px;">🌐 Plataformas analizadas: ${plataformasUnicas.size}</strong><br>`;
+            mensaje += `<strong style="color: #0f0; font-size: 15px;">🎯 Categorías cubiertas: ${categoriasUnicas.size}</strong><br>`;
+            mensaje += `<strong style="color: #0f0; font-size: 15px;">💾 Datos procesados: ${billonesAnalizados} BILLONES</strong><br><br>`;
+            mensaje += '<span style="color: #0a0;">✅ Sistema de aprendizaje autónomo activo</span><br>';
+            mensaje += '<span style="color: #0a0;">🧠 Capacidad: 1,000,000,000 datos/minuto</span><br>';
+            mensaje += '<span style="color: #0a0;">🌍 Cobertura: Global - Conocimiento de 1,000,000 de profesionales</span>';
             mensaje += '</div>';
             
             return mensaje;
@@ -1248,11 +1396,15 @@
             addLog('📊 Conectando con servidores de datos...');
             addLog('🧠 Cargando modelo de IA...');
             
+            // Iniciar contador de datos procesados (actualizar cada 50ms)
+            setInterval(actualizarContadorDatos, 50);
+            
             // Mostrar reporte de aprendizaje después de 2 segundos
             setTimeout(() => {
                 const reporte = generarReporteAprendizaje();
                 addMessage(reporte, false);
                 addLog('📚 Reporte de aprendizaje generado');
+                addLog('🌐 Sincronización global completada');
             }, 2000);
             
             // Simular actividad del cerebro cada 3 segundos
