@@ -1009,60 +1009,65 @@
             ]
         };
         
-        // Normalizador: quita tildes/acentos y pasa a minúsculas para búsqueda flexible
+        // Elimina acentos/tildes de un texto (ej: 'ó' -> 'o'). No cambia mayúsculas.
+        function quitarAcentos(texto) {
+            if (!texto || typeof texto !== 'string') return '';
+            return texto.normalize('NFD').replace(/\p{Diacritic}/gu, '');
+        }
+        
+        // Normalizador: minúsculas + sin acentos + trim, para búsqueda flexible
         function normalizarTexto(texto) {
             if (!texto || typeof texto !== 'string') return '';
-            return texto
-                .toLowerCase()
-                .trim()
-                .normalize('NFD')
-                .replace(/\p{Diacritic}/gu, '');
+            return quitarAcentos(texto).toLowerCase().trim();
         }
         
         // Función para obtener respuesta de la IA (usa conocimiento real, sin plantillas)
         function getAIResponse(message) {
             const msg = message.toLowerCase().trim();
-            const msgNorm = normalizarTexto(message);  // mensaje sin acentos ni mayúsculas
+            const msgNorm = normalizarTexto(message);  // mensaje en minúsculas y sin acentos
             
-            // 1) Buscar en base de conocimiento (ignorando acentos y mayúsculas; acepta coincidencia flexible)
+            // 1) Buscar en base de conocimiento: usuario y claves normalizados; coincide si la frase contiene la palabra clave o al revés (ej. "revolucion" o "revolución" encuentran "revolución francesa")
             const claves = Object.keys(baseConocimiento).sort((a, b) => b.length - a.length);
             for (let i = 0; i < claves.length; i++) {
-                if (msg.includes(claves[i])) {
+                const claveNorm = normalizarTexto(claves[i]);
+                const contieneClave = msgNorm.includes(claveNorm);
+                const fraseContienePalabra = claveNorm.includes(msgNorm) && msgNorm.length >= 3;
+                if (contieneClave || fraseContienePalabra) {
                     return baseConocimiento[claves[i]];
                 }
             }
             
-            // Saludo
-            if (msg.includes('hola') || msg.includes('buenos') || msg.includes('hello') || msg.includes('hi') || msg.includes('que tal') || msg.includes('cómo estás')) {
+            // Saludo (acepta con o sin tildes)
+            if (msgNorm.includes('hola') || msgNorm.includes('buenos') || msgNorm.includes('hello') || msgNorm.includes('hi') || msgNorm.includes('que tal') || msgNorm.includes('como estas')) {
                 return aiResponses.greeting[Math.floor(Math.random() * aiResponses.greeting.length)];
             }
             
-            // Preguntas sobre Argentina (respuesta completa)
-            if (msg.includes('argentina') || msg.includes('capital de argentina') || msg.includes('capital argentina')) {
+            // Preguntas sobre Argentina (respuesta completa; acepta con/sin tildes)
+            if (msgNorm.includes('argentina') || msgNorm.includes('capital de argentina') || msgNorm.includes('capital argentina')) {
                 return aiResponses.argentina[0];
             }
             
-            // Capacidades / qué sabes
-            if (msg.includes('qué sabes') || msg.includes('conocimiento') || msg.includes('cuánto sabes') || msg.includes('capacidades') || msg.includes('base de datos')) {
+            // Capacidades / qué sabes (acepta "que sabes", "cuanto sabes", etc.)
+            if (msgNorm.includes('que sabes') || msgNorm.includes('conocimiento') || msgNorm.includes('cuanto sabes') || msgNorm.includes('capacidades') || msgNorm.includes('base de datos')) {
                 return aiResponses.conocimiento[0];
             }
             
-            // Geografía, historia, ciencia, medicina: responder con contenido real de baseConocimiento
-            if ((msg.includes('capital de') || msg.includes('geografía')) && msg.length < 30) {
+            // Geografía, historia, ciencia, medicina: contenido real de baseConocimiento (claves normalizadas)
+            if ((msgNorm.includes('capital de') || msgNorm.includes('geografia')) && msgNorm.length < 30) {
                 return baseConocimiento['capital de argentina'] + '<br><br>' + baseConocimiento['capital de francia'];
             }
-            if (msg.includes('historia') && msg.length < 25) {
+            if (msgNorm.includes('historia') && msgNorm.length < 25) {
                 return baseConocimiento['colón'] + '<br><br>' + baseConocimiento['primera guerra mundial'];
             }
-            if ((msg.includes('ciencia') || msg.includes('física')) && msg.length < 30) {
+            if ((msgNorm.includes('ciencia') || msgNorm.includes('fisica')) && msgNorm.length < 30) {
                 return baseConocimiento['velocidad de la luz'] + '<br><br>' + baseConocimiento['teoría de la relatividad'];
             }
-            if ((msg.includes('medicina') || msg.includes('salud')) && msg.length < 25) {
+            if ((msgNorm.includes('medicina') || msgNorm.includes('salud')) && msgNorm.length < 25) {
                 return baseConocimiento['qué es el adn'] + '<br><br>' + baseConocimiento['diabetes'];
             }
-            if ((msg.includes('inteligencia artificial') || msg.includes(' ia ') || msg.includes('chatgpt') || msg.includes('gemini')) && !baseConocimiento[msg]) {
-                if (msg.includes('chatgpt')) return baseConocimiento['qué es chatgpt'];
-                if (msg.includes('gemini')) return baseConocimiento['qué es gemini'];
+            if (msgNorm.includes('inteligencia artificial') || msgNorm.includes(' ia ') || msgNorm.includes('chatgpt') || msgNorm.includes('gemini')) {
+                if (msgNorm.includes('chatgpt')) return baseConocimiento['qué es chatgpt'];
+                if (msgNorm.includes('gemini')) return baseConocimiento['qué es gemini'];
                 return baseConocimiento['qué es chatgpt'];
             }
             
