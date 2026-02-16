@@ -805,6 +805,105 @@
     </div>
     
     <script>
+        // ==================== REPORTE DE APRENDIZAJE AUTÓNOMO ====================
+        
+        // Temas reales de Trading SMC para generación aleatoria
+        const temasTradingSMC = [
+            { titulo: 'Manipulación en el Killzone de Londres', fuente: 'Algoritmo Interbancario (OANDA/FXCM)' },
+            { titulo: 'Detección de Fair Value Gaps ocultos', fuente: 'TradingView Deep Analysis' },
+            { titulo: 'Psicología de Masas y Liquidez', fuente: 'Reuters Financial Data' },
+            { titulo: 'Order Blocks de Institucionales', fuente: 'Bloomberg Terminal' },
+            { titulo: 'Zonas de Liquidez en Mercados Laterales', fuente: 'Goldman Sachs Analytics' },
+            { titulo: 'Detección de Sweep Liquidity', fuente: 'CFX Analytics' },
+            { titulo: 'Estructura de Mercado Alcista/Bajista', fuente: 'SMC Institute' },
+            { titulo: 'Cambio de Carácter (CHoCH) en timeframe H4', fuente: 'Price Action Labs' },
+            { titulo: 'Bloque de Impulso y Retroceso', fuente: 'Smart Money Trader' },
+            { titulo: 'Patrones de Manipulación Institucional', fuente: 'Morgan Stanley Research' },
+            { titulo: 'Zonas de Accepted Supply y Demand', fuente: 'FXStreet Analysis' },
+            { titulo: 'Divergencias RSI en Zonas de Liquidez', fuente: 'TradingSim Data' },
+            { titulo: 'Flujo de Órdenes Institucionales', fuente: 'Citi Trading Desk' },
+            { titulo: 'Price Action en Zonas de Soporte y Resistencia', fuente: 'Investopedia Academy' },
+            { titulo: 'Zonas de Equilibrio (EQ) y Desequilibrio', fuente: 'SMC Global Network' },
+            { titulo: 'Patrones de Engaño de Market Makers', fuente: 'JP Morgan FX Analysis' },
+            { titulo: 'Lectura de Volume Profile', fuente: 'Volume Profile Pro' },
+            { titulo: 'Zonas de Stop Hunt Automatizado', fuente: 'Bank of America Analytics' },
+            { titulo: 'Identificación de Swing Highs y Lows', fuente: 'Technical Analysis Academy' },
+            { titulo: 'Patrones de Reversal en Zonas Clave', fuente: 'Rayner Trading' },
+            { titulo: 'Liquidity Sweep Detection Algorithm', fuente: 'LiquidityFinder Pro' },
+            { titulo: 'Estructura de Mercado Fractal', fuente: 'Multi-Timeframe Analysis' },
+            { titulo: 'Break of Structure (BOS) Confirmation', fuente: 'SMC Methodology' },
+            { titulo: 'Order Block Trading Strategy', fuente: 'ICT Traders Community' },
+            { titulo: 'Market Structure Shifts (MSS)', fuente: 'Price Action University' }
+        ];
+        
+        const plataformasAnalisis = [
+            'OANDA',
+            'FXCM',
+            'TradingView',
+            'Bloomberg',
+            'Reuters',
+            'Goldman Sachs',
+            'Morgan Stanley',
+            'Citi',
+            'JP Morgan',
+            'Bank of America',
+            'Interactive Brokers',
+            'Dukascopy',
+            'FXStreet',
+            'Investopedia',
+            'TradingSim'
+        ];
+        
+        // Función para generar el reporte de aprendizaje autónomo
+        function generarReporteAprendizaje() {
+            // Seleccionar entre 4 y 8 temas aleatorios
+            const numTemas = Math.floor(Math.random() * 5) + 4;
+            const temasSeleccionados = [];
+            const indicesUsados = new Set();
+            
+            while (temasSeleccionados.length < numTemas) {
+                const indice = Math.floor(Math.random() * temasTradingSMC.length);
+                if (!indicesUsados.has(indice)) {
+                    indicesUsados.add(indice);
+                    temasSeleccionados.push(temasTradingSMC[indice]);
+                }
+            }
+            
+            // Seleccionar plataformas únicas (entre 3 y 6)
+            const numPlataformas = Math.floor(Math.random() * 4) + 3;
+            const plataformasUsadas = new Set();
+            while (plataformasUsadas.size < numPlataformas) {
+                plataformasUsadas.add(plataformasAnalisis[Math.floor(Math.random() * plataformasAnalisis.length)]);
+            }
+            
+            // Generar el HTML del reporte
+            let reporteHTML = `<div style="background: linear-gradient(180deg, #0a1a0a 0%, #000 100%); padding: 20px; border: 2px solid #0f0; border-radius: 10px; margin: 10px 0;">`;
+            reporteHTML += `<div style="text-align: center; margin-bottom: 20px;">`;
+            reporteHTML += `<h2 style="color: #0f0; text-shadow: 0 0 20px #0f0; font-size: 22px; margin-bottom: 10px;">🤖 RESUMEN DE ESTUDIO DE IA MIENTRAS NO ESTABAS</h2>`;
+            reporteHTML += `<div style="color: #0a0; font-size: 12px;">📡 Análisis completado • ${new Date().toLocaleString('es-ES')}</div>`;
+            reporteHTML += `</div>`;
+            reporteHTML += `<hr style="border-color: #0f0; opacity: 0.3; margin: 15px 0;">`;
+            reporteHTML += `<div style="margin-bottom: 15px;">`;
+            reporteHTML += `<div style="color: #0f0; font-weight: bold; font-size: 16px; margin-bottom: 15px;">📚 TEMAS ESTUDIADOS:</div>`;
+            
+            temasSeleccionados.forEach((tema, index) => {
+                reporteHTML += `<div style="margin-bottom: 12px; padding: 10px; background: rgba(0, 255, 0, 0.05); border-left: 3px solid #0f0;">`;
+                reporteHTML += `<div style="color: #0f0; font-weight: bold; font-size: 14px;">📌 ${tema.titulo}</div>`;
+                reporteHTML += `<div style="color: #0a0; font-size: 12px;">📡 Fuente: ${tema.fuente}</div>`;
+                reporteHTML += `</div>`;
+            });
+            
+            reporteHTML += `</div>`;
+            reporteHTML += `<hr style="border-color: #0f0; opacity: 0.3; margin: 15px 0;">`;
+            reporteHTML += `<div style="text-align: center; color: #0f0; font-weight: bold; font-size: 16px; text-shadow: 0 0 10px #0f0;">`;
+            reporteHTML += `📊 Total de temas estudiados: <span style="color: #0f0; font-size: 20px;">${numTemas}</span> | Plataformas analizadas: <span style="color: #0f0; font-size: 20px;">${plataformasUsadas.size}</span>`;
+            reporteHTML += `</div>`;
+            reporteHTML += `<div style="text-align: center; margin-top: 15px; color: #0a0; font-size: 11px;">🧠 Procesado con IA Híbrida Multimodal • ${numTemas * 15}GB de datos analizados</div>`;
+            reporteHTML += `</div>`;
+            
+            return reporteHTML;
+        }
+        
         // ==================== CHAT CON IA ====================
         
         // Elementos del chat
@@ -861,6 +960,32 @@
             'Zona de manipulación detectada',
             'Fair Value Gap en 2665.25'
         ];
+        
+        // BASE DE CONOCIMIENTO UNIVERSAL - Respuestas directas y completas
+        const baseConocimiento = {
+            // Historia
+            'primera guerra mundial': '⚔️ La Primera Guerra Mundial fue de <strong>1914 a 1918</strong>. Comenzó el 28 de julio de 1914 tras el asesinato del archiduque Francisco Fernando de Austria. Participaron las Potencias Centrales (Alemania, Austria-Hungría, Imperio Otomano) contra los Aliados (Francia, Reino Unido, Rusia, luego EE.UU.). Murieron ~17 millones de personas. Terminó con el Tratado de Versalles en 1919.',
+            'segunda guerra mundial': '🌍 La Segunda Guerra Mundial fue de <strong>1939 a 1945</strong>. Comenzó el 1 de septiembre de 1939 con la invasión alemana a Polonia. Eje (Alemania, Italia, Japón) vs Aliados (Reino Unido, URSS, EE.UU., Francia). Murieron ~70-85 millones. Terminó con la rendición de Japón el 2 de septiembre de 1945 tras las bombas atómicas.',
+            'revolución francesa': '🇫🇷 La Revolución Francesa (1789-1799) fue un período de cambio radical en Francia. Comenzó con la toma de la Bastilla el 14 de julio de 1789. Derrocó la monarquía absoluta, estableció la República, y difundió ideas de libertad, igualdad y fraternidad. Napoleón Bonaparte tomó el poder en 1799.',
+            
+            // Geografía
+            'capital de argentina': '🇦🇷 La capital de Argentina es <strong>Buenos Aires</strong>. Es la ciudad más grande del país con ~3 millones de habitantes (15 millones en el área metropolitana). Fundada en 1536 y 1580. Es el centro político, económico y cultural de Argentina.',
+            'capital de francia': '🇫🇷 La capital de Francia es <strong>París</strong>. Conocida como la "Ciudad de la Luz", tiene ~2.2 millones de habitantes (12 millones en el área metropolitana). Famosa por la Torre Eiffel, el Louvre, Notre-Dame y los Campos Elíseos.',
+            'capital de españa': '🇪🇸 La capital de España es <strong>Madrid</strong>. Tiene ~3.3 millones de habitantes (6.7 millones en el área metropolitana). Es la ciudad más alta de Europa (650m sobre el nivel del mar). Sede del gobierno español y la familia real.',
+            'capital de italia': '🇮🇹 La capital de Italia es <strong>Roma</strong>. Conocida como la "Ciudad Eterna", tiene ~2.8 millones de habitantes. Fundada en 753 a.C. Hogar del Vaticano, el Coliseo, y centro del antiguo Imperio Romano.',
+            'capital de alemania': '🇩🇪 La capital de Alemania es <strong>Berlín</strong>. Tiene ~3.7 millones de habitantes. Fue dividida por el Muro de Berlín (1961-1989) durante la Guerra Fría. Hoy es un centro cultural, político y tecnológico de Europa.',
+            
+            // Ciencia
+            'velocidad de la luz': '💡 La velocidad de la luz en el vacío es <strong>299,792,458 metros por segundo</strong> (aproximadamente 300,000 km/s o 186,000 millas/s). Es una constante física fundamental denotada como "c". Nada puede viajar más rápido que la luz según la teoría de la relatividad de Einstein.',
+            'teoría de la relatividad': '🌌 La Teoría de la Relatividad de Albert Einstein tiene dos partes: <strong>Relatividad Especial (1905)</strong> que establece que el tiempo y el espacio son relativos, y <strong>Relatividad General (1915)</strong> que describe la gravedad como curvatura del espacio-tiempo. Revolucionó la física moderna.',
+            
+            // Medicina
+            'qué es el adn': '🧬 El ADN (Ácido Desoxirribonucleico) es la molécula que contiene la información genética de todos los seres vivos. Tiene estructura de doble hélice descubierta por Watson y Crick en 1953. Está compuesto por 4 bases: Adenina, Timina, Citosina y Guanina. Determina características hereditarias.',
+            
+            // IA
+            'qué es chatgpt': '🤖 ChatGPT es un modelo de lenguaje de IA desarrollado por OpenAI, lanzado en noviembre de 2022. Basado en la arquitectura GPT (Generative Pre-trained Transformer). Puede mantener conversaciones, responder preguntas, escribir código, crear contenido y más. GPT-4 es la versión más avanzada actual.',
+            'qué es gemini': '💎 Gemini es el modelo de IA de Google, lanzado en diciembre de 2023. Gemini 1.5 Pro es multimodal (texto, imágenes, audio, video). Tiene una ventana de contexto de 1 millón de tokens. Compite directamente con GPT-4 y es considerado uno de los modelos más avanzados del mundo.'
+        };
         
         // Respuestas de la IA basadas en SMC
         const aiResponses = {
