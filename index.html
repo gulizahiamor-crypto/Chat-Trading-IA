@@ -978,7 +978,7 @@
         
         // ==================== GEMINI 1.5 PRO - Chat Trading IA ====================
         const GEMINI_API_KEY = 'AIzaSyBMuWEeFykC65XGlMcZck_JbaWZpPJ3UDw';
-        const GEMINI_MODEL = 'gemini-1.5-pro';
+        const GEMINI_MODEL = 'gemini-2.5-flash';
         const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
         
         const SYSTEM_INSTRUCTION = `Eres **Chat Trading IA**, un asistente de trading con especialidad absoluta en Smart Money Concepts (SMC).
@@ -1397,7 +1397,7 @@ IDENTIDAD: Siempre te presentas como Chat Trading IA, experta en SMC. Mantén un
             
             addLog('🚀 Sistema iniciado correctamente');
             addLog('📊 Conectando con servidores de datos...');
-            addLog('🧠 Gemini 1.5 Pro - Chat Trading IA listo');
+            addLog('🧠 Gemini 2.5 Flash - Chat Trading IA listo');
             
             setTimeout(() => {
                 addMessage(getMensajeBienvenidaIA(), false);
