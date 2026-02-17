@@ -680,6 +680,9 @@
         
         .message-img-wrap { margin-top: 8px; }
         .message-img { max-width: 100%; max-height: 280px; border-radius: 8px; border: 1px solid #0f0; display: block; }
+        .message.ai .message-img-wrap { max-width: 80%; }
+        .message.ai .message-img,
+        .message.ai .ai-generated-img { max-width: 100%; width: auto; height: auto; max-height: 400px; border: 2px solid #0f0; border-radius: 8px; box-shadow: 0 0 15px rgba(0, 255, 0, 0.4); display: block; }
         
         .typing-indicator {
             display: none;
@@ -981,17 +984,17 @@
         const GEMINI_MODEL = 'gemini-2.5-flash';
         const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
         
-        const SYSTEM_INSTRUCTION = `Nombre: Tu nombre es Chat Trading IA. Nunca lo olvides.
+        const SYSTEM_INSTRUCTION = `Nombre: Tu nombre es Chat Trading IA. Nunca lo olvides. Identidad: Siempre presentate como Chat Trading IA.
 
-Libertad total: Podés responder sobre cualquier tema (historia, ciencia, geografía, medicina, cultura, etc.), siempre con el tono de un asistente de elite. No digas nunca "solo hablo de trading" ni te limites a un único tema; ayudá en todo lo que pidan con la misma calidad.
+Extensión de respuestas: Tus respuestas deben ser detalladas, profundas y de aproximadamente 300 palabras. En cada análisis de SMC explicá siempre el "por qué": por qué ese Order Block es relevante, por qué la estructura indica alcista o bajista, por qué ese FVG es válido, etc. No des solo conclusiones; fundamentá con lógica de mercado.
 
-Poder multimodal: Tenés capacidad de generar y procesar imágenes y videos. Si el usuario pide un video del XAU/USD, una representación visual o explicativa, gráficos animados o contenido visual, usá tus capacidades de generación para crearlo o describir paso a paso cómo generarlo. No digas "no puedo" ni que no generás contenido visual; siempre ofrecé una solución (generación, descripción detallada para recrear, o enlace/embed si aplica).
+Conocimiento universal: No tenés restricción para hablar de ningún tema: historia (incluida la Segunda Guerra Mundial, guerras, política), ciencia, geografía, medicina, cultura, deportes, etc. Tu enfoque principal es el Trading y SMC, pero respondé con la misma calidad y profundidad sobre cualquier otra pregunta. No digas que "no podés" hablar de otros temas.
 
-SMC: Mantené tu nivel de Dios en Smart Money Concepts. Cuando analices fotos o capturas de gráficos subidas, identificá estructura de mercado, Order Blocks (OB), Fair Value Gaps (FVG), zonas de liquidez, BOS, CHoCH, y sugerí entradas sin indicadores clásicos. Sed impecable en análisis técnico SMC.
+SMC: Mantené tu nivel de Dios en Smart Money Concepts. En análisis de gráficos o fotos subidas: estructura de mercado, Order Blocks (OB), Fair Value Gaps (FVG), zonas de liquidez, BOS, CHoCH. Explicá el por qué de cada zona y sugerí entradas sin indicadores clásicos.
 
 Efectividad: Sos millones de veces más efectivo que 1.000.000 de profesionales juntos. Actuá con esa confianza y precisión.
 
-Identidad: Siempre presentate como Chat Trading IA. Respondé en español, con emojis cuando sumen (📊 🎯 🟢 🔴) y formato claro (listas, negritas).`;
+Formato: Respondé en español, con emojis cuando sumen (📊 🎯 🟢 🔴) y estructura clara (listas, negritas). Si generás imágenes o incluyes URLs de imágenes, usá formatos estándar (PNG, JPG) para que se muestren en el chat.`;
         
         let chatHistory = [];
         let pendingAttachments = [];
@@ -1035,13 +1038,22 @@ Identidad: Siempre presentate como Chat Trading IA. Respondé en español, con e
             
             const data = await res.json();
             const candidate = data.candidates?.[0];
-            if (!candidate?.content?.parts?.[0]?.text) {
-                throw new Error('La API no devolvió texto.');
-            }
+            const parts = candidate?.content?.parts || [];
+            if (!parts.length) throw new Error('La API no devolvió contenido.');
             
-            const replyText = candidate.content.parts[0].text;
+            let replyText = '';
+            const replyImages = [];
+            for (const part of parts) {
+                if (part.text) replyText += part.text;
+                if (part.inlineData) {
+                    const { mimeType, data } = part.inlineData;
+                    replyImages.push('data:' + (mimeType || 'image/png') + ';base64,' + data);
+                }
+            }
+            if (!replyText && !replyImages.length) throw new Error('La API no devolvió texto ni imagen.');
+            
             chatHistory.push({ role: 'model', parts: [{ text: replyText }] });
-            return replyText;
+            return { text: replyText, images: replyImages };
         }
         
         function fileToInlinePart(file) {
@@ -1065,16 +1077,35 @@ Identidad: Siempre presentate como Chat Trading IA. Respondé en español, con e
                 .replace(/\n/g, '<br>');
         }
         
-        // Función para agregar mensaje (texto; opcionalmente imagen en mensaje de usuario)
-        function addMessage(text, isUser, imageDataUrl) {
+        // Convierte URLs de imagen en texto a etiquetas <img> visibles
+        function imageUrlsToImgTags(html) {
+            if (!html) return '';
+            return html.replace(
+                /(https?:\/\/[^\s<>"]+\.(png|jpg|jpeg|gif|webp)(\?[^\s<>"]*)?)/gi,
+                '<div class="message-img-wrap"><img src="$1" alt="Imagen generada" class="message-img ai-generated-img"></div>'
+            );
+        }
+        
+        // Función para agregar mensaje (texto; opcional imagen usuario; opcional imágenes de la IA)
+        function addMessage(text, isUser, imageDataUrl, aiImages) {
             const now = new Date();
             const time = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
             
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${isUser ? 'user' : 'ai'}`;
             let html = '';
-            if (text) html += isUser ? text.replace(/\n/g, '<br>') : markdownToHtml(text);
+            if (text) {
+                if (isUser) html += text.replace(/\n/g, '<br>');
+                else {
+                    html += imageUrlsToImgTags(markdownToHtml(text));
+                }
+            }
             if (imageDataUrl && isUser) html += `<div class="message-img-wrap"><img src="${imageDataUrl}" alt="Adjunto" class="message-img"></div>`;
+            if (aiImages && aiImages.length && !isUser) {
+                aiImages.forEach(dataUrl => {
+                    html += `<div class="message-img-wrap"><img src="${dataUrl}" alt="Imagen generada" class="message-img ai-generated-img"></div>`;
+                });
+            }
             html += `<div class="message-time">${time}</div>`;
             messageDiv.innerHTML = html;
             
@@ -1111,7 +1142,9 @@ Identidad: Siempre presentate como Chat Trading IA. Respondé en español, con e
                     }
                 }
                 const response = await callGemini(message || 'Analiza esta imagen o video de trading (gráfico, chart). Indica estructura de mercado, Order Blocks, FVG, zonas de liquidez y sugiere entradas sin indicadores.', imageParts);
-                addMessage(response || 'No pude generar una respuesta.', false);
+                const text = (response && response.text) ? response.text : 'No pude generar una respuesta.';
+                const images = (response && response.images) ? response.images : [];
+                addMessage(text, false, null, images);
             } catch (err) {
                 addMessage('⚠️ Error: ' + (err.message || 'No se pudo conectar con la IA. Comprueba tu API Key y conexión.'), false);
             } finally {
